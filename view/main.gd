@@ -3,11 +3,13 @@ extends Node
 
 @onready var _city: CityView = %City
 @onready var _ui_root: Control = %UiRoot
+@onready var _hud: Hud = %Hud
 @onready var _debug_panel: DebugPanel = %DebugPanel
 
 
 func _ready() -> void:
 	_ui_root.theme = UiTheme.build()
+	_hud.bind(_city.build_controller)
 	if OS.is_debug_build():
 		_debug_panel.day_night = _city.day_night
 	else:

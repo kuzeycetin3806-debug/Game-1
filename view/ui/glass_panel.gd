@@ -7,7 +7,7 @@ extends PanelContainer
 	set(value):
 		corner_radius = value
 		_sync()
-@export var tint: Color = Color(1, 1, 1, 0.28):
+@export var tint: Color = Color(1, 1, 1, 0.55):
 	set(value):
 		tint = value
 		_sync()

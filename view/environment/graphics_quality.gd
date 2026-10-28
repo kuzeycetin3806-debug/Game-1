@@ -5,7 +5,7 @@ extends Node
 @export var camera_rig: CityCamera
 @export var light: DirectionalLight3D
 @export var world_environment: WorldEnvironment
-@export var city: PlaceholderCity
+@export var city: CityRenderer
 
 ## Keys match Settings.Quality (LOW, MEDIUM, HIGH).
 ## VARSAYIM: LOW caps at 30 FPS to save battery on weak phones.

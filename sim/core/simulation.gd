@@ -40,8 +40,7 @@ static func new_game(p_content: ContentDb, city_seed: int, start_unix: int, utc_
 	var sim: Simulation = create(s, p_content)
 	# Start the town already lived-in so the first session is not empty.
 	sim._refresh_aggregates()
-	s.population = PopulationSystem.target(sim.aggregates.residents_capacity, s.happiness, p_content)
-	s.happiness = HappinessSystem.target(s, sim.aggregates, p_content)
+	sim._settle_initial_mood()
 	return sim
 
 
@@ -112,6 +111,18 @@ func step() -> Array[SimEvent]:
 ## Local time of the start of the current tick, for UI.
 func local_seconds_now() -> int:
 	return SimClockMath.local_seconds(state.start_unix, state.utc_offset_s, state.tick)
+
+
+## Converges population, jobs and mood for the starting town without running
+## ticks, so the first session shows a believable, steady city.
+func _settle_initial_mood() -> void:
+	var workforce_pm: int = content.bal_int("workforce_permille", 600)
+	state.green = EnvironmentSystem.green_permille(aggregates)
+	state.pollution = clampi(aggregates.pollution_static - aggregates.green_total * content.bal_int("environment.green_absorb_permille", 4) / SimConfig.PERMILLE, 0, SimConfig.PERMILLE)
+	for i: int in 8:
+		state.population = PopulationSystem.target(aggregates.residents_capacity, state.happiness, content)
+		state.employed = mini(state.population * workforce_pm / SimConfig.PERMILLE, aggregates.jobs_total)
+		state.happiness = HappinessSystem.target(state, aggregates, content)
 
 
 func _refresh_aggregates() -> void:

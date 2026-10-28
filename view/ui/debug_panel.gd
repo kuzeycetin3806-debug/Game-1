@@ -34,6 +34,7 @@ func _ready() -> void:
 		Settings.set_quality(((Settings.graphics_quality + 1) % 3) as Settings.Quality)
 		_refresh_buttons())
 	%Header.pressed.connect(func() -> void: _body.visible = not _body.visible)
+	_body.visible = false # collapsed by default; tap the clock to open
 	_refresh_buttons()
 
 

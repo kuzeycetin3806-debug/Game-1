@@ -5,6 +5,11 @@ extends Node
 signal tick_advanced(tick: int)
 signal sim_event_emitted(event: RefCounted)
 signal catch_up_finished(summary: RefCounted)
+## A new or loaded city is ready on SimRunner.sim.
+signal city_loaded
+## Buildings were added, removed or finished; views should rebuild.
+signal city_changed
+signal command_rejected(error_key: String)
 signal graphics_quality_changed(quality: int)
 signal debug_time_offset_changed(offset_seconds: float)
 @warning_ignore_restore("unused_signal")

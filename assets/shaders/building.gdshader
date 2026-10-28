@@ -42,7 +42,15 @@ void fragment() {
 	float rough = 0.85;
 
 	bool side = abs(v_normal_local.y) < 0.5;
-	if (!side) {
+	if (style > 2.5) {
+		// Under construction: concrete core wrapped in orange safety netting.
+		float u = abs(v_normal_local.x) > 0.5 ? v_local.z : v_local.x;
+		float stripe = step(0.5, fract((u + v_local.y) * 0.25));
+		float floor_line = 1.0 - step(0.12, fract(v_local.y / floor_height));
+		vec3 net = mix(vec3(0.95, 0.55, 0.25), vec3(0.98, 0.9, 0.75), stripe);
+		albedo = side ? mix(net, vec3(0.45), floor_line) : vec3(0.62, 0.6, 0.57);
+		rough = 0.95;
+	} else if (!side) {
 		// Roof: lighter slab, optional garden with a border.
 		albedo = base * 1.08;
 		if (v_custom.z > 0.5 && v_normal_local.y > 0.5) {

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://view/city/city_view.gd" id="1_view"]
 [ext_resource type="Script" path="res://view/camera/city_camera.gd" id="2_cam"]
-[ext_resource type="Script" path="res://view/city/placeholder_city.gd" id="3_city"]
+[ext_resource type="Script" path="res://view/city/city_renderer.gd" id="3_city"]
+[ext_resource type="Script" path="res://view/city/build_controller.gd" id="6_bc"]
 [ext_resource type="Script" path="res://view/environment/day_night.gd" id="4_dn"]
 [ext_resource type="Script" path="res://view/environment/graphics_quality.gd" id="5_gq"]
 
@@ -26,7 +27,7 @@ near = 2.0
 far = 2000.0
 current = true
 
-[node name="PlaceholderCity" type="Node3D" parent="."]
+[node name="CityRenderer" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_city")
 
@@ -41,4 +42,10 @@ script = ExtResource("5_gq")
 camera_rig = NodePath("../CameraRig")
 light = NodePath("../Sun")
 world_environment = NodePath("../WorldEnvironment")
-city = NodePath("../PlaceholderCity")
+city = NodePath("../CityRenderer")
+
+[node name="BuildController" type="Node" parent="." node_paths=PackedStringArray("camera_rig", "renderer")]
+unique_name_in_owner = true
+script = ExtResource("6_bc")
+camera_rig = NodePath("../CameraRig")
+renderer = NodePath("../CityRenderer")

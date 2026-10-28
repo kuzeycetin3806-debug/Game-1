@@ -20,3 +20,11 @@ func test_starting_buildings_are_complete_and_silent() -> void:
 	assert_eq(SimFixture.count(events, "building_completed"), 0)
 	assert_gt(sim.aggregates.residents_capacity, 0)
 	assert_gt(sim.state.population, 0, "new town starts lived-in")
+
+
+func test_new_town_mood_is_already_settled() -> void:
+	var sim: Simulation = SimFixture.new_sim()
+	var before: int = sim.state.happiness
+	SimFixture.run(sim, 144)
+	assert_gt(before, 500, "starting town should be reasonably happy")
+	assert_lt(absi(sim.state.happiness - before), 120, "no big swing on day one")

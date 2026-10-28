@@ -1,0 +1,58 @@
+keys,tr,en
+BLD_HOUSE_SMALL,Müstakil Ev,Small House
+BLD_HOUSE_SMALL_DESC,"Bahçeli, sakin, üç katlı.",Quiet three-storey home with a garden.
+BLD_APARTMENT_MID,Apartman,Apartment Block
+BLD_APARTMENT_MID_DESC,Orta yoğunlukta konut.,Mid-density housing.
+BLD_APARTMENT_GREEN,Yeşil Apartman,Green Apartments
+BLD_APARTMENT_GREEN_DESC,Çatı bahçeli konut; çevresini mutlu eder.,Housing with a rooftop garden; cheers up the street.
+BLD_RESIDENTIAL_TOWER,Konut Kulesi,Residential Tower
+BLD_RESIDENTIAL_TOWER_DESC,"Çok sayıda daire, yoğun trafik.","Lots of homes, lots of traffic."
+BLD_CAFE,Kafe,Café
+BLD_CAFE_DESC,Mahallenin buluşma noktası.,The neighbourhood's meeting point.
+BLD_SHOP_ROW,Dükkânlar,Shop Row
+BLD_SHOP_ROW_DESC,Küçük esnaf ve iş yeri.,Small shops and jobs.
+BLD_OFFICE_MID,Ofis Binası,Office Building
+BLD_OFFICE_MID_DESC,İş imkânı yaratır.,Creates jobs.
+BLD_OFFICE_TOWER,Ofis Kulesi,Office Tower
+BLD_OFFICE_TOWER_DESC,"Binlerce iş, sabah trafiği.","Thousands of jobs, morning traffic."
+BLD_POCKET_PARK,Cep Parkı,Pocket Park
+BLD_POCKET_PARK_DESC,Küçük ama etkili bir yeşillik.,Small but mighty greenery.
+BLD_CITY_PARK,Şehir Parkı,City Park
+BLD_CITY_PARK_DESC,"Ağaçlar, patikalar, temiz hava.","Trees, paths, fresh air."
+BLD_METRO_STATION,Metro İstasyonu,Metro Station
+BLD_METRO_STATION_DESC,Çevredeki trafiği ciddi azaltır.,Cuts traffic around it a lot.
+BLD_BIKE_HUB,Bisiklet Durağı,Bike Hub
+BLD_BIKE_HUB_DESC,Kısa yolculukları yola çıkarmadan çözer.,Short trips without cars.
+UI_MONEY,Bütçe,Budget
+UI_POPULATION,Nüfus,Population
+UI_HAPPINESS,Mutluluk,Happiness
+UI_TRAFFIC,Trafik,Traffic
+UI_GREEN,Yeşil,Green
+UI_POLLUTION,Kirlilik,Pollution
+UI_BUILD,İnşa et,Build
+UI_CANCEL,İptal,Cancel
+UI_PLACE,Yerleştir,Place
+UI_CLOSE,Kapat,Close
+UI_DEMOLISH,Yık (+%s),Demolish (+%s)
+UI_UNDER_CONSTRUCTION,İnşaat sürüyor · %d%%,Under construction · %d%%
+UI_COMPLETED,Hizmette,In service
+UI_RESIDENTS,%d kişilik konut,Homes for %d
+UI_JOBS,%d iş,%d jobs
+UI_BUILD_TIME,%d saatte biter,Ready in %d h
+UI_PLACE_HINT,"Haritayı kaydır, sonra yerleştir","Pan the map, then place"
+UI_CAT_ALL,Tümü,All
+UI_CAT_RESIDENTIAL,Konut,Homes
+UI_CAT_COMMERCIAL,Ticaret,Shops
+UI_CAT_OFFICE,Ofis,Offices
+UI_CAT_PARK,Park,Parks
+UI_CAT_TRANSIT,Ulaşım,Transit
+ERR_ON_ROAD,Yolun üstüne inşa edilemez,Can't build on a road
+ERR_CELL_OCCUPIED,Burası dolu,This spot is taken
+ERR_OUT_OF_BOUNDS,Şehir sınırının dışında,Outside the city limits
+ERR_NOT_ENOUGH_MONEY,Bütçe yetmiyor,Not enough money
+ERR_UNKNOWN_BUILDING,Bilinmeyen bina,Unknown building
+ERR_NO_SUCH_BUILDING,Bina bulunamadı,Building not found
+EVT_BUILDING_COMPLETED,%s açıldı!,%s is open!
+EVT_POPULATION_MILESTONE,Nüfus %s oldu!,Population reached %s!
+EVT_TRAFFIC_JAM,Trafik kilitlendi!,Traffic is gridlocked!
+EVT_BUILDING_PLACED,%s için temel atıldı,Ground broken for %s

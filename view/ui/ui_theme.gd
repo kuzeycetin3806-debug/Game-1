@@ -20,7 +20,9 @@ static func build() -> Theme:
 	t.set_stylebox("normal", "Button", _pill(Color(1, 1, 1, 0.55)))
 	t.set_stylebox("hover", "Button", _pill(Color(1, 1, 1, 0.7)))
 	t.set_stylebox("pressed", "Button", _pill(ACCENT.lerp(Color.WHITE, 0.45)))
+	t.set_stylebox("disabled", "Button", _pill(Color(1, 1, 1, 0.28)))
 	t.set_stylebox("focus", "Button", StyleBoxEmpty.new())
+	t.set_color("font_disabled_color", "Button", Color(UiTheme.TEXT, 0.4))
 	t.set_constant("separation", "HBoxContainer", 10)
 	t.set_constant("separation", "VBoxContainer", 8)
 	return t

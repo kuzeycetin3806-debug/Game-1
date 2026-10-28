@@ -105,3 +105,35 @@ func test_zoom_respects_limits() -> void:
 	_settle(2.0)
 	assert_lte(rig.distance, rig.max_distance + 0.01)
 	assert_gte(rig.distance, rig.min_distance - 0.01)
+
+
+func test_short_touch_is_a_tap() -> void:
+	watch_signals(rig)
+	_touch(0, Vector2(200, 400), true)
+	_touch(0, Vector2(203, 401), false)
+	assert_signal_emitted(rig, "tapped")
+
+
+func test_drag_is_not_a_tap() -> void:
+	watch_signals(rig)
+	_touch(0, Vector2(200, 400), true)
+	_drag(0, Vector2(200, 400), Vector2(260, 400))
+	_touch(0, Vector2(260, 400), false)
+	assert_signal_not_emitted(rig, "tapped")
+
+
+func test_two_finger_gesture_is_not_a_tap() -> void:
+	watch_signals(rig)
+	_touch(0, Vector2(200, 400), true)
+	_touch(1, Vector2(300, 400), true)
+	_touch(1, Vector2(300, 400), false)
+	_touch(0, Vector2(200, 400), false)
+	assert_signal_not_emitted(rig, "tapped")
+
+
+func test_focus_on_glides_to_target() -> void:
+	rig.focus_on(Vector3(30, 5, -20))
+	_settle(2.0)
+	assert_almost_eq(rig.focus.x, 30.0, 0.1)
+	assert_almost_eq(rig.focus.z, -20.0, 0.1)
+	assert_almost_eq(rig.focus.y, 0.0, 0.001)

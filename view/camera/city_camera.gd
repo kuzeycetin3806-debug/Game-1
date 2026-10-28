@@ -6,6 +6,11 @@ extends Node3D
 ## Motion is smoothed and keeps inertia after release.
 
 signal moved
+## A short touch/click without dragging (screen position).
+signal tapped(screen_pos: Vector2)
+
+const TAP_SLOP_PX: float = 14.0
+const TAP_MAX_MS: int = 350
 
 @export var camera: Camera3D
 @export_group("Limits")
@@ -41,6 +46,9 @@ var _dragging: bool = false
 var _mouse_pan: bool = false
 var _mouse_rotate: bool = false
 var _attributes: CameraAttributesPractical
+var _press_pos: Vector2 = Vector2.ZERO
+var _press_ms: int = 0
+var _tap_possible: bool = false
 
 
 func _ready() -> void:
@@ -58,6 +66,23 @@ func _ready() -> void:
 func set_dof_enabled(enabled: bool) -> void:
 	dof_enabled = enabled
 	_update_dof()
+
+
+## Jump without smoothing (scene setup, captures).
+func snap_to(world_pos: Vector3, dist: float) -> void:
+	focus = _clamp_focus(world_pos)
+	_target_focus = focus
+	distance = clampf(dist, min_distance, max_distance)
+	_target_distance = distance
+	_pan_velocity = Vector3.ZERO
+	_apply_transform()
+	moved.emit()
+
+
+## Glide the view so `world_pos` ends up under the screen centre.
+func focus_on(world_pos: Vector3) -> void:
+	_pan_velocity = Vector3.ZERO
+	_target_focus = _clamp_focus(Vector3(world_pos.x, 0.0, world_pos.z))
 
 
 func get_pitch() -> float:
@@ -81,9 +106,15 @@ func _on_touch(e: InputEventScreenTouch) -> void:
 		_pan_velocity = Vector3.ZERO
 		_yaw_velocity = 0.0
 		_dragging = true
+		if _touches.size() == 1:
+			_begin_tap(e.position)
+		else:
+			_tap_possible = false
 	else:
 		_touches.erase(e.index)
 		_dragging = not _touches.is_empty()
+		if _touches.is_empty():
+			_end_tap(e.position)
 
 
 func _on_drag(e: InputEventScreenDrag) -> void:
@@ -91,6 +122,7 @@ func _on_drag(e: InputEventScreenDrag) -> void:
 		_touches[e.index] = e.position - e.relative
 	var prev: Dictionary = _touches.duplicate()
 	_touches[e.index] = e.position
+	_track_tap(e.position)
 	if _touches.size() == 1:
 		_pan_by_screen(e.relative)
 	elif _touches.size() >= 2:
@@ -113,6 +145,9 @@ func _on_mouse(e: InputEventMouse) -> void:
 				_dragging = b.pressed
 				if b.pressed:
 					_pan_velocity = Vector3.ZERO
+					_begin_tap(b.position)
+				else:
+					_end_tap(b.position)
 			MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE:
 				_mouse_rotate = b.pressed
 				if b.pressed:
@@ -126,9 +161,37 @@ func _on_mouse(e: InputEventMouse) -> void:
 	elif e is InputEventMouseMotion:
 		var m := e as InputEventMouseMotion
 		if _mouse_pan:
+			_track_tap(m.position)
 			_pan_by_screen(m.relative)
 		elif _mouse_rotate:
 			_rotate_by(m.relative.x * mouse_rotate_speed)
+
+
+func _begin_tap(pos: Vector2) -> void:
+	_tap_possible = true
+	_press_pos = pos
+	_press_ms = Time.get_ticks_msec()
+
+
+func _track_tap(pos: Vector2) -> void:
+	if _tap_possible and pos.distance_to(_press_pos) > TAP_SLOP_PX:
+		_tap_possible = false
+
+
+func _end_tap(pos: Vector2) -> void:
+	_track_tap(pos)
+	if _tap_possible and Time.get_ticks_msec() - _press_ms <= TAP_MAX_MS:
+		# A tap must not leave the camera gliding.
+		_pan_velocity = Vector3.ZERO
+		tapped.emit(pos)
+	_tap_possible = false
+
+
+## Ground-plane (y = 0) point under a screen position, or null when looking at the sky.
+func ground_point(screen_pos: Vector2) -> Variant:
+	var from: Vector3 = camera.project_ray_origin(screen_pos)
+	var dir: Vector3 = camera.project_ray_normal(screen_pos)
+	return Plane(Vector3.UP, 0.0).intersects_ray(from, dir)
 
 
 func _pan_by_screen(delta_px: Vector2) -> void:

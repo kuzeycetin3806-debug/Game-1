@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.4", "Mobile")
 
 EventBus="*res://app/event_bus.gd"
 Clock="*res://app/clock.gd"
+SimRunner="*res://app/sim_runner.gd"
 Settings="*res://app/settings.gd"
 
 [debug]
@@ -35,6 +36,11 @@ window/size/viewport_height=960
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/i18n/strings.tr.translation", "res://assets/i18n/strings.en.translation")
+locale/fallback="tr"
 
 [input_devices]
 
