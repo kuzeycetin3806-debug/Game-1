@@ -1,0 +1,21 @@
+# Godot
+.godot/
+.import/
+export_credentials.cfg
+build/
+*.translation
+
+# Secrets
+.env
+.env.*
+*.keystore
+*.jks
+backend/.dev.vars
+
+# Node (backend)
+node_modules/
+backend/.wrangler/
+
+# OS
+.DS_Store
+Thumbs.db
