@@ -1,0 +1,9 @@
+{
+  "id": "default_city_location",
+  "version": 1,
+  "_comment": "VARSAYIM: Kurgusal şehir. Enlem güneşin yolunu ve gün uzunluğunu belirler; saat cihazın yerel saatidir.",
+  "city_name": "Nefeskent",
+  "address": "Ihlamur Sokağı No: 17, Çınaraltı Mahallesi, 34712 Nefeskent",
+  "latitude_deg": 40.74,
+  "north_offset_deg": 30.0
+}

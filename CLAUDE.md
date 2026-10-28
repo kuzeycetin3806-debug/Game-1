@@ -172,7 +172,8 @@ godot --path . --editor                      # editörü aç
 godot --path .                               # oyunu çalıştır
 godot --headless --path . --import           # ilk kurulumda/CI'da kaynakları içe aktar
 
-# Testler (GUT, headless)
+# Testler (GUT, headless) — kısa yol: ilk seferde import da eder
+tools/run_tests.sh
 godot --headless --path . -s addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude_subdirs -gexit
 
 # Tek test dosyası
