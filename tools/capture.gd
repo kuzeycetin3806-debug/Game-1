@@ -3,7 +3,7 @@ extends SceneTree
 ## Usage: godot --path . -s tools/capture.gd -- --out=DIR --hours=8,13,19.5,23 [--quality=2] [--date=2026-06-21]
 ##   [--build=def@x,y;def@x,y]  place buildings first   [--advance=ticks]  run the sim forward
 ##   [--placing=def]  enter placement mode               [--select=x,y]  select the building on a cell
-##   [--zoom=distance] [--focus=cellx,celly] [--prefix=name]
+##   [--zoom=distance] [--focus=cellx,celly] [--prefix=name] [--drawer]  open the build drawer
 
 var _out: String = "user://captures"
 var _hours: Array[float] = [9.0, 13.0, 19.0, 23.0]
@@ -16,6 +16,7 @@ var _select: Vector2i = Vector2i(-1, -1)
 var _zoom: float = -1.0
 var _focus: Vector2i = Vector2i(-1, -1)
 var _prefix: String = "city"
+var _drawer: bool = false
 
 
 func _initialize() -> void:
@@ -42,6 +43,8 @@ func _initialize() -> void:
 		elif arg.begins_with("--focus="):
 			var p3: PackedStringArray = arg.trim_prefix("--focus=").split(",")
 			_focus = Vector2i(int(p3[0]), int(p3[1]))
+		elif arg == "--drawer":
+			_drawer = true
 		elif arg.begins_with("--prefix="):
 			_prefix = arg.trim_prefix("--prefix=")
 		elif arg.begins_with("--date="):
@@ -82,6 +85,8 @@ func _run() -> void:
 	rig.call("snap_to", focus, _zoom if _zoom > 0.0 else float(rig.get("distance")))
 	if _placing != "":
 		city.get("build_controller").call("start_placing", _placing)
+	if _drawer:
+		current_scene.get_node("%Hud").call("open_drawer")
 	if _select.x >= 0:
 		city.get("build_controller").call("select", sim.grid.building_at(_select))
 	var clock: Node = root.get_node("Clock")

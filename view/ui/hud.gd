@@ -56,6 +56,11 @@ func _process(delta: float) -> void:
 		_toast.visible = _toast_time > 0.0
 
 
+func open_drawer() -> void:
+	_drawer.visible = true
+	_refresh_cards()
+
+
 func show_toast(text: String) -> void:
 	_toast_label.text = text
 	_toast.visible = true
@@ -127,6 +132,7 @@ func _build_drawer() -> void:
 	_drawer.add_child(v)
 	var tabs_scroll := ScrollContainer.new()
 	tabs_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	tabs_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 	tabs_scroll.custom_minimum_size = Vector2(0, 52)
 	v.add_child(tabs_scroll)
 	var tabs := HBoxContainer.new()
@@ -146,6 +152,7 @@ func _build_drawer() -> void:
 		tabs.add_child(b)
 	var scroll := ScrollContainer.new()
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 	scroll.custom_minimum_size = Vector2(0, 176)
 	v.add_child(scroll)
 	_cards = HBoxContainer.new()
@@ -186,7 +193,7 @@ func _refresh_cards() -> void:
 	for c: Node in _cards.get_children():
 		c.queue_free()
 	var sim: Simulation = SimRunner.sim
-	for id: String in sim.content.building_order:
+	for id: String in sorted_building_ids(sim.content):
 		var def: BuildingDef = sim.content.get_building(id)
 		if _category != "all" and def.category != _category:
 			continue
@@ -208,6 +215,18 @@ func _refresh_cards() -> void:
 			_drawer.visible = false
 			controller.start_placing(id))
 		_cards.add_child(card)
+
+
+## Category order of the tabs, then cheapest first.
+static func sorted_building_ids(content: ContentDb) -> Array[String]:
+	var ids: Array[String] = content.building_order.duplicate()
+	ids.sort_custom(func(a: String, b: String) -> bool:
+		var da: BuildingDef = content.get_building(a)
+		var db: BuildingDef = content.get_building(b)
+		var ca: int = CATEGORIES.find(da.category)
+		var cb: int = CATEGORIES.find(db.category)
+		return ca < cb if ca != cb else (da.cost < db.cost if da.cost != db.cost else a < b))
+	return ids
 
 
 func _clear_bottom() -> void:

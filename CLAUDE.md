@@ -94,6 +94,8 @@ Yeni autoload eklemek **mimari değişikliktir** → önce sor.
 - `sim/content/ContentDb` bunları yükleyip doğrular (şema kontrolü, eksik alan → açık hata mesajı).
 - Kodda içerik kimliği sabitlenmez (`"cafe_small"` gibi string'ler yalnızca data ve testlerde geçer).
 - Her içerik kaydının `id` (snake_case, benzersiz) ve `version` alanı vardır.
+- `ContentDb.from_dicts()` saftır (testler fixture verir); dosya okuyan tek yer `ContentDb.load_default()`.
+- Yeni bina = `data/buildings/<id>.json` + `assets/i18n/strings.csv` içinde `BLD_<ID>` ve `BLD_<ID>_DESC` anahtarları.
 
 ### 2.6 Kayıt
 
@@ -135,7 +137,7 @@ view/                 Görsel katman script'leri
   life/               araç, yaya, tramvay
   ui/                 cam paneller, gazete, mektup, HUD
 scenes/               .tscn dosyaları (main.tscn, city.tscn, ui/*.tscn)
-assets/               models/, textures/, materials/, shaders/, fonts/, audio/
+assets/               models/, textures/, materials/, shaders/, fonts/, audio/, i18n/ (strings.csv: keys,tr,en)
 data/                 buildings/, events/, citizens/, policies/, text_templates/  (JSON)
 tests/                unit/ (sim), integration/ (app servisleri), fixtures/
 backend/              Cloudflare Worker (TypeScript) — gazete/mektup üretimi
@@ -183,6 +185,12 @@ godot --headless --path . -s addons/gut/gut_cmdln.gd -gtest=res://tests/unit/tes
 
 # Görsel kontrol: belirli saatlerde ekran görüntüsü (GPU yoksa xvfb-run + lavapipe ile)
 xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/capture.gd -- --out=/tmp/shots --hours=8,13,18,22 --quality=2
+
+# Senaryolu görüntü: bina kur, sim'i ilerlet, yerleştirme modu / seçim / inşa çekmecesi
+xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/capture.gd -- --out=/tmp/shots --hours=11 --build="office_tower@19,19" --advance=100 --placing=cafe --zoom=210 --focus=15,16
+
+# Sim hız ölçümü (14 günlük catch-up)
+godot --headless --path . -s tools/bench_sim.gd
 
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd

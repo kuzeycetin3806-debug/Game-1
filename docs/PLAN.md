@@ -1,9 +1,11 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Plan onaylandı. M0 ✅ M1 ✅ — sıradaki: M2.**
+Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ — sıradaki: M3.**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
+
+![M2 akışı: açılış, inşa çekmecesi, geçerli yerleştirme, dolu yer, bina bilgisi](images/m2_build_flow.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -147,3 +149,23 @@ düşük). Serbest metin istenirse ayrı karar.
 - VARSAYIM: Saat "güneş saati" kabul edildi (boylam/yaz saati düzeltmesi yok). Düşük kalite 30 FPS sınırlı (pil).
 - VARSAYIM: Ay ışığı sabit 42° yükseklikten, güneşin karşı yönünden gelir; ışık geçişi güneş −4°'deyken yapılır.
 - Bilinen eksik: cihazda (Android/iOS) FPS ölçümü yapılmadı — export ayarları M6'da. Gerçek low-poly modeller yok.
+
+### M2 (tamamlandı)
+- Sim çekirdeği (`sim/`): `SimState` (serileştirilebilir, `hash()`), `Simulation.step/replay`, `SimRng` (sadece 32-bit
+  tamsayı; GDScript taşma davranışına güvenmez), tamsayı takvim (`SimClockMath`), `CityGrid`, `CityAggregates` önbelleği.
+- Sistemler: nüfus (konut + mutluluk hedefine yavaş yaklaşır), ekonomi (vergi/bakım, kuruş altı kalanlar dahil tam),
+  trafik (blok bazlı, gün içi talep eğrisi, metro/bisiklet rahatlatması), çevre (yeşil/kirlilik), mutluluk.
+- Komutlar: `PlaceBuildingCommand`, `DemolishCommand` — tick ile damgalanır, günlüğe yazılır, yeniden oynatılır.
+- Olaylar: `building_placed/completed/demolished`, `day_started` (dünün özeti), `population_milestone`, `traffic_jam`.
+- İçerik: 12 bina, denge ve harita JSON'da; `tools/validate_data.gd` CI'da çalışır.
+- Görsel: şehir sim'den çiziliyor; inşaat iskelesi büyüyerek yükseliyor; tek elle yerleştirme (hayalet ekran
+  ortasında, haritayı kaydır, "Yerleştir"), dokununca bina bilgisi ve yıkma; cam HUD ve inşa çekmecesi; TR/EN metinler.
+- Determinizm: tek seferde / parçalı + JSON kaydet-yükle / komut günlüğünden yeniden oynatma → aynı hash (test ediliyor).
+- Performans: 329 binalık şehirde 14 gün (2016 tick) masaüstünde ~0,5 sn (`tools/bench_sim.gd`).
+- VARSAYIM: Yol ağı sabit ızgara (her 6. hücre). Bloğun iç hücreleri de yapılabilir (yola bitişiklik şartı yok).
+- VARSAYIM: Binalar döndürülmüyor (hepsi kare taban). Bakım ücreti inşaat başladığı an işler.
+- VARSAYIM: Yıkımda maliyetin %30'u iade. Bütçe eksiye düşebilir (borç); yeni inşaat için para gerekir.
+- VARSAYIM: Saat dilimi şehir kurulurken sabitlenir. Dil varsayılanı cihazdan bağımsız Türkçe.
+- VARSAYIM: Kayıt M3'e kadar yok — her açılışta yeni kasaba kurulur.
+- M3'e not: `CityAggregates` her bina tamamlanışında yeniden hesaplanıyor (mutluluk yarıçapı O(n²)); catch-up hedefi
+  için ölçülecek, gerekirse artımlı yapılacak.
