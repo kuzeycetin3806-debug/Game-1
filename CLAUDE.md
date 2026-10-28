@@ -153,6 +153,8 @@ tools/                yardımcı script'ler (veri doğrulama, determinizm karş�
 - `get_node("../../X")` gibi kırılgan yollar yok; `@export` veya `%UniqueName` kullan.
 - `_process` içinde ayırma (allocation) yok; nesne havuzu kullan. Sim `_process`'te değil, `SimRunner`'da tick ile çalışır.
 - Kullanıcıya görünen tüm metinler `tr()` ile; birincil dil **Türkçe**, anahtarlar İngilizce (`"UI_NEWSPAPER_TITLE"`).
+  İstisna: sadece debug build'de görünen geliştirici araçları (`DebugPanel`).
+- Görsel katmandaki saf hesaplar (güneş, palet, kamera jest matematiği) `static func` olarak yazılır ve birim test edilir.
 - Yorumlar kısa; "neden"i açıklar. Kod tanımlayıcıları İngilizce.
 - Sihirli sayı yok: denge değerleri `data/` veya `SimConfig` içinde.
 
@@ -178,6 +180,9 @@ godot --headless --path . -s addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude
 
 # Tek test dosyası
 godot --headless --path . -s addons/gut/gut_cmdln.gd -gtest=res://tests/unit/test_determinism.gd -gexit
+
+# Görsel kontrol: belirli saatlerde ekran görüntüsü (GPU yoksa xvfb-run + lavapipe ile)
+xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/capture.gd -- --out=/tmp/shots --hours=8,13,18,22 --quality=2
 
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd

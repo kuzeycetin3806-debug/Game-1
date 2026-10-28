@@ -1,6 +1,9 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Onay bekliyor.** Repo başlangıçta tamamen boştu (commit yok, dosya yok).
+Durum: **Plan onaylandı. M0 ✅ M1 ✅ — sıradaki: M2.**
+Repo başlangıçta tamamen boştu (commit yok, dosya yok).
+
+![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -118,7 +121,7 @@ düşük). Serbest metin istenirse ayrı karar.
 
 ---
 
-## Açık sorular / onayınızı bekleyen varsayımlar
+## Varsayımlar (onaylandı)
 
 1. **Godot 4.4.x + Mobile renderer** — uygun mu? (4.5/4.6 kullanıyorsanız söyleyin.)
 2. **Tick = 10 dakika, catch-up limiti 14 gün** — denge ve pil açısından makul buluyorum.
@@ -129,4 +132,18 @@ düşük). Serbest metin istenirse ayrı karar.
 7. **3D modeller:** başlangıçta prosedürel/yer tutucu low-poly (kod/CSG/basit mesh). Kendi model kütüphaneniz veya
    tercih ettiğiniz bir CC0 paket var mı?
 8. **Dil:** birincil Türkçe, İngilizce ikincil.
-9. **Godot ortamda kurulu değil** — CI ve yerel doğrulama için headless Godot'u script ile indireceğim.
+9. **Godot ortamda kurulu değil** — CI'da GitHub Actions indiriyor; yerelde (bulut ortamı) Godot 4.4.1 + lavapipe
+   (yazılımsal Vulkan) ile gerçek Mobile renderer görüntüsü alınabiliyor (`tools/capture.gd`).
+10. **Şehrin kurgusal adresi/konumu** (`data/environment/city_location.json`): "Ihlamur Sokağı No: 17, Çınaraltı
+    Mahallesi, 34712 Nefeskent", enlem 40.74°. Güneşin yolu bu enleme göre, saat cihazın yerel saatine göre.
+    Backend için de M5'te yer tutucu adres `https://sehir-nefes-api.example.workers.dev` (ayardan değişir).
+
+## Aşama notları
+
+### M1 (tamamlandı)
+- Yapılan: dokunmatik kamera (pan/pinch/twist/atalet/sınırlar, fare desteği), gerçek saate bağlı güneş/ay,
+  gökyüzü, sis, pencere ve sokak lambası ışıkları, tilt-shift DOF, kalite profilleri, cam efektli debug paneli
+  (saat kaydırma, hızlı akış, kalite, FPS/draw call). Yer tutucu şehir tamamen MultiMesh ile (~31 draw call, ~51k üçgen).
+- VARSAYIM: Saat "güneş saati" kabul edildi (boylam/yaz saati düzeltmesi yok). Düşük kalite 30 FPS sınırlı (pil).
+- VARSAYIM: Ay ışığı sabit 42° yükseklikten, güneşin karşı yönünden gelir; ışık geçişi güneş −4°'deyken yapılır.
+- Bilinen eksik: cihazda (Android/iOS) FPS ölçümü yapılmadı — export ayarları M6'da. Gerçek low-poly modeller yok.
