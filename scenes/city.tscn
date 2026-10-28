@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://view/city/city_view.gd" id="1_view"]
+[ext_resource type="Script" path="res://view/camera/city_camera.gd" id="2_cam"]
+[ext_resource type="Script" path="res://view/city/placeholder_city.gd" id="3_city"]
+[ext_resource type="Script" path="res://view/environment/day_night.gd" id="4_dn"]
+[ext_resource type="Script" path="res://view/environment/graphics_quality.gd" id="5_gq"]
+
+[node name="City" type="Node3D"]
+script = ExtResource("1_view")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+shadow_enabled = true
+
+[node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+unique_name_in_owner = true
+script = ExtResource("2_cam")
+camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+keep_aspect = 0
+fov = 28.0
+near = 2.0
+far = 2000.0
+current = true
+
+[node name="PlaceholderCity" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_city")
+
+[node name="DayNight" type="Node" parent="." node_paths=PackedStringArray("light", "world_environment")]
+unique_name_in_owner = true
+script = ExtResource("4_dn")
+light = NodePath("../Sun")
+world_environment = NodePath("../WorldEnvironment")
+
+[node name="GraphicsQuality" type="Node" parent="." node_paths=PackedStringArray("camera_rig", "light", "world_environment", "city")]
+script = ExtResource("5_gq")
+camera_rig = NodePath("../CameraRig")
+light = NodePath("../Sun")
+world_environment = NodePath("../WorldEnvironment")
+city = NodePath("../PlaceholderCity")

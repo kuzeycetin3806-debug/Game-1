@@ -9,8 +9,8 @@ signal moved
 
 @export var camera: Camera3D
 @export_group("Limits")
-@export var min_distance: float = 60.0
-@export var max_distance: float = 420.0
+@export var min_distance: float = 90.0
+@export var max_distance: float = 760.0
 ## Pitch (degrees below horizon) when fully zoomed in / out.
 @export var pitch_near_deg: float = 32.0
 @export var pitch_far_deg: float = 52.0
@@ -24,11 +24,11 @@ signal moved
 @export var wheel_zoom_step: float = 1.12
 @export_group("Tilt-shift")
 @export var dof_enabled: bool = true
-@export var dof_amount: float = 0.06
+@export var dof_amount: float = 0.018
 
 var focus: Vector3 = Vector3.ZERO
 var yaw: float = deg_to_rad(45.0)
-var distance: float = 220.0
+var distance: float = 560.0
 
 var _target_focus: Vector3 = Vector3.ZERO
 var _target_yaw: float = yaw
@@ -179,10 +179,10 @@ func _update_dof() -> void:
 		return
 	_attributes.dof_blur_far_enabled = dof_enabled
 	_attributes.dof_blur_near_enabled = dof_enabled
-	_attributes.dof_blur_far_distance = distance * 1.12
-	_attributes.dof_blur_far_transition = distance * 0.55
-	_attributes.dof_blur_near_distance = distance * 0.8
-	_attributes.dof_blur_near_transition = distance * 0.35
+	_attributes.dof_blur_far_distance = distance * 1.25
+	_attributes.dof_blur_far_transition = distance * 0.6
+	_attributes.dof_blur_near_distance = distance * 0.72
+	_attributes.dof_blur_near_transition = distance * 0.3
 	_attributes.dof_blur_amount = dof_amount
 
 
