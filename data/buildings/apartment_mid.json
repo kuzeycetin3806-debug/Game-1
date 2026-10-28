@@ -1,0 +1,24 @@
+{
+  "id": "apartment_mid",
+  "version": 1,
+  "name_key": "BLD_APARTMENT_MID",
+  "desc_key": "BLD_APARTMENT_MID_DESC",
+  "category": "residential",
+  "size": 1,
+  "cost": 22000,
+  "upkeep_per_day": 160,
+  "build_hours": 12,
+  "residents": 48,
+  "jobs": 0,
+  "effects": {
+    "traffic": 12,
+    "pollution": 2
+  },
+  "visual": {
+    "kind": "building",
+    "height": 20.0,
+    "style": 1,
+    "color": "#e59f84",
+    "garden": false
+  }
+}

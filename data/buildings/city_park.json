@@ -1,0 +1,23 @@
+{
+  "id": "city_park",
+  "version": 1,
+  "name_key": "BLD_CITY_PARK",
+  "desc_key": "BLD_CITY_PARK_DESC",
+  "category": "park",
+  "size": 2,
+  "cost": 26000,
+  "upkeep_per_day": 160,
+  "build_hours": 10,
+  "residents": 0,
+  "jobs": 4,
+  "effects": {
+    "happiness": 60,
+    "green": 160,
+    "radius": 4,
+    "pollution": -25
+  },
+  "visual": {
+    "kind": "park",
+    "trees": 18
+  }
+}

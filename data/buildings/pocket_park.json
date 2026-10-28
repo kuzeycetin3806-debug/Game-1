@@ -1,0 +1,23 @@
+{
+  "id": "pocket_park",
+  "version": 1,
+  "name_key": "BLD_POCKET_PARK",
+  "desc_key": "BLD_POCKET_PARK_DESC",
+  "category": "park",
+  "size": 1,
+  "cost": 5000,
+  "upkeep_per_day": 40,
+  "build_hours": 3,
+  "residents": 0,
+  "jobs": 0,
+  "effects": {
+    "happiness": 30,
+    "green": 40,
+    "radius": 2,
+    "pollution": -6
+  },
+  "visual": {
+    "kind": "park",
+    "trees": 5
+  }
+}

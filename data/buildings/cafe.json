@@ -1,0 +1,25 @@
+{
+  "id": "cafe",
+  "version": 1,
+  "name_key": "BLD_CAFE",
+  "desc_key": "BLD_CAFE_DESC",
+  "category": "commercial",
+  "size": 1,
+  "cost": 9000,
+  "upkeep_per_day": 90,
+  "build_hours": 4,
+  "residents": 0,
+  "jobs": 8,
+  "effects": {
+    "happiness": 25,
+    "radius": 2,
+    "traffic": 6
+  },
+  "visual": {
+    "kind": "building",
+    "height": 5.5,
+    "style": 1,
+    "color": "#efbcbc",
+    "garden": false
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "id": "nefeskent",
+  "version": 1,
+  "name_key": "MAP_NEFESKENT",
+  "grid_size": 32,
+  "road_every": 6,
+  "_comment": "VARSAYIM: Yol ağı sabit ızgara (her 6. hücre yol). Başlangıç kasabası merkez bloklarda.",
+  "starting_buildings": [
+    {
+      "def": "apartment_mid",
+      "cell": [
+        13,
+        13
+      ]
+    },
+    {
+      "def": "apartment_mid",
+      "cell": [
+        14,
+        13
+      ]
+    },
+    {
+      "def": "cafe",
+      "cell": [
+        15,
+        13
+      ]
+    },
+    {
+      "def": "office_mid",
+      "cell": [
+        16,
+        13
+      ]
+    },
+    {
+      "def": "shop_row",
+      "cell": [
+        17,
+        13
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        13,
+        14
+      ]
+    },
+    {
+      "def": "pocket_park",
+      "cell": [
+        14,
+        14
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        13,
+        15
+      ]
+    },
+    {
+      "def": "apartment_green",
+      "cell": [
+        16,
+        14
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        7,
+        13
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        8,
+        13
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        9,
+        13
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        7,
+        14
+      ]
+    },
+    {
+      "def": "cafe",
+      "cell": [
+        10,
+        13
+      ]
+    },
+    {
+      "def": "city_park",
+      "cell": [
+        13,
+        19
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        19,
+        13
+      ]
+    },
+    {
+      "def": "house_small",
+      "cell": [
+        20,
+        13
+      ]
+    },
+    {
+      "def": "shop_row",
+      "cell": [
+        19,
+        14
+      ]
+    }
+  ]
+}

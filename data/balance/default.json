@@ -1,0 +1,96 @@
+{
+  "id": "default_balance",
+  "version": 1,
+  "_comment": "Denge değerleri. Para lira cinsinden yazılır, sim içinde kuruşa çevrilir. Oranlar binde (permille).",
+  "start_money": 250000,
+  "tax_per_worker_per_day": 18,
+  "tax_per_resident_per_day": 4,
+  "commerce_income_per_job_per_day": 9,
+  "workforce_permille": 600,
+  "demolish_refund_permille": 300,
+  "population": {
+    "move_divisor": 96,
+    "vacancy_floor_permille": 450,
+    "happiness_weight_permille": 550
+  },
+  "happiness": {
+    "base": 520,
+    "follow_divisor": 36,
+    "unemployment_penalty": 260,
+    "traffic_penalty": 220,
+    "pollution_penalty": 240,
+    "green_bonus": 160,
+    "amenity_cap": 220,
+    "homeless_penalty": 120
+  },
+  "traffic": {
+    "road_capacity_per_tile": 40,
+    "follow_divisor": 3,
+    "_curve_comment": "Günün dakikasına göre yolculuk talebi (binde). Sabah ve akşam zirve.",
+    "demand_curve": [
+      [
+        0,
+        80
+      ],
+      [
+        300,
+        60
+      ],
+      [
+        420,
+        520
+      ],
+      [
+        480,
+        1000
+      ],
+      [
+        570,
+        620
+      ],
+      [
+        720,
+        480
+      ],
+      [
+        780,
+        560
+      ],
+      [
+        960,
+        620
+      ],
+      [
+        1050,
+        1000
+      ],
+      [
+        1140,
+        700
+      ],
+      [
+        1320,
+        260
+      ],
+      [
+        1440,
+        80
+      ]
+    ]
+  },
+  "environment": {
+    "pollution_per_trip_permille": 6,
+    "green_absorb_permille": 4,
+    "follow_divisor": 48
+  },
+  "milestones": [
+    100,
+    250,
+    500,
+    1000,
+    2500,
+    5000,
+    10000,
+    25000
+  ]
+}

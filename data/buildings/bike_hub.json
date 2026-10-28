@@ -1,0 +1,26 @@
+{
+  "id": "bike_hub",
+  "version": 1,
+  "name_key": "BLD_BIKE_HUB",
+  "desc_key": "BLD_BIKE_HUB_DESC",
+  "category": "transit",
+  "size": 1,
+  "cost": 6000,
+  "upkeep_per_day": 50,
+  "build_hours": 3,
+  "residents": 0,
+  "jobs": 2,
+  "effects": {
+    "traffic_relief": 120,
+    "radius": 3,
+    "happiness": 8,
+    "pollution": -2
+  },
+  "visual": {
+    "kind": "plaza",
+    "height": 2.5,
+    "style": 0,
+    "color": "#9cbfb6",
+    "garden": false
+  }
+}

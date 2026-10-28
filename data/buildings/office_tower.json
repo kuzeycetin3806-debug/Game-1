@@ -1,0 +1,24 @@
+{
+  "id": "office_tower",
+  "version": 1,
+  "name_key": "BLD_OFFICE_TOWER",
+  "desc_key": "BLD_OFFICE_TOWER_DESC",
+  "category": "office",
+  "size": 2,
+  "cost": 180000,
+  "upkeep_per_day": 1300,
+  "build_hours": 48,
+  "residents": 0,
+  "jobs": 520,
+  "effects": {
+    "traffic": 140,
+    "pollution": 18
+  },
+  "visual": {
+    "kind": "building",
+    "height": 84.0,
+    "style": 2,
+    "color": "#8eaec8",
+    "garden": false
+  }
+}

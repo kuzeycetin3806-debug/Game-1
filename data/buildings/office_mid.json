@@ -1,0 +1,24 @@
+{
+  "id": "office_mid",
+  "version": 1,
+  "name_key": "BLD_OFFICE_MID",
+  "desc_key": "BLD_OFFICE_MID_DESC",
+  "category": "office",
+  "size": 1,
+  "cost": 40000,
+  "upkeep_per_day": 300,
+  "build_hours": 18,
+  "residents": 0,
+  "jobs": 90,
+  "effects": {
+    "traffic": 30,
+    "pollution": 6
+  },
+  "visual": {
+    "kind": "building",
+    "height": 28.0,
+    "style": 2,
+    "color": "#c6d5de",
+    "garden": false
+  }
+}

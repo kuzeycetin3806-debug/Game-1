@@ -1,0 +1,26 @@
+{
+  "id": "apartment_green",
+  "version": 1,
+  "name_key": "BLD_APARTMENT_GREEN",
+  "desc_key": "BLD_APARTMENT_GREEN_DESC",
+  "category": "residential",
+  "size": 1,
+  "cost": 30000,
+  "upkeep_per_day": 200,
+  "build_hours": 16,
+  "residents": 44,
+  "jobs": 0,
+  "effects": {
+    "traffic": 10,
+    "green": 6,
+    "happiness": 10,
+    "radius": 1
+  },
+  "visual": {
+    "kind": "building",
+    "height": 17.0,
+    "style": 1,
+    "color": "#a9c49e",
+    "garden": true
+  }
+}

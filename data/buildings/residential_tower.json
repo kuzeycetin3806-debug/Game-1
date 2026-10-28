@@ -1,0 +1,24 @@
+{
+  "id": "residential_tower",
+  "version": 1,
+  "name_key": "BLD_RESIDENTIAL_TOWER",
+  "desc_key": "BLD_RESIDENTIAL_TOWER_DESC",
+  "category": "residential",
+  "size": 2,
+  "cost": 140000,
+  "upkeep_per_day": 900,
+  "build_hours": 36,
+  "residents": 320,
+  "jobs": 0,
+  "effects": {
+    "traffic": 70,
+    "pollution": 8
+  },
+  "visual": {
+    "kind": "building",
+    "height": 62.0,
+    "style": 2,
+    "color": "#a6bfd6",
+    "garden": false
+  }
+}

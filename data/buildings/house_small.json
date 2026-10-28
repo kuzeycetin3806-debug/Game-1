@@ -1,0 +1,23 @@
+{
+  "id": "house_small",
+  "version": 1,
+  "name_key": "BLD_HOUSE_SMALL",
+  "desc_key": "BLD_HOUSE_SMALL_DESC",
+  "category": "residential",
+  "size": 1,
+  "cost": 8000,
+  "upkeep_per_day": 60,
+  "build_hours": 6,
+  "residents": 14,
+  "jobs": 0,
+  "effects": {
+    "traffic": 4
+  },
+  "visual": {
+    "kind": "building",
+    "height": 8.0,
+    "style": 1,
+    "color": "#f2d3ae",
+    "garden": false
+  }
+}

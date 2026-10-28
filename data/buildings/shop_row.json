@@ -1,0 +1,26 @@
+{
+  "id": "shop_row",
+  "version": 1,
+  "name_key": "BLD_SHOP_ROW",
+  "desc_key": "BLD_SHOP_ROW_DESC",
+  "category": "commercial",
+  "size": 1,
+  "cost": 15000,
+  "upkeep_per_day": 140,
+  "build_hours": 8,
+  "residents": 0,
+  "jobs": 18,
+  "effects": {
+    "happiness": 12,
+    "radius": 2,
+    "traffic": 12,
+    "pollution": 2
+  },
+  "visual": {
+    "kind": "building",
+    "height": 7.5,
+    "style": 1,
+    "color": "#dcc6a0",
+    "garden": false
+  }
+}

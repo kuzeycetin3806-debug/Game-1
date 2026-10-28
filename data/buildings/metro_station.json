@@ -1,0 +1,25 @@
+{
+  "id": "metro_station",
+  "version": 1,
+  "name_key": "BLD_METRO_STATION",
+  "desc_key": "BLD_METRO_STATION_DESC",
+  "category": "transit",
+  "size": 1,
+  "cost": 90000,
+  "upkeep_per_day": 700,
+  "build_hours": 72,
+  "residents": 0,
+  "jobs": 12,
+  "effects": {
+    "traffic_relief": 350,
+    "radius": 7,
+    "happiness": 10
+  },
+  "visual": {
+    "kind": "building",
+    "height": 6.0,
+    "style": 0,
+    "color": "#ff8a5c",
+    "garden": true
+  }
+}
