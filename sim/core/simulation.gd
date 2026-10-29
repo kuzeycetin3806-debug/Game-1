@@ -70,6 +70,17 @@ func clone() -> Simulation:
 	return copy
 
 
+## Re-runs this city from its seed and command history and compares hashes.
+## Slow for old cities (every tick is simulated again); used by tools/verify_save.gd.
+func verify_replay() -> bool:
+	var origin: int = state.start_unix
+	for c: Command in command_log:
+		if c is RealignClockCommand:
+			origin -= (c as RealignClockCommand).shift_seconds
+	var re: Simulation = replay(content, state.city_seed, origin, state.utc_offset_s, command_log, state.tick)
+	return re.state.hash() == state.hash()
+
+
 func mark_buildings_changed() -> void:
 	grid = CityGrid.build(state, content)
 	_aggregates_dirty = true

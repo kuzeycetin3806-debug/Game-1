@@ -102,3 +102,16 @@ func test_realign_rejects_odd_shift() -> void:
 	var sim: Simulation = SimFixture.new_sim()
 	assert_eq(sim.apply_command(RealignClockCommand.create(601)).error, "ERR_BAD_TIME_SHIFT")
 	assert_eq(sim.apply_command(RealignClockCommand.create(0)).error, "ERR_BAD_TIME_SHIFT")
+
+
+func test_verify_replay_through_sleep_and_rebase() -> void:
+	var sim: Simulation = SimFixture.new_sim()
+	SimFixture.run(sim, 30)
+	sim.apply_command(RealignClockCommand.create(2 * 86400))
+	SimFixture.place(sim, "cafe", Vector2i(25, 25))
+	SimFixture.run(sim, 100)
+	sim.apply_command(RealignClockCommand.create(-86400))
+	SimFixture.run(sim, 20)
+	assert_true(sim.verify_replay())
+	sim.state.money_cents += 1
+	assert_false(sim.verify_replay(), "a tampered state must not verify")

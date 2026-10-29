@@ -103,6 +103,9 @@ Yeni autoload eklemek **mimari değişikliktir** → önce sor.
 - Kök alanlar: `{"save_version": N, "game_version": "x.y.z", "city_seed": ..., "last_tick": ..., "last_wall_time": ..., "state": {...}, "commands": [...]}`
 - Göç zinciri: `SaveMigrations.migrate(data)` → `v1→v2→…→güncel`. **Eski göç fonksiyonları asla silinmez.**
 - Her `save_version` artışında `tests/fixtures/saves/` altına örnek kayıt eklenir ve göç testi yazılır.
+- Dosyada `state_hash` vardır; uyuşmazlık = bozuk kayıt → yedek denenir. Format dönüşümü saf `sim/save/SaveCodec`,
+  dosya işlemleri `app/SaveService`. Test ve araçlar `SEHIR_SAVE_DIR` ile ayrı klasör kullanır, gerçek kayda dokunmaz.
+- Zaman atlamaları (uyku, saat geri alma) `RealignClockCommand` olarak komut günlüğüne yazılır; yeniden oynatma bozulmaz.
 
 ### 2.7 Görsel / performans
 
@@ -191,6 +194,15 @@ xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s too
 
 # Sim hız ölçümü (14 günlük catch-up)
 godot --headless --path . -s tools/bench_sim.gd
+
+# Kayıt determinizm kontrolü: kaydı tohum + komutlardan baştan oynat, hash'i karşılaştır
+godot --headless --path . -s tools/verify_save.gd -- user://saves/city.json
+
+# Yeni kayıt sürümü için fixture (sadece SaveMigrations.CURRENT artınca; eskisini asla yeniden üretme)
+godot --headless --path . -s tools/make_save_fixture.gd
+
+# Yetiştirme özeti görüntüsü: şehri kur, 50 saat "uygulama kapalı", yeniden aç
+xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/capture.gd -- --out=/tmp/shots --hours=10 --away=50
 
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd

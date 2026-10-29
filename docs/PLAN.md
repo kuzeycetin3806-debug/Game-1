@@ -1,11 +1,13 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ — sıradaki: M3.**
+Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ — sıradaki: M4.**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
 
 ![M2 akışı: açılış, inşa çekmecesi, geçerli yerleştirme, dolu yer, bina bilgisi](images/m2_build_flow.png)
+
+![M3: 2 gün sonra açılış özeti; 20 gün sonra (14 gün yetiştirildi, gerisi uyku)](images/m3_away.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -169,3 +171,21 @@ düşük). Serbest metin istenirse ayrı karar.
 - VARSAYIM: Kayıt M3'e kadar yok — her açılışta yeni kasaba kurulur.
 - M3'e not: `CityAggregates` her bina tamamlanışında yeniden hesaplanıyor (mutluluk yarıçapı O(n²)); catch-up hedefi
   için ölçülecek, gerekirse artımlı yapılacak.
+
+### M3 (tamamlandı)
+- Kayıt: `SaveCodec` (saf) + `SaveMigrations` zinciri (`CURRENT = 1`), dosyada `state_hash` ile bozulma tespiti.
+  `SaveService`: `.tmp` yaz → doğrula → `city.json`→`.bak`, `.tmp`→`city.json`; ana dosya bozuksa yedekten açılır
+  (oyuncuya "Kayıt yedekten kurtarıldı" bildirimi). Sabit `tests/fixtures/saves/v1_city.json` + göç testleri.
+- Kayıt anları: her saat (6 tick), her başarılı komuttan sonra, uygulama arka plana geçince/kapanırken, catch-up bitince.
+- Catch-up: açılışta ve uygulama geri gelince `CatchUp.plan` → (gerekirse) `RealignClockCommand` → şehrin kopyası
+  üzerinde **arka plan thread'inde** `CatchUpJob` → ana thread'de değiştir → kaydet → "Sen yokken" kartı.
+  ≤ 6 tick'lik açıklar canlı adımlanır. Catch-up sürerken komutlar reddedilir (`ERR_CITY_BUSY`).
+- 14 gün sınırı: fazlası "uyku" — takvim çapası kaydırılır, simüle edilmez; en son 14 gün simüle edilir, sim saati
+  her zaman duvar saatine eşit kalır.
+- Saat geri alınırsa: ≤ 6 saat → şehir bekler (geri sarılmaz). VARSAYIM: > 6 saat → şehir durumu korunur, takvim
+  çapası yeni saate kaydırılır (`clock_rebased` olayı); aksi hâlde saat bir yıl geri alınınca şehir bir yıl donardı.
+- Determinizm: `tools/verify_save.gd` bir kaydı tohum + komut günlüğünden baştan oynatıp hash'i karşılaştırır
+  (CI'da fixture üzerinde çalışır). Testler: thread'li catch-up = doğrudan adımlama; uyku/rebase içeren yeniden oynatma.
+- Testler/araçlar gerçek kayda dokunmaz: `SEHIR_SAVE_DIR` (run_tests.sh otomatik ayarlar), capture aracı kendi klasörü.
+- VARSAYIM: Aynı anda tek şehir (tek kayıt yuvası). Bulut kaydı yok.
+- Bilinen eksik: catch-up ilerleme kartı çok kısa sürdüğü için masaüstünde ancak bir an görünüyor; telefonda ölçülecek (M6).

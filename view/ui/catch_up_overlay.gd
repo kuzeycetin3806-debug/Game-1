@@ -14,20 +14,21 @@ var _bar: ProgressBar
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_dim = ColorRect.new()
 	_dim.color = Color(0.1, 0.12, 0.2, 0.28)
-	_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_dim)
+	_dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var center := CenterContainer.new()
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(center)
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_panel = GlassPanel.new()
 	_panel.content_margin = 24
-	_panel.set_anchors_preset(Control.PRESET_CENTER)
-	_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
-	_panel.custom_minimum_size = Vector2(420, 0)
-	add_child(_panel)
+	_panel.custom_minimum_size = Vector2(440, 0)
+	center.add_child(_panel)
 	_box = VBoxContainer.new()
 	_box.add_theme_constant_override("separation", 12)
 	_panel.add_child(_box)
@@ -145,20 +146,22 @@ static func signed_points(permille: int) -> String:
 
 
 func _row(grid: GridContainer, caption: String, value: String) -> void:
-	grid.add_child(_label(caption, 17, UiTheme.TEXT_SOFT))
-	var v: Label = _label(value, 19, UiTheme.TEXT)
+	var c: Label = _label(caption, 17, UiTheme.TEXT_SOFT, false)
+	c.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	grid.add_child(c)
+	var v: Label = _label(value, 19, UiTheme.TEXT, false)
 	v.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	grid.add_child(v)
 
 
-func _label(text: String, size: int, color: Color) -> Label:
+func _label(text: String, size: int, color: Color, wrap: bool = true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.add_theme_font_size_override("font_size", size)
 	l.add_theme_color_override("font_color", color)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if wrap else TextServer.AUTOWRAP_OFF
 	return l
 
 

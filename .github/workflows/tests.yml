@@ -28,3 +28,5 @@ jobs:
         run: GODOT=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 tools/run_tests.sh
       - name: Validate data
         run: ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --path . -s tools/validate_data.gd
+      - name: Verify save fixture replays exactly
+        run: ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --path . -s tools/verify_save.gd -- res://tests/fixtures/saves/v1_city.json

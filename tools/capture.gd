@@ -4,6 +4,7 @@ extends SceneTree
 ##   [--build=def@x,y;def@x,y]  place buildings first   [--advance=ticks]  run the sim forward
 ##   [--placing=def]  enter placement mode               [--select=x,y]  select the building on a cell
 ##   [--zoom=distance] [--focus=cellx,celly] [--prefix=name] [--drawer]  open the build drawer
+##   [--away=hours]  close the app, let time pass, reopen (shows the catch-up summary)
 
 var _out: String = "user://captures"
 var _hours: Array[float] = [9.0, 13.0, 19.0, 23.0]
@@ -17,6 +18,7 @@ var _zoom: float = -1.0
 var _focus: Vector2i = Vector2i(-1, -1)
 var _prefix: String = "city"
 var _drawer: bool = false
+var _away_hours: float = 0.0
 
 
 func _initialize() -> void:
@@ -43,6 +45,8 @@ func _initialize() -> void:
 		elif arg.begins_with("--focus="):
 			var p3: PackedStringArray = arg.trim_prefix("--focus=").split(",")
 			_focus = Vector2i(int(p3[0]), int(p3[1]))
+		elif arg.begins_with("--away="):
+			_away_hours = float(arg.trim_prefix("--away="))
 		elif arg == "--drawer":
 			_drawer = true
 		elif arg.begins_with("--prefix="):
@@ -77,9 +81,19 @@ func _run() -> void:
 			printerr("build failed: ", spec, " ", r.error)
 	for i: int in _advance:
 		sim.step()
-	# Keep the wall clock from stepping the city further during capture.
-	sim.state.start_unix = int(Time.get_unix_time_from_system()) - sim.state.tick * SimConfig.TICK_SECONDS + 10_000_000
 	root.get_node("EventBus").emit_signal("city_changed")
+	if _away_hours > 0.0:
+		runner.call("save_now")
+		var clock0: Node = root.get_node("Clock")
+		clock0.set("frozen_unix_time", float(sim.state.start_unix + sim.state.tick * SimConfig.TICK_SECONDS) + _away_hours * 3600.0)
+		runner.call("load_or_create")
+		while bool(runner.get("catching_up")):
+			await process_frame
+		for i: int in 3:
+			await process_frame
+		sim = runner.get("sim")
+	# Freeze the city: the capture clock below only drives the lighting.
+	runner.set_process(false)
 	# Untyped on purpose: this script compiles before autoloads exist.
 	var city: Node = current_scene.get_node("City")
 	var rig: Node = city.get("camera_rig")
