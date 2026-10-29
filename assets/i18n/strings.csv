@@ -56,3 +56,17 @@ EVT_BUILDING_COMPLETED,%s açıldı!,%s is open!
 EVT_POPULATION_MILESTONE,Nüfus %s oldu!,Population reached %s!
 EVT_TRAFFIC_JAM,Trafik kilitlendi!,Traffic is gridlocked!
 EVT_BUILDING_PLACED,%s için temel atıldı,Ground broken for %s
+UI_CATCHUP_TITLE,Şehir uyanıyor…,The city is waking up…
+UI_CATCHUP_SUB,Sen yokken geçen %s yetiştiriliyor,Catching up on %s you were away
+UI_AWAY_TITLE,Sen yokken,While you were away
+UI_AWAY_TIME,%s geçti,%s passed
+UI_AWAY_SLEPT,Şehir %s boyunca uyudu,The city slept for %s
+UI_BACK_TO_CITY,Şehre dön,Back to the city
+UI_NOTHING_MAJOR,Sakin bir dönemdi.,It was a quiet spell.
+UI_DAYS,%d gün,%d days
+UI_HOURS,%d saat,%d h
+UI_MINUTES,%d dakika,%d min
+UI_RECOVERED,Kayıt yedekten kurtarıldı,Save restored from backup
+ERR_CITY_BUSY,Şehir hâlâ uyanıyor,The city is still waking up
+ERR_BAD_TIME_SHIFT,Geçersiz zaman kayması,Invalid time shift
+EVT_CLOCK_REBASED,Saat geri alınmış; şehir yeni saate uydu,The clock went back; the city adjusted

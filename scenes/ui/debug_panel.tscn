@@ -71,6 +71,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "+1 sa"
 
+[node name="PlusOneDay" type="Button" parent="Glass/VBox/Body/Row1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1 gün"
+
 [node name="PlusDay" type="Button" parent="Glass/VBox/Body/Row1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 52)
@@ -101,3 +108,10 @@ custom_minimum_size = Vector2(64, 52)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Kalite"
+
+[node name="NewCityButton" type="Button" parent="Glass/VBox/Body/Row2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Yeni şehir"

@@ -4,6 +4,9 @@ extends Node
 @warning_ignore_start("unused_signal")
 signal tick_advanced(tick: int)
 signal sim_event_emitted(event: RefCounted)
+signal catch_up_started(total_ticks: int)
+## 0..1
+signal catch_up_progressed(progress: float)
 signal catch_up_finished(summary: RefCounted)
 ## A new or loaded city is ready on SimRunner.sim.
 signal city_loaded

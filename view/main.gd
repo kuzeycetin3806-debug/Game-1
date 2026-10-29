@@ -10,6 +10,9 @@ extends Node
 func _ready() -> void:
 	_ui_root.theme = UiTheme.build()
 	_hud.bind(_city.build_controller)
+	_ui_root.add_child(CatchUpOverlay.new())
+	if SimRunner.recovered_from_backup:
+		_hud.show_toast(tr("UI_RECOVERED"))
 	if OS.is_debug_build():
 		_debug_panel.day_night = _city.day_night
 	else:

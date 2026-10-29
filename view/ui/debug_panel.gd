@@ -26,7 +26,9 @@ func _ready() -> void:
 		_timelapse = false
 		Clock.debug_offset_seconds = 0.0
 		_refresh_buttons())
+	%PlusOneDay.pressed.connect(func() -> void: Clock.debug_offset_seconds += 86400.0)
 	%PlusDay.pressed.connect(func() -> void: Clock.debug_offset_seconds += 86400.0 * 30.0)
+	%NewCityButton.pressed.connect(func() -> void: SimRunner.new_city())
 	_timelapse_button.pressed.connect(func() -> void:
 		_timelapse = not _timelapse
 		_refresh_buttons())

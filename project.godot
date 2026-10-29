@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.4", "Mobile")
 
 EventBus="*res://app/event_bus.gd"
 Clock="*res://app/clock.gd"
+SaveService="*res://app/save_service.gd"
 SimRunner="*res://app/sim_runner.gd"
 Settings="*res://app/settings.gd"
 

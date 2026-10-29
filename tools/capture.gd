@@ -60,7 +60,11 @@ func _run() -> void:
 	change_scene_to_file("res://scenes/main.tscn")
 	for i: int in 5:
 		await process_frame
+	# Fresh, reproducible city in a scratch save dir (never the real save).
+	root.get_node("SaveService").set("save_dir", "user://capture_saves")
+	root.get_node("SaveService").call("delete_all")
 	var runner: Node = root.get_node("SimRunner")
+	runner.call("new_city", 20261028)
 	var sim: RefCounted = runner.get("sim")
 	sim.state.money_cents = maxi(sim.state.money_cents, 5_000_000 * 100)
 	for spec: String in _build:
