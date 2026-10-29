@@ -60,6 +60,16 @@ static func replay(p_content: ContentDb, city_seed: int, start_unix: int, utc_of
 	return sim
 
 
+## Independent deep copy (state, history, events) for background catch-up.
+func clone() -> Simulation:
+	var copy: Simulation = create(SimState.from_dict(state.to_dict()), content)
+	for c: Command in command_log:
+		copy.command_log.append(Command.from_dict(c.to_dict()))
+	copy.event_log = EventLog.from_array(event_log.to_array())
+	copy.event_log.capacity = event_log.capacity
+	return copy
+
+
 func mark_buildings_changed() -> void:
 	grid = CityGrid.build(state, content)
 	_aggregates_dirty = true

@@ -38,6 +38,8 @@ static func from_dict(d: Dictionary) -> Command:
 			cmd = PlaceBuildingCommand.create(String(d.def), Vector2i(int(d.cell[0]), int(d.cell[1])))
 		"demolish":
 			cmd = DemolishCommand.create(int(d.building_id))
+		"realign_clock":
+			cmd = RealignClockCommand.create(int(d.shift_seconds))
 		_:
 			push_error("Unknown command type: %s" % d.get("type", ""))
 			return null

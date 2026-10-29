@@ -1,0 +1,340 @@
+{
+  "city_seed": 424242,
+  "commands": [
+    {
+      "cell": [
+        25,
+        25
+      ],
+      "def": "cafe",
+      "tick": 30,
+      "type": "place_building"
+    },
+    {
+      "cell": [
+        26,
+        25
+      ],
+      "def": "pocket_park",
+      "tick": 30,
+      "type": "place_building"
+    }
+  ],
+  "events": [
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "cost": 9000,
+        "def": "cafe",
+        "ready_tick": 54
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "cost": 5000,
+        "def": "pocket_park",
+        "ready_tick": 48
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park"
+      },
+      "tick": 48,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe"
+      },
+      "tick": 54,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "day": 29,
+        "expense": 15801,
+        "happiness": 753,
+        "income": 3209,
+        "money": 237407,
+        "month": 10,
+        "population": 217,
+        "year": 2025
+      },
+      "tick": 126,
+      "type": "day_started"
+    },
+    {
+      "data": {
+        "day": 30,
+        "expense": 2090,
+        "happiness": 753,
+        "income": 3730,
+        "money": 239048,
+        "month": 10,
+        "population": 217,
+        "year": 2025
+      },
+      "tick": 270,
+      "type": "day_started"
+    }
+  ],
+  "game_version": "0.1.0",
+  "last_tick": 330,
+  "last_wall_time": 1761807600,
+  "save_version": 1,
+  "state": {
+    "block_traffic": {
+      "1,2": 23,
+      "2,2": 100,
+      "3,2": 20,
+      "4,4": 6
+    },
+    "buildings": [
+      {
+        "cell": [
+          13,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 1,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 2,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          15,
+          13
+        ],
+        "def": "cafe",
+        "id": 3,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          13
+        ],
+        "def": "office_mid",
+        "id": 4,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          17,
+          13
+        ],
+        "def": "shop_row",
+        "id": 5,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          14
+        ],
+        "def": "house_small",
+        "id": 6,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          14
+        ],
+        "def": "pocket_park",
+        "id": 7,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          15
+        ],
+        "def": "house_small",
+        "id": 8,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          14
+        ],
+        "def": "apartment_green",
+        "id": 9,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          13
+        ],
+        "def": "house_small",
+        "id": 10,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          8,
+          13
+        ],
+        "def": "house_small",
+        "id": 11,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          9,
+          13
+        ],
+        "def": "house_small",
+        "id": 12,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          14
+        ],
+        "def": "house_small",
+        "id": 13,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          10,
+          13
+        ],
+        "def": "cafe",
+        "id": 14,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          19
+        ],
+        "def": "city_park",
+        "id": 15,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          13
+        ],
+        "def": "house_small",
+        "id": 16,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          20,
+          13
+        ],
+        "def": "house_small",
+        "id": 17,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          14
+        ],
+        "def": "shop_row",
+        "id": 18,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe",
+        "id": 19,
+        "placed": 30,
+        "ready": 54
+      },
+      {
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park",
+        "id": 20,
+        "placed": 30,
+        "ready": 48
+      }
+    ],
+    "city_seed": 424242,
+    "day_expense_cents": 87084,
+    "day_income_cents": 155825,
+    "employed": 129,
+    "expense_frac": 0,
+    "green": 976,
+    "grid_size": 32,
+    "happiness": 740,
+    "income_frac": 96,
+    "milestone_index": 1,
+    "money_cents": 23973566,
+    "next_building_id": 21,
+    "pollution": 0,
+    "population": 215,
+    "road_every": 6,
+    "start_unix": 1761609600,
+    "tick": 330,
+    "traffic": 72,
+    "traffic_jam_active": false,
+    "utc_offset_s": 10800
+  },
+  "state_hash": 3412127758
+}
