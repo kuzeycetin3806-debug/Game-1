@@ -4,7 +4,8 @@ extends SceneTree
 ##   [--build=def@x,y;def@x,y]  place buildings first   [--advance=ticks]  run the sim forward
 ##   [--placing=def]  enter placement mode               [--select=x,y]  select the building on a cell
 ##   [--zoom=distance] [--focus=cellx,celly] [--prefix=name] [--drawer]  open the build drawer
-##   [--away=hours]  close the app, let time pass, reopen (shows the catch-up summary)
+##   [--away=hours]  close the app, let time pass, reopen (opens the newspaper)
+##   [--weather=rain|snow|storm|fog|cloudy|clear]  [--policies]  open decisions  [--no-paper]  close any open paper
 
 var _out: String = "user://captures"
 var _hours: Array[float] = [9.0, 13.0, 19.0, 23.0]
@@ -19,6 +20,9 @@ var _focus: Vector2i = Vector2i(-1, -1)
 var _prefix: String = "city"
 var _drawer: bool = false
 var _away_hours: float = 0.0
+var _weather: String = ""
+var _policies: bool = false
+var _close_paper: bool = false
 
 
 func _initialize() -> void:
@@ -47,6 +51,12 @@ func _initialize() -> void:
 			_focus = Vector2i(int(p3[0]), int(p3[1]))
 		elif arg.begins_with("--away="):
 			_away_hours = float(arg.trim_prefix("--away="))
+		elif arg.begins_with("--weather="):
+			_weather = arg.trim_prefix("--weather=")
+		elif arg == "--policies":
+			_policies = true
+		elif arg == "--no-paper":
+			_close_paper = true
 		elif arg == "--drawer":
 			_drawer = true
 		elif arg.begins_with("--prefix="):
@@ -94,6 +104,9 @@ func _run() -> void:
 		sim = runner.get("sim")
 	# Freeze the city: the capture clock below only drives the lighting.
 	runner.set_process(false)
+	if _weather != "":
+		sim.state.weather = _weather
+
 	# Untyped on purpose: this script compiles before autoloads exist.
 	var city: Node = current_scene.get_node("City")
 	var rig: Node = city.get("camera_rig")
@@ -105,6 +118,8 @@ func _run() -> void:
 		city.get("build_controller").call("start_placing", _placing)
 	if _drawer:
 		current_scene.get_node("%Hud").call("open_drawer")
+	if _policies:
+		current_scene.get_node("%Hud").get("_policies").set("visible", true)
 	if _select.x >= 0:
 		city.get("build_controller").call("select", sim.grid.building_at(_select))
 	var clock: Node = root.get_node("Clock")
@@ -120,8 +135,14 @@ func _run() -> void:
 		clock.set("frozen_unix_time", float(Time.get_unix_time_from_datetime_dict(d) - bias))
 		var dn: Node = current_scene.get_node("City/DayNight")
 		dn.call("refresh")
-		for i: int in 20:
+		# Weather fades in over a few seconds; give it time (and particles) to settle.
+		for i: int in (90 if _weather != "" else 20):
 			await process_frame
+		if _close_paper:
+			for n: Node in current_scene.find_children("*", "NewspaperView", true, false):
+				(n as Control).visible = false
+			for i: int in 2:
+				await process_frame
 		var img: Image = root.get_texture().get_image()
 		var path: String = "%s/%s_%05.2f.png" % [_out, _prefix, h]
 		img.save_png(path)

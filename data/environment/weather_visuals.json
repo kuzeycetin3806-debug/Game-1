@@ -1,0 +1,62 @@
+{
+  "id": "weather_visuals",
+  "version": 1,
+  "_comment": "Havaya göre görsel profil. light: güneş/ay enerjisi çarpanı, ambient: ortam ışığı çarpanı, fog_add: eklenecek sis yoğunluğu, saturation: renk doygunluğu çarpanı, rain/snow: parçacık yoğunluğu (0-1+), lightning: şimşek.",
+  "transition_seconds": 4.0,
+  "profiles": {
+    "clear": {
+      "light": 1.0,
+      "ambient": 1.0,
+      "fog_add": 0.0,
+      "saturation": 1.0,
+      "rain": 0.0,
+      "snow": 0.0,
+      "lightning": 0.0
+    },
+    "cloudy": {
+      "light": 0.62,
+      "ambient": 1.05,
+      "fog_add": 0.0002,
+      "saturation": 0.86,
+      "rain": 0.0,
+      "snow": 0.0,
+      "lightning": 0.0
+    },
+    "rain": {
+      "light": 0.45,
+      "ambient": 0.95,
+      "fog_add": 0.0005,
+      "saturation": 0.76,
+      "rain": 1.0,
+      "snow": 0.0,
+      "lightning": 0.0
+    },
+    "storm": {
+      "light": 0.3,
+      "ambient": 0.85,
+      "fog_add": 0.0008,
+      "saturation": 0.62,
+      "rain": 1.6,
+      "snow": 0.0,
+      "lightning": 1.0
+    },
+    "fog": {
+      "light": 0.6,
+      "ambient": 1.1,
+      "fog_add": 0.0019,
+      "saturation": 0.7,
+      "rain": 0.0,
+      "snow": 0.0,
+      "lightning": 0.0
+    },
+    "snow": {
+      "light": 0.72,
+      "ambient": 1.15,
+      "fog_add": 0.0009,
+      "saturation": 0.8,
+      "rain": 0.0,
+      "snow": 1.0,
+      "lightning": 0.0
+    }
+  }
+}

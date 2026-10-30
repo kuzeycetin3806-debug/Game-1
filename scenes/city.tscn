@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://view/city/city_view.gd" id="1_view"]
 [ext_resource type="Script" path="res://view/camera/city_camera.gd" id="2_cam"]
 [ext_resource type="Script" path="res://view/city/city_renderer.gd" id="3_city"]
 [ext_resource type="Script" path="res://view/city/build_controller.gd" id="6_bc"]
+[ext_resource type="Script" path="res://view/environment/weather_view.gd" id="7_wv"]
 [ext_resource type="Script" path="res://view/environment/day_night.gd" id="4_dn"]
 [ext_resource type="Script" path="res://view/environment/graphics_quality.gd" id="5_gq"]
 
@@ -37,12 +38,19 @@ script = ExtResource("4_dn")
 light = NodePath("../Sun")
 world_environment = NodePath("../WorldEnvironment")
 
-[node name="GraphicsQuality" type="Node" parent="." node_paths=PackedStringArray("camera_rig", "light", "world_environment", "city")]
+[node name="WeatherView" type="Node3D" parent="." node_paths=PackedStringArray("day_night", "camera_rig")]
+unique_name_in_owner = true
+script = ExtResource("7_wv")
+day_night = NodePath("../DayNight")
+camera_rig = NodePath("../CameraRig")
+
+[node name="GraphicsQuality" type="Node" parent="." node_paths=PackedStringArray("camera_rig", "light", "world_environment", "city", "weather")]
 script = ExtResource("5_gq")
 camera_rig = NodePath("../CameraRig")
 light = NodePath("../Sun")
 world_environment = NodePath("../WorldEnvironment")
 city = NodePath("../CityRenderer")
+weather = NodePath("../WeatherView")
 
 [node name="BuildController" type="Node" parent="." node_paths=PackedStringArray("camera_rig", "renderer")]
 unique_name_in_owner = true

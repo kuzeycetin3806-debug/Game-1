@@ -6,16 +6,17 @@ extends Node
 @export var light: DirectionalLight3D
 @export var world_environment: WorldEnvironment
 @export var city: CityRenderer
+@export var weather: WeatherView
 
 ## Keys match Settings.Quality (LOW, MEDIUM, HIGH).
 ## VARSAYIM: LOW caps at 30 FPS to save battery on weak phones.
 const PROFILES: Dictionary = {
 	0: {"msaa": Viewport.MSAA_DISABLED, "scale": 0.75, "shadows": true, "shadow_size": 1024,
-		"soft_filter": RenderingServer.SHADOW_QUALITY_HARD, "dof": false, "glow": false, "foliage": 0.45, "fps": 30},
+		"soft_filter": RenderingServer.SHADOW_QUALITY_HARD, "dof": false, "glow": false, "foliage": 0.45, "fps": 30, "particles": 0.3},
 	1: {"msaa": Viewport.MSAA_2X, "scale": 0.9, "shadows": true, "shadow_size": 2048,
-		"soft_filter": RenderingServer.SHADOW_QUALITY_SOFT_LOW, "dof": true, "glow": true, "foliage": 0.8, "fps": 60},
+		"soft_filter": RenderingServer.SHADOW_QUALITY_SOFT_LOW, "dof": true, "glow": true, "foliage": 0.8, "fps": 60, "particles": 0.6},
 	2: {"msaa": Viewport.MSAA_4X, "scale": 1.0, "shadows": true, "shadow_size": 4096,
-		"soft_filter": RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM, "dof": true, "glow": true, "foliage": 1.0, "fps": 60},
+		"soft_filter": RenderingServer.SHADOW_QUALITY_SOFT_MEDIUM, "dof": true, "glow": true, "foliage": 1.0, "fps": 60, "particles": 1.0},
 }
 
 
@@ -36,6 +37,8 @@ func apply(q: int) -> void:
 	camera_rig.set_dof_enabled(p.dof)
 	world_environment.environment.glow_enabled = p.glow
 	city.foliage_density = p.foliage
+	if weather != null:
+		weather.particle_density = p.particles
 	Engine.max_fps = p.fps
 	_update_shadow_distance()
 

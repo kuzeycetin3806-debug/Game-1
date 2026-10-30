@@ -30,6 +30,8 @@ static func build(sim: Simulation, events: Array[SimEvent], edition_no: int, fro
 	var stories: Array = []
 	for key: String in order:
 		stories.append(merged[key])
+	if edition_no == 1:
+		stories.append(_s("welcome", 95, sim.state.tick, {}))
 	stories.sort_custom(_by_importance)
 	var max_n: int = int(editorial.get("max_stories", 5))
 	if stories.size() > max_n:

@@ -446,6 +446,16 @@
       "body": [
         "Belediye kasası güçlü. Yeni park, metro ve kültür projeleri için ideal zaman."
       ]
+    },
+    "welcome": {
+      "title": [
+        "Yeni belediye başkanı göreve başladı",
+        "Nefeskent'te yeni bir dönem"
+      ],
+      "body": [
+        "Kasabanın yeni başkanı bugün ilk mesaisine başladı. Kafelerde tek konu var: \"Acaba neler yapacak?\" Mahalle sakinleri parklar, iş ve rahat bir trafik bekliyor.",
+        "Belediye binasının ışıkları erkenden yandı. Yeni başkanın masasında şimdiden bir yığın dilek var; şehir nefesini tutmuş, ilk kararları bekliyor."
+      ]
     }
   },
   "numbers": {

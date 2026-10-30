@@ -23,6 +23,11 @@ var _toast_label: Label
 var _toast_time: float = 0.0
 var _stats_accum: float = 0.0
 var _place_info: Label
+var _policies: PoliciesPanel
+var _paper_button: Button
+var _paper_dot: Control
+## Set by main: the newspaper overlay the "Gazete" button opens.
+var newspaper: NewspaperView
 
 
 func _ready() -> void:
@@ -32,9 +37,12 @@ func _ready() -> void:
 	_build_drawer()
 	_build_bottom_bar()
 	_build_toast()
+	_build_policies()
 	EventBus.sim_event_emitted.connect(_on_sim_event)
 	EventBus.command_rejected.connect(func(key: String) -> void: show_toast(tr(key)))
 	EventBus.city_changed.connect(_refresh_cards)
+	EventBus.newspaper_published.connect(func(_e: Dictionary, _a: bool) -> void: _refresh_paper_dot())
+	EventBus.newspaper_closed.connect(_refresh_paper_dot)
 
 
 func bind(p_controller: BuildController) -> void:
@@ -247,16 +255,62 @@ func _on_mode_changed(mode: BuildController.Mode) -> void:
 
 func _show_idle() -> void:
 	_clear_bottom()
+	var row := HBoxContainer.new()
+	_bottom_box.add_child(row)
+	_paper_button = _side_button(tr("UI_NEWSPAPER"))
+	_paper_button.pressed.connect(func() -> void:
+		_drawer.visible = false
+		_policies.visible = false
+		if newspaper != null:
+			newspaper.open_latest())
+	row.add_child(_paper_button)
+	_paper_dot = ColorRect.new()
+	(_paper_dot as ColorRect).color = UiTheme.ACCENT
+	_paper_dot.custom_minimum_size = Vector2(12, 12)
+	_paper_dot.position = Vector2(8, 8)
+	_paper_dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_paper_button.add_child(_paper_dot)
 	var build := _big_button(tr("UI_BUILD"), true)
+	build.size_flags_stretch_ratio = 1.6
 	build.pressed.connect(func() -> void:
+		_policies.visible = false
 		_drawer.visible = not _drawer.visible
 		_refresh_cards())
-	_bottom_box.add_child(build)
+	row.add_child(build)
+	var decisions := _side_button(tr("UI_DECISIONS"))
+	decisions.pressed.connect(func() -> void:
+		_drawer.visible = false
+		_policies.visible = not _policies.visible)
+	row.add_child(decisions)
+	_refresh_paper_dot()
+
+
+func _side_button(text: String) -> Button:
+	var b := _big_button(text, false)
+	b.add_theme_font_size_override("font_size", 17)
+	return b
+
+
+func _refresh_paper_dot() -> void:
+	if _paper_dot != null and is_instance_valid(_paper_dot):
+		_paper_dot.visible = TextService.has_unread()
+
+
+func _build_policies() -> void:
+	_policies = PoliciesPanel.new()
+	_policies.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	_policies.offset_left = 12
+	_policies.offset_right = -12
+	_policies.offset_bottom = -112
+	_policies.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_policies.visible = false
+	add_child(_policies)
 
 
 func _show_placing() -> void:
 	_clear_bottom()
 	_drawer.visible = false
+	_policies.visible = false
 	_place_info = Label.new()
 	_place_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_place_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -358,3 +412,11 @@ func _on_sim_event(e: RefCounted) -> void:
 			show_toast(tr("EVT_POPULATION_MILESTONE") % UiFormat.thousands(int(ev.data.population)))
 		"traffic_jam":
 			show_toast(tr("EVT_TRAFFIC_JAM"))
+		"policy_took_effect":
+			var pol: Dictionary = SimRunner.content.policies.get(String(ev.data.policy), {})
+			if not pol.is_empty():
+				show_toast(tr("EVT_POLICY_TOOK_EFFECT") % tr(String(pol.name_key)))
+		"story":
+			# Live stories: a short teaser; the full text waits for tomorrow's paper.
+			var t: Dictionary = TextService.writer().story_text({"key": "story." + String(ev.data.id), "count": 1, "vars": {"district": String(ev.data.get("district", ""))}}, int(ev.data.seq))
+			show_toast(String(t.title))

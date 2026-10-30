@@ -1,6 +1,6 @@
 shader_type spatial;
 // Cheap fake light pool under street lamps: additive radial quad, no real light.
-render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;
+render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled, fog_disabled;
 
 global uniform float street_lamp;
 uniform vec3 glow_color : source_color = vec3(1.0, 0.74, 0.42);

@@ -111,3 +111,11 @@ func test_date_text() -> void:
 	var w: TemplateWriter = _writer(tr_t)
 	assert_eq(w.date_text({"year": 2026, "month": 10, "day": 28, "weekday": 3}), "28 Ekim 2026, Çarşamba")
 	assert_eq(_writer(en_t).date_text({"year": 2026, "month": 10, "day": 28, "weekday": 3}), "Wednesday, October 28, 2026")
+
+
+func test_first_edition_welcomes_the_mayor() -> void:
+	var sim: Simulation = SimFixture.new_sim()
+	var ed: Dictionary = NewsDesk.build(sim, [] as Array[SimEvent], 1, 0, {}, editorial)
+	assert_eq(String(ed.stories[0].key), "welcome")
+	var later: Dictionary = NewsDesk.build(sim, [] as Array[SimEvent], 2, 0, {}, editorial)
+	assert_ne(String(later.stories[0].key), "welcome")

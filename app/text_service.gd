@@ -24,11 +24,12 @@ func _ready() -> void:
 
 
 ## Builds the next edition from everything since the previous one.
-func publish(auto_open: bool) -> Dictionary:
+## `fallback_before` is used when no earlier edition left a snapshot (old saves).
+func publish(auto_open: bool, fallback_before: Dictionary = {}) -> Dictionary:
 	var sim: Simulation = SimRunner.sim
 	var meta: Dictionary = SimRunner.meta
 	var from: int = int(meta.get("last_edition_tick", 0))
-	var before: Dictionary = meta.get("last_snapshot", CatchUpSummary.snapshot(sim.state))
+	var before: Dictionary = meta.get("last_snapshot", fallback_before if not fallback_before.is_empty() else CatchUpSummary.snapshot(sim.state))
 	var n: int = int(meta.get("edition_no", 0)) + 1
 	var edition: Dictionary = NewsDesk.build(sim, sim.event_log.since(from), n, from, before, editorial)
 	var archive: Array = meta.get("newspapers", [])
@@ -76,7 +77,7 @@ func writer(lang: String = "") -> TemplateWriter:
 func _on_catch_up_finished(s: RefCounted) -> void:
 	var summary: CatchUpSummary = s as CatchUpSummary
 	if summary.away_ticks() >= MIN_AWAY_TICKS or not summary.highlights.is_empty():
-		publish(true)
+		publish(true, summary.before)
 
 
 func _on_sim_event(e: RefCounted) -> void:

@@ -15,6 +15,7 @@ signal city_changed
 signal command_rejected(error_key: String)
 ## A newspaper edition (NewsDesk data) was published; auto_open after an absence.
 signal newspaper_published(edition: Dictionary, auto_open: bool)
+signal newspaper_closed
 signal graphics_quality_changed(quality: int)
 signal debug_time_offset_changed(offset_seconds: float)
 @warning_ignore_restore("unused_signal")

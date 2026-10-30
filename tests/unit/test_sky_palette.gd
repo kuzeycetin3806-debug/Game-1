@@ -42,3 +42,16 @@ func test_window_occupancy_wraps_midnight() -> void:
 func test_street_lamps_off_by_day_on_by_night() -> void:
 	assert_almost_eq(palette.street_lamps(0.0), 0.0, 0.001)
 	assert_almost_eq(palette.street_lamps(1.0), 1.0, 0.001)
+
+
+func test_weather_profiles_complete_and_blend() -> void:
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/environment/weather_visuals.json"))
+	var sim_weather: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/environment/weather.json"))
+	for season: String in (sim_weather.seasons as Dictionary):
+		for w: String in (sim_weather.seasons[season] as Dictionary):
+			assert_true((data.profiles as Dictionary).has(w), "visual profile for " + w)
+	var clear: Dictionary = WeatherView.profile_for("clear", data.profiles)
+	var storm: Dictionary = WeatherView.profile_for("storm", data.profiles)
+	var half: Dictionary = WeatherView.blend(clear, storm, 0.5)
+	assert_almost_eq(float(half.light), (1.0 + 0.3) / 2.0, 0.001)
+	assert_eq(WeatherView.profile_for("unknown", data.profiles).light, 1.0)

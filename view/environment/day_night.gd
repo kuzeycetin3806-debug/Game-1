@@ -15,12 +15,20 @@ extends Node
 ## Seconds between environment refreshes when time is flowing normally.
 @export var refresh_interval: float = 1.0
 
+const BASE_FOG_DENSITY: float = 0.00035
+const BASE_SATURATION: float = 1.15
+
 var palette: SkyPalette
 var latitude_deg: float = 41.0
 var north_offset_deg: float = 0.0
 var current: SkyPalette.Sample
 var sun_dir: Vector3 = Vector3.UP
 var sun_elevation: float = 90.0
+## Set every frame by WeatherView: light/ambient multipliers, extra fog, saturation.
+var weather_profile: Dictionary = {}:
+	set(value):
+		weather_profile = value
+		_force_refresh = true
 
 var _sky_mat: ShaderMaterial
 var _accum: float = 0.0
@@ -70,14 +78,16 @@ func _apply_light() -> void:
 		dir = _with_min_elevation(flat.normalized(), moon_elevation_deg)
 	light.global_transform = Transform3D(Basis.looking_at(-dir, Vector3.UP if absf(dir.y) < 0.99 else Vector3.FORWARD), Vector3.ZERO)
 	light.light_color = current.light_color
-	light.light_energy = current.light_energy
+	light.light_energy = current.light_energy * float(weather_profile.get("light", 1.0))
 
 
 func _apply_environment() -> void:
 	var env: Environment = world_environment.environment
 	env.ambient_light_color = current.ambient_color
-	env.ambient_light_energy = current.ambient_energy
+	env.ambient_light_energy = current.ambient_energy * float(weather_profile.get("ambient", 1.0))
 	env.fog_light_color = current.fog_color
+	env.fog_density = BASE_FOG_DENSITY + float(weather_profile.get("fog_add", 0.0))
+	env.adjustment_saturation = BASE_SATURATION * float(weather_profile.get("saturation", 1.0))
 	_sky_mat.set_shader_parameter("top_color", current.sky_top)
 	_sky_mat.set_shader_parameter("horizon_color", current.sky_horizon)
 	_sky_mat.set_shader_parameter("bottom_color", current.sky_bottom)
@@ -106,11 +116,11 @@ func _setup_environment() -> void:
 	env.glow_bloom = 0.0
 	env.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
 	env.fog_enabled = true
-	env.fog_density = 0.00035
+	env.fog_density = BASE_FOG_DENSITY
 	env.fog_sky_affect = 0.0
 	env.fog_aerial_perspective = 0.0
 	env.adjustment_enabled = true
-	env.adjustment_saturation = 1.15
+	env.adjustment_saturation = BASE_SATURATION
 	env.adjustment_contrast = 1.06
 	light.shadow_enabled = true
 	light.shadow_blur = 1.6

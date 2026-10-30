@@ -1,11 +1,6 @@
 class_name CatchUpOverlay
 extends Control
-## Blocks input while the city catches up, then shows "while you were away".
-## The newspaper (M4) will replace the summary card; this is its raw preview.
-
-const MAX_HIGHLIGHTS: int = 4
-## Short absences with nothing notable skip the card entirely.
-const TRIVIAL_TICKS: int = 6
+## Blocks input while the city catches up. When it is done the newspaper opens.
 
 var _dim: ColorRect
 var _panel: GlassPanel
@@ -63,56 +58,11 @@ func show_progress(ticks: int) -> void:
 	_box.add_child(_bar)
 
 
-func show_summary(s: CatchUpSummary) -> void:
+## The newspaper (published by TextService on the same signal) tells the story;
+## this overlay only covers the wait.
+func show_summary(_s: CatchUpSummary) -> void:
 	_bar = null
-	if s.away_ticks() <= TRIVIAL_TICKS and s.highlights.is_empty():
-		visible = false
-		return
-	_clear()
-	visible = true
-	_box.add_child(_label(tr("UI_AWAY_TITLE"), 28, UiTheme.TEXT))
-	_box.add_child(_label(tr("UI_AWAY_TIME") % duration(s.away_ticks()), 17, UiTheme.TEXT_SOFT))
-	if s.slept_ticks > 0:
-		_box.add_child(_label(tr("UI_AWAY_SLEPT") % duration(s.slept_ticks), 15, UiTheme.TEXT_SOFT))
-	var grid := GridContainer.new()
-	grid.columns = 2
-	grid.add_theme_constant_override("h_separation", 24)
-	_box.add_child(grid)
-	_row(grid, tr("UI_POPULATION"), signed(s.delta("population")))
-	_row(grid, tr("UI_MONEY"), signed_money(s.delta("money")))
-	_row(grid, tr("UI_HAPPINESS"), signed_points(s.delta("happiness")))
-	_row(grid, tr("UI_TRAFFIC"), signed_points(s.delta("traffic")))
-	var shown: int = 0
-	for e: SimEvent in s.highlights:
-		var line: String = highlight_text(e)
-		if line == "":
-			continue
-		_box.add_child(_label("• " + line, 17, UiTheme.TEXT))
-		shown += 1
-		if shown >= MAX_HIGHLIGHTS:
-			break
-	if shown == 0:
-		_box.add_child(_label(tr("UI_NOTHING_MAJOR"), 17, UiTheme.TEXT_SOFT))
-	var ok := Button.new()
-	ok.text = tr("UI_BACK_TO_CITY")
-	ok.custom_minimum_size = Vector2(0, 60)
-	ok.add_theme_font_size_override("font_size", 22)
-	ok.pressed.connect(func() -> void: visible = false)
-	_box.add_child(ok)
-
-
-static func highlight_text(e: SimEvent) -> String:
-	match e.type:
-		"building_completed":
-			var def: BuildingDef = SimRunner.content.get_building(String(e.data.def))
-			return TranslationServer.translate("EVT_BUILDING_COMPLETED") % TranslationServer.translate(def.name_key) if def != null else ""
-		"population_milestone":
-			return TranslationServer.translate("EVT_POPULATION_MILESTONE") % UiFormat.thousands(int(e.data.population))
-		"traffic_jam":
-			return TranslationServer.translate("EVT_TRAFFIC_JAM")
-		"clock_rebased":
-			return TranslationServer.translate("EVT_CLOCK_REBASED")
-	return ""
+	visible = false
 
 
 ## Ticks -> "2 gün 3 saat" / "4 saat 20 dakika" / "30 dakika".
@@ -129,30 +79,6 @@ static func duration(ticks: int) -> String:
 	if days == 0 and (mins > 0 or parts.is_empty()):
 		parts.append(TranslationServer.translate("UI_MINUTES") % mins)
 	return " ".join(parts)
-
-
-static func signed(n: int) -> String:
-	return ("+" if n > 0 else "") + UiFormat.thousands(n)
-
-
-static func signed_money(n: int) -> String:
-	return ("+" if n > 0 else "") + UiFormat.money(n)
-
-
-## Permille change shown as percentage points: +2.
-static func signed_points(permille: int) -> String:
-	var p: int = roundi(permille / 10.0)
-	return ("+" if p > 0 else "") + str(p)
-
-
-func _row(grid: GridContainer, caption: String, value: String) -> void:
-	var c: Label = _label(caption, 17, UiTheme.TEXT_SOFT, false)
-	c.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	grid.add_child(c)
-	var v: Label = _label(value, 19, UiTheme.TEXT, false)
-	v.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_child(v)
 
 
 func _label(text: String, size: int, color: Color, wrap: bool = true) -> Label:
