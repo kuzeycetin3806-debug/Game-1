@@ -142,3 +142,12 @@ NOTIF_BUILDING,%s açıldı. Kurdeleyi kesmeye gel!,%s just opened. Come cut the
 NOTIF_STORY,Gazetede manşet: %s,Front page: %s
 NOTIF_TRAFFIC,Trafik kilitlendi; vatandaşlar sabırsız.,Traffic is gridlocked; people are restless.
 NOTIF_PAPER,Sabah gazeten kapında.,Your morning paper is here.
+AGENDA_TITLE,Bugünün gündemi,Today's agenda
+AGENDA_LETTERS,%d mektup cevap bekliyor,%d letters await a reply
+AGENDA_POLICY_PENDING,"%s, %s sonra yürürlükte",%s takes effect in %s
+AGENDA_CONSTRUCTION,%d bina inşa ediliyor,%d buildings under construction
+AGENDA_TIP_BUDGET,Bütçe ekside: giderleri gözden geçirin,Budget is negative: review the costs
+AGENDA_TIP_TRAFFIC,Trafik bunaltıyor: ulaşım kararlarına bakın,Traffic is heavy: look at transit decisions
+AGENDA_TIP_JOBS,İş arayan çok: yeni ofisler iyi gelir,Many are job hunting: new offices would help
+AGENDA_TIP_GREEN,Şehir yeşile hasret: bir park yapın,The city craves green: build a park
+AGENDA_TIP_GROW,Herkes mutlu: yeni konutlarla büyüyün,Everyone is happy: grow with new homes

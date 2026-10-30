@@ -155,6 +155,7 @@ func submit(cmd: Command) -> Dictionary:
 		return {"ok": false, "error": "ERR_CITY_BUSY", "events": [] as Array[SimEvent]}
 	var result: Dictionary = sim.apply_command(cmd)
 	if result.ok:
+		Settings.haptic()
 		for e: SimEvent in result.events:
 			EventBus.sim_event_emitted.emit(e)
 		EventBus.city_changed.emit()

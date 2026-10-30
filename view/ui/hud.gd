@@ -20,6 +20,7 @@ var _bottom_box: VBoxContainer
 var _drawer: GlassPanel
 var _cards: HBoxContainer
 var _category: String = "all"
+var _tabs: HBoxContainer
 var _toast: GlassPanel
 var _toast_label: Label
 var _toast_time: float = 0.0
@@ -71,9 +72,36 @@ func _process(delta: float) -> void:
 		_toast.visible = _toast_time > 0.0
 
 
-func open_drawer() -> void:
+func open_drawer(category: String = "") -> void:
+	if category != "":
+		_category = category
+		for i: int in _tabs.get_child_count():
+			(_tabs.get_child(i) as Button).button_pressed = CATEGORIES[i] == _category
+	_policies.visible = false
 	_drawer.visible = true
 	_refresh_cards()
+	_fade_in(_drawer)
+
+
+func open_policies() -> void:
+	_drawer.visible = false
+	_policies.visible = true
+	_fade_in(_policies)
+
+
+static func _fade_in(c: Control) -> void:
+	c.modulate.a = 0.0
+	c.create_tween().tween_property(c, "modulate:a", 1.0, 0.18)
+
+
+## Agenda shortcuts: "mailbox", "decisions", "build:<category>".
+func run_action(action: String) -> void:
+	if action == "mailbox" and mailbox != null:
+		mailbox.open()
+	elif action == "decisions":
+		open_policies()
+	elif action.begins_with("build:"):
+		open_drawer(action.trim_prefix("build:"))
 
 
 func show_toast(text: String) -> void:
@@ -158,6 +186,7 @@ func _build_drawer() -> void:
 	tabs_scroll.custom_minimum_size = Vector2(0, 52)
 	v.add_child(tabs_scroll)
 	var tabs := HBoxContainer.new()
+	_tabs = tabs
 	tabs_scroll.add_child(tabs)
 	for cat: String in CATEGORIES:
 		var b := Button.new()
@@ -306,9 +335,10 @@ func _show_idle() -> void:
 	var build := _big_button(tr("UI_BUILD"), true)
 	build.size_flags_stretch_ratio = 1.4
 	build.pressed.connect(func() -> void:
-		_policies.visible = false
-		_drawer.visible = not _drawer.visible
-		_refresh_cards())
+		if _drawer.visible:
+			_drawer.visible = false
+		else:
+			open_drawer())
 	# Larger text does not fit four buttons in one row: Build gets its own row on top.
 	var two_rows: bool = Settings.text_scale_index > 0
 	if two_rows:
@@ -321,8 +351,10 @@ func _show_idle() -> void:
 	_policies.offset_bottom = lift
 	var decisions := _side_button(tr("UI_DECISIONS"))
 	decisions.pressed.connect(func() -> void:
-		_drawer.visible = false
-		_policies.visible = not _policies.visible)
+		if _policies.visible:
+			_policies.visible = false
+		else:
+			open_policies())
 	row.add_child(decisions)
 	_refresh_paper_dot()
 	_refresh_mail_badge()

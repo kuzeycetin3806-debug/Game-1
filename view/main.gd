@@ -18,6 +18,15 @@ func _ready() -> void:
 	var mailbox := MailboxView.new()
 	_ui_root.add_child(mailbox)
 	_hud.mailbox = mailbox
+	var agenda := AgendaCard.new()
+	agenda.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	agenda.offset_left = 12
+	agenda.offset_right = -12
+	# Below the stats bar; in debug builds also below the developer panel's clock strip.
+	agenda.offset_top = 172 if OS.is_debug_build() else 104
+	_ui_root.add_child(agenda)
+	_ui_root.move_child(agenda, _hud.get_index() + 1)
+	agenda.action_requested.connect(_hud.run_action)
 	var settings := SettingsView.new()
 	_ui_root.add_child(settings)
 	_hud.settings_requested.connect(settings.open)

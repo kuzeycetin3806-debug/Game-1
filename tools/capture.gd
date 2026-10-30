@@ -27,6 +27,7 @@ var _policies: bool = false
 var _close_paper: bool = false
 var _mailbox: String = ""
 var _settings: bool = false
+var _agenda: bool = false
 var _locale: String = ""
 var _text_scale: int = -1
 
@@ -63,6 +64,8 @@ func _initialize() -> void:
 			_policies = true
 		elif arg == "--mailbox" or arg == "--letter":
 			_mailbox = arg.trim_prefix("--")
+		elif arg == "--agenda":
+			_agenda = true
 		elif arg == "--settings":
 			_settings = true
 		elif arg.begins_with("--locale="):
@@ -167,6 +170,10 @@ func _run() -> void:
 			if bool(ts.call("backend_idle")):
 				break
 			await process_frame
+		if _agenda:
+			(current_scene.find_children("*", "AgendaCard", true, false)[0] as Node).call("show_agenda")
+			for i: int in 3:
+				await process_frame
 		if _settings:
 			(current_scene.find_children("*", "SettingsView", true, false)[0] as Node).call("open")
 			for i: int in 3:
