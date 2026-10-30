@@ -83,7 +83,7 @@ Geliştirme planı ve aşamalar: [`docs/PLAN.md`](docs/PLAN.md). Bu dosya kalıc
 | `Clock` | Duvar saati soyutlaması (testte sahte saat enjekte edilir) |
 | `SimRunner` | Simulation örneğini tutar, tick'leri sürer, catch-up başlatır |
 | `SaveService` | Kayıt/yükleme, sürüm göçü (migration), atomik yazma |
-| `TextService` | Gazete/mektup metni: önce backend, olmazsa şablon |
+| `TextService` | Gazete/mektup metni: önce backend, olmazsa şablon (M4: şablon; saf `app/text/NewsDesk` + `TemplateWriter`) |
 | `Settings` | Grafik kalitesi, ses, bildirim tercihleri |
 
 Yeni autoload eklemek **mimari değişikliktir** → önce sor.
@@ -96,6 +96,9 @@ Yeni autoload eklemek **mimari değişikliktir** → önce sor.
 - Her içerik kaydının `id` (snake_case, benzersiz) ve `version` alanı vardır.
 - `ContentDb.from_dicts()` saftır (testler fixture verir); dosya okuyan tek yer `ContentDb.load_default()`.
 - Yeni bina = `data/buildings/<id>.json` + `assets/i18n/strings.csv` içinde `BLD_<ID>` ve `BLD_<ID>_DESC` anahtarları.
+- Yeni olay = `data/events/<id>.json` + her iki dilde `story.<id>` gazete şablonu; yeni karar = `data/policies/<id>.json`
+  + `POL_<ID>`/`POL_<ID>_DESC`. Format ve kurallar: [`docs/events.md`](docs/events.md).
+- Gazete metni sim'i etkilemez; baskılar kaydın `meta` alanında veri olarak saklanır, okunurken yazıya dökülür.
 
 ### 2.6 Kayıt
 

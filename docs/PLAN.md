@@ -1,6 +1,6 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ — sıradaki: M4.**
+Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ M4 ✅ — sıradaki: M5.**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
@@ -8,6 +8,8 @@ Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 ![M2 akışı: açılış, inşa çekmecesi, geçerli yerleştirme, dolu yer, bina bilgisi](images/m2_build_flow.png)
 
 ![M3: 2 gün sonra açılış özeti; 20 gün sonra (14 gün yetiştirildi, gerisi uyku)](images/m3_away.png)
+
+![M4: gazete, kararlar, yağmur, sis, gece fırtınası](images/m4_paper_weather.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -189,3 +191,22 @@ düşük). Serbest metin istenirse ayrı karar.
 - Testler/araçlar gerçek kayda dokunmaz: `SEHIR_SAVE_DIR` (run_tests.sh otomatik ayarlar), capture aracı kendi klasörü.
 - VARSAYIM: Aynı anda tek şehir (tek kayıt yuvası). Bulut kaydı yok.
 - Bilinen eksik: catch-up ilerleme kartı çok kısa sürdüğü için masaüstünde ancak bir an görünüyor; telefonda ölçülecek (M6).
+
+### M4 (tamamlandı)
+- Kayıt v2: hava, bayraklar, bekleme süreleri, bekleyen takip olayları, geçici değiştiriciler, politikalar.
+  v1→v2 göçü; hash artık göçten önce ham veride doğrulanıyor (eski sürümler de korunuyor). v1 ve v2 fixture'ları.
+- Hava: 6 saatlik dilimler, mevsimsel olasılık + süreklilik, kusursuz tahmin; etkileri trafik/mutluluğa yansır.
+  Görselde yağmur/kar parçacıkları, pus, kararma, fırtınada şimşek (kalite profiline bağlı yoğunluk).
+- Olay motoru (`sim/events/EventEngine`): 20 olay, koşullar (mevsim, hava, saat, gün, istatistik, bina, bayrak, karar),
+  ağırlık, bekleme, etkiler (değiştirici, para, bayrak), zincir (gecikmeli takip olayı). 14 günde ~10–13 hikâye.
+- Kararlar: 6 politika (`ChoosePolicyCommand`), kurulum + günlük maliyet, gecikmeli etki ("3 günde etkili olur").
+- Gazete: `NewsDesk` (önem puanı, birleştirme, dolgu) → `TemplateWriter` (TR/EN, deterministik varyant) →
+  `TextService` (yokluktan sonra ve her sabah baskı; arşiv kaydın `meta` alanında, 10 sayı). Gazete ekranı, HUD'da
+  okunmamış işareti, canlı oyunda hikâye başlığı bildirimi. Format: [`events.md`](events.md).
+- **Motor hatası bulundu ve kalıcı kurala bağlandı:** Godot 4.4.1'de tick başına çalışan statik koddan `const` tipli
+  diziyi dolaşmak yığını bozuyor (rastgele "double free"). `sim/` içinde bu kalıp yasak; `test_sim_code_rules.gd` denetler.
+- Testler artık `SimRunner`'ın açılış catch-up thread'iyle yarışmıyor (`SEHIR_TEST=1`).
+- VARSAYIM: Hava tahmini hep doğru. Canlı oyunda gazete her gün başında (yerel 00:00) basılır; okunmamış işaretiyle
+  bekler, kendiliğinden açılmaz. Gece yarısı uygulama açıksa bile oyuncuyu bölmez.
+- VARSAYIM: Mektuplar ve vatandaşlar M5'te; gazetedeki alıntılar şimdilik şablon içi anonim seslerdir.
+- Performans: dolu şehirde 14 gün ~0,7 sn (0,35 ms/tick; thread'de).
