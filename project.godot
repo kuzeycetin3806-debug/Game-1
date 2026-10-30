@@ -21,6 +21,7 @@ EventBus="*res://app/event_bus.gd"
 Clock="*res://app/clock.gd"
 SaveService="*res://app/save_service.gd"
 SimRunner="*res://app/sim_runner.gd"
+TextService="*res://app/text_service.gd"
 Settings="*res://app/settings.gd"
 
 [debug]

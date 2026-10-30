@@ -1,0 +1,496 @@
+{
+  "_comment": "Gazete şablonları. {değişken} yer tutucular: building, count, district, population, policy, weather, city. Her başlık/gövde için birden fazla varyant; seçim baskı numarasından türetilir (deterministik). title_many/body_many: aynı türden birden çok haber birleştiğinde.",
+  "id": "news_tr",
+  "version": 1,
+  "masthead": "Nefeskent Postası",
+  "tagline": [
+    "Şehrin nabzı, her sabah kapınızda",
+    "Kahvenizin yanına bir tutam şehir",
+    "Mahalleden mahalleye, haberden habere"
+  ],
+  "edition_line": "Sayı {edition} · {date}",
+  "section_numbers": "Rakamlarla",
+  "section_weather": "Hava",
+  "section_more": "Kısa kısa",
+  "stories": {
+    "story.street_festival": {
+      "title": [
+        "{district} Mahallesi festivalle renklendi",
+        "Sokaklar dans etti: {district} şenliği",
+        "{district} Mahallesi'nde müzik, mısır ve bol kahkaha"
+      ],
+      "body": [
+        "Akşamüstü başlayan şenlik gece yarısına kadar sürdü. Bir esnaf \"Böyle kalabalığı bayramda görmedik\" dedi; belediye bütçesi biraz incelse de gönüller kabardı.",
+        "Çocuklar yüz boyası, büyükler halay; {district} Mahallesi bir günlüğüne şehrin kalbi oldu. Belediyenin desteği tam not aldı."
+      ]
+    },
+    "story.festival_cleanup": {
+      "title": [
+        "Festivalden geriye kalanlar: konfeti ve çay bardakları",
+        "{district} Mahallesi'nde temizlik seferberliği"
+      ],
+      "body": [
+        "Ekipler sabahın erken saatlerinde işbaşı yaptı. Bir görevli \"İyi eğlenmişler belli\" diyerek gülümsedi; hava bir süre toz kokacak.",
+        "Şenliğin ertesi günü süpürgeler konuştu. Kısa süreli bir kirlilik bekleniyor, vatandaşlar anlayışlı."
+      ]
+    },
+    "story.rainy_cafe_rush": {
+      "title": [
+        "Yağmur yağdı, kafeler doldu",
+        "Şemsiyeler kapıda, herkes içeride"
+      ],
+      "body": [
+        "Ani bastıran yağmurla kafelerde boş masa kalmadı. Bir barista \"Bugün çay demlemeye yetişemiyoruz\" dedi; esnafın yüzü güldü.",
+        "Islak sokaklar, buğulu camlar ve tıklım tıklım kafeler. Yağmur, şehir ekonomisine beklenmedik bir can suyu oldu."
+      ]
+    },
+    "story.heatwave": {
+      "title": [
+        "Sıcak dalgası şehri sardı",
+        "Termometreler zorlanıyor, gölgeler değerlendi"
+      ],
+      "body": [
+        "Asfalt yumuşadı, dondurmacıların önünde kuyruk uzadı. Uzmanlar bol su ve gölge öneriyor; sokaklar öğle saatlerinde sessiz.",
+        "Şehir bir fırın gibi. Vatandaşlar trafiğe çıkmak yerine evde kalmayı tercih etti; mutluluk biraz eridi."
+      ]
+    },
+    "story.parks_save_the_day": {
+      "title": [
+        "Sıcakta herkes parka koştu",
+        "{district} Mahallesi'ndeki ağaçlar günü kurtardı"
+      ],
+      "body": [
+        "Ağaç gölgesi bu hafta en değerli gayrimenkul oldu. Parklar sabahtan akşama kadar doldu taştı.",
+        "\"Yeşil alan lüks değil, ihtiyaç\" diyen bir emekli, piknik örtüsünü sererken haklıydı."
+      ]
+    },
+    "story.first_snow": {
+      "title": [
+        "İlk kar düştü!",
+        "Nefeskent beyaza büründü"
+      ],
+      "body": [
+        "Sabah perdeleri açanlar şaşkın ama mutluydu. Kardan adamlar kısa sürede mahalleleri süsledi; trafik biraz yavaşladı.",
+        "Yılın ilk karı çocukları sokağa döktü. Sıcak salep tezgâhlarının önünde kuyruk var."
+      ]
+    },
+    "story.fog_morning": {
+      "title": [
+        "Sabah sisi yolları yavaşlattı",
+        "Sis çöktü, farlar yandı"
+      ],
+      "body": [
+        "Görüş mesafesinin azaldığı sabah saatlerinde trafik ağır ilerledi. Belediye sürücülere sabır öneriyor.",
+        "Şehir sabaha gri bir battaniyenin altında uyandı. Öğleye doğru açılması bekleniyor."
+      ]
+    },
+    "story.jam_complaints": {
+      "title": [
+        "{district} Mahallesi'nde trafik isyanı",
+        "Kornalar konuştu: \"Bu yollar bize dar\""
+      ],
+      "body": [
+        "Akşam trafiğinde saatlerce bekleyen sürücüler belediyeye şikâyet yağdırdı. Toplu taşıma ve bisiklet yolu talepleri yükseliyor.",
+        "Bir taksici \"Bu kavşakta çay demleyip içtim\" dedi. Ulaşım planı bekleniyor."
+      ]
+    },
+    "story.bike_lane_petition": {
+      "title": [
+        "Bisiklet yolu için imza kampanyası",
+        "Pedallar belediye kapısında"
+      ],
+      "body": [
+        "{district} Mahallesi'nden başlayan kampanya birkaç günde yüzlerce imzaya ulaştı. Vatandaşlar korumalı bisiklet şeritleri istiyor.",
+        "Gençler ve emekliler aynı imza masasında buluştu: \"Arabaya mecbur kalmayalım.\" Karar belediyenin."
+      ]
+    },
+    "story.new_bakery": {
+      "title": [
+        "{district} Mahallesi'ne yeni fırın açıldı",
+        "Sabahları mis gibi simit kokusu"
+      ],
+      "body": [
+        "Taze ekmek ve poğaça kuyruğu daha ilk gün köşeyi döndü. Esnaf \"Mahalle bizi bağrına bastı\" dedi.",
+        "Yeni fırın, mahalleye hem iş hem koku getirdi. Sabah yürüyüşlerinin rotası değişti."
+      ]
+    },
+    "story.lost_cat_found": {
+      "title": [
+        "Kayıp kedi Pamuk evine döndü",
+        "{district} Mahallesi'nde mutlu son"
+      ],
+      "body": [
+        "Üç gündür aranan Pamuk, bir kafenin sandalyesinde uyurken bulundu. Sahibi gözyaşlarını tutamadı; kafe ona ömür boyu süt sözü verdi.",
+        "Mahalleli el ilanlarını tek tek topladı. Pamuk'un yorumu: \"Miyav.\""
+      ]
+    },
+    "story.park_concert": {
+      "title": [
+        "Parkta hafta sonu konseri",
+        "{district} Mahallesi'nde çimenlerde caz"
+      ],
+      "body": [
+        "Battaniyesini kapan çimenlere koştu. Yerel grup akşamüstü güneşiyle birlikte sahneye çıktı; alkışlar karşı mahalleden duyuldu.",
+        "Bebek arabaları, köpekler ve bir saksafon: Hafta sonunun en güzel buluşması parktaydı."
+      ]
+    },
+    "story.power_outage": {
+      "title": [
+        "{district} Mahallesi'nde elektrik kesintisi",
+        "Şehir bir süre mum ışığında"
+      ],
+      "body": [
+        "Trafo arızası nedeniyle saatlerce elektrik yoktu. Onarım bütçeden pay aldı; vatandaşlar mum ve sabırla idare etti.",
+        "Buzdolapları sustu, komşular kapı önünde sohbete başladı. Ekipler gece yarısına doğru sorunu çözdü."
+      ]
+    },
+    "story.grid_upgrade_debate": {
+      "title": [
+        "Meclisin gündemi: Elektrik altyapısı",
+        "Kesintinin ardından yatırım tartışması"
+      ],
+      "body": [
+        "Son kesinti sonrası meclis üyeleri altyapı yenilemesini tartıştı. \"Önce plan, sonra kablo\" görüşü ağır bastı.",
+        "Uzmanlar şehrin büyümesine yetişecek bir şebeke çağrısında bulundu."
+      ]
+    },
+    "story.startup_moves_in": {
+      "title": [
+        "Genç bir girişim Nefeskent'i seçti",
+        "{district} Mahallesi'ne yeni ofis, yeni iş"
+      ],
+      "body": [
+        "Teknoloji girişimi işe alımlara başladı. İş arayanlar için iyi haber; kafelerde dizüstü bilgisayar sayısı arttı.",
+        "\"Bu şehirde enerji var\" diyen kurucu, ilk etapta onlarca kişiye iş vaat ediyor."
+      ]
+    },
+    "story.pothole_season": {
+      "title": [
+        "Çukur sezonu açıldı",
+        "{district} Mahallesi'nde yollar yamalandı"
+      ],
+      "body": [
+        "Soğuk ve yağmur asfaltı yordu. Belediye ekipleri yama çalışması yaptı; trafik bir süre yavaş akacak.",
+        "Bir sürücü \"Direksiyon değil, slalom çeviriyoruz\" dedi. Onarımlar sürüyor."
+      ]
+    },
+    "story.autumn_leaves": {
+      "title": [
+        "Parklarda sonbahar şöleni",
+        "{district} Mahallesi sarıya ve turuncuya boyandı"
+      ],
+      "body": [
+        "Hışırdayan yapraklar arasında yürüyüş yapanlar fotoğraf çekmeye doyamadı.",
+        "Sonbahar şehrin en fotojenik mevsimi olduğunu bir kez daha kanıtladı."
+      ]
+    },
+    "story.storm_damage": {
+      "title": [
+        "Fırtına şehri hırpaladı",
+        "Rüzgâr {district} Mahallesi'nde ağaç devirdi"
+      ],
+      "body": [
+        "Şiddetli rüzgâr çatı kiremitlerini uçurdu, bazı yollar kısa süre kapandı. Hasar bütçeden karşılanacak.",
+        "Ekipler gece boyunca çalıştı. Can kaybı yok; şemsiye satıcılarının kârı rekor."
+      ]
+    },
+    "story.night_market_buzz": {
+      "title": [
+        "Gece pazarında izdiham",
+        "Tezgâhlar ışıl ışıl, mideler dolu"
+      ],
+      "body": [
+        "Akşam saatlerinde kurulan pazar, mahallenin yeni buluşma yeri oldu. Esnaf memnun, vatandaş daha da memnun.",
+        "Kokoreç, mısır ve canlı müzik: Gece pazarı şehrin gece hayatına renk kattı."
+      ]
+    },
+    "story.tourists_arrive": {
+      "title": [
+        "Turistler Nefeskent'i keşfetti",
+        "Yeşil ve mutlu şehir ziyaretçi akınına uğradı"
+      ],
+      "body": [
+        "Rehberli turlar parklardan kafelere uzanıyor. Otellerde boş oda bulmak zorlaştı; esnafın yüzü güldü.",
+        "\"Böyle huzurlu bir şehir görmedik\" diyen bir turist kartpostal almaya doyamadı."
+      ]
+    },
+    "built.residential": {
+      "title": [
+        "Yeni konutlar tamamlandı: {building}",
+        "{building} yeni sakinlerini bekliyor"
+      ],
+      "title_many": [
+        "{count} yeni konut binası tamamlandı",
+        "Şehre {count} yeni yuva"
+      ],
+      "body": [
+        "Taşınma kamyonları sokakta sıraya girdi. Yeni komşular şimdiden balkon sohbetlerine katıldı.",
+        "Anahtarlar teslim edildi; mahalle biraz daha kalabalık, biraz daha canlı."
+      ]
+    },
+    "built.commercial": {
+      "title": [
+        "{building} kapılarını açtı",
+        "Mahallenin yeni gözdesi: {building}"
+      ],
+      "title_many": [
+        "{count} yeni dükkân açıldı",
+        "Ticarette hareketli günler: {count} yeni işletme"
+      ],
+      "body": [
+        "Açılışta ikram edilen çaylar kısa sürede bitti. Esnaf, mahallenin ilgisinden memnun.",
+        "Vitrinler parladı, kapı zilleri çalmaya başladı. Yeni iş imkânları da cabası."
+      ]
+    },
+    "built.office": {
+      "title": [
+        "{building} hizmete girdi",
+        "İş dünyasına yeni adres: {building}"
+      ],
+      "title_many": [
+        "{count} yeni ofis binası açıldı",
+        "İş kapısı genişliyor: {count} yeni ofis"
+      ],
+      "body": [
+        "Masalar kuruldu, kahve makineleri çalıştı. Yeni iş ilanları şimdiden yayında.",
+        "Asansörler ilk yolcularını taşıdı. Sabah trafiğinin biraz artması bekleniyor."
+      ]
+    },
+    "built.park": {
+      "title": [
+        "Şehre yeni yeşil: {building} açıldı",
+        "{building} çocuk sesleriyle doldu"
+      ],
+      "title_many": [
+        "{count} yeni park açıldı",
+        "Nefeskent yeşeriyor: {count} yeni park"
+      ],
+      "body": [
+        "İlk ziyaretçiler banklara kuruldu, salıncaklar durmadı. Hava da sanki biraz temizlendi.",
+        "Fidanlar küçük ama umutlar büyük. Vatandaşlar yeşil alanı alkışladı."
+      ]
+    },
+    "built.transit": {
+      "title": [
+        "{building} hizmette",
+        "Ulaşımda yeni dönem: {building}"
+      ],
+      "title_many": [
+        "{count} yeni ulaşım durağı açıldı",
+        "Şehir birbirine yaklaşıyor: {count} yeni durak"
+      ],
+      "body": [
+        "İlk yolcular kurdele kesiminden sonra bindi. Trafikte rahatlama bekleniyor.",
+        "\"Arabayı evde bırakacağım\" diyen bir öğretmen, yeni hattın ilk düzenli yolcusu oldu."
+      ]
+    },
+    "milestone": {
+      "title": [
+        "Nüfus {population} oldu!",
+        "Nefeskent büyüyor: {population} kişi"
+      ],
+      "body": [
+        "Şehir yeni bir eşiği geçti. Belediye başkanına tebrik mesajları yağıyor; okullar ve parklar için planlar masada.",
+        "Bir zamanlar küçük bir kasabaydık. Şimdi {population} kişiyiz ve hikâyemiz yeni başlıyor."
+      ]
+    },
+    "traffic_jam": {
+      "title": [
+        "Trafik kilitlendi",
+        "Kornalar senfonisi: Şehir durma noktasında"
+      ],
+      "body": [
+        "Mesai saatinde ana arterler doldu, {district} Mahallesi civarında araçlar adım adım ilerledi. Toplu taşıma ve bisiklet yolları tartışılıyor.",
+        "Bir sürücü navigasyona bakıp iç çekti: \"Yürüsem daha hızlı.\""
+      ]
+    },
+    "policy_enacted": {
+      "title": [
+        "Belediyeden yeni karar: {policy}",
+        "{policy} için düğmeye basıldı"
+      ],
+      "body": [
+        "Kararın etkilerinin önümüzdeki günlerde hissedilmesi bekleniyor. Vatandaşlar ilk sonuçları merakla bekliyor.",
+        "Meclis onayladı, ekipler işe koyuldu. Sonuçlar kısa sürede görülecek."
+      ]
+    },
+    "policy_effect": {
+      "title": [
+        "{policy} yürürlükte: ilk etkiler görüldü",
+        "Karar sahada: {policy}"
+      ],
+      "body": [
+        "Kararın etkileri artık sokakta. Bazıları memnun, bazıları alışmaya çalışıyor; herkes konuşuyor.",
+        "Belediyenin hamlesi meyvesini vermeye başladı. Rakamlar önümüzdeki günlerde netleşecek."
+      ]
+    },
+    "policy_repealed": {
+      "title": [
+        "{policy} kaldırıldı",
+        "Belediye geri adım attı: {policy}"
+      ],
+      "body": [
+        "Karar yürürlükten kalktı. Destekçiler üzgün, eleştirenler rahatlamış görünüyor.",
+        "Bazı kararlar dönüşü olan yollardır. Şehir yeni dengesini arıyor."
+      ]
+    },
+    "weather.storm": {
+      "title": [
+        "Fırtına uyarısı",
+        "Gök gürledi, şehir sığındı"
+      ],
+      "body": [
+        "Meteoroloji kuvvetli rüzgâr ve sağanak bekliyor. Evden çıkmak zorunda olanlara dikkat çağrısı yapıldı."
+      ]
+    },
+    "weather.snow": {
+      "title": [
+        "Kar yağışı başladı",
+        "Lapa lapa kar"
+      ],
+      "body": [
+        "Yollarda kayganlık var; belediye tuzlama yapıyor. Çocuklar için mükemmel bir gün."
+      ]
+    },
+    "weather.fog": {
+      "title": [
+        "Yoğun sis",
+        "Şehir sisin içinde"
+      ],
+      "body": [
+        "Görüş mesafesi düştü. Sürücülerin yavaş ve dikkatli olması öneriliyor."
+      ]
+    },
+    "city_slept": {
+      "title": [
+        "Şehir uzun bir uykudan uyandı",
+        "Uzun aradan sonra yeniden merhaba"
+      ],
+      "body": [
+        "Belediye başkanının uzun yokluğunda şehir sessizce yaşamaya devam etti. Bazı dosyalar masada bekliyor."
+      ]
+    },
+    "demolished": {
+      "title": [
+        "Bir bina yıkıldı: {building}",
+        "{building} tarihe karıştı"
+      ],
+      "title_many": [
+        "{count} bina yıkıldı",
+        "Kepçeler iş başında: {count} yıkım"
+      ],
+      "body": [
+        "Yerine ne yapılacağı merak konusu. Komşular şimdiden önerilerini sıralıyor."
+      ]
+    },
+    "filler.quiet": {
+      "title": [
+        "Sakin bir gün",
+        "Nefeskent'te hayat olağan akışında"
+      ],
+      "body": [
+        "Kayda değer bir olay yok; kafeler dolu, parklar huzurlu. Bazen en iyi haber, haber olmamasıdır.",
+        "Şehir kendi ritminde yaşıyor. Belediye başkanı için nefes alma vakti."
+      ]
+    },
+    "filler.mood_high": {
+      "title": [
+        "Anket: Nefeskentliler mutlu",
+        "Gülümseyen şehir"
+      ],
+      "body": [
+        "Sokak röportajlarında çoğunluk şehrinden memnun. \"Burada yaşamak güzel\" diyenlerin sayısı artıyor."
+      ]
+    },
+    "filler.mood_low": {
+      "title": [
+        "Anket: Vatandaş huzursuz",
+        "Şehirde memnuniyet düşüşte"
+      ],
+      "body": [
+        "Sokaktaki ses net: daha fazla yeşil alan, daha az trafik isteniyor. Belediyenin adım atması bekleniyor."
+      ]
+    },
+    "filler.traffic_busy": {
+      "title": [
+        "Trafik canımızdan bezdirdi",
+        "Yollar dar, sabır az"
+      ],
+      "body": [
+        "Mesai saatlerinde yollar dolup taşıyor. Metro ve bisiklet yolu fikirleri her sohbette."
+      ]
+    },
+    "filler.green_city": {
+      "title": [
+        "Yeşilin başkenti olmaya aday",
+        "Ağaçlar şehri sardı"
+      ],
+      "body": [
+        "Parklar ve çatı bahçeleri sayesinde hava temiz. Kuşlar bile şehre geri döndü."
+      ]
+    },
+    "filler.budget_tight": {
+      "title": [
+        "Belediye kasası zor durumda",
+        "Bütçede kemer sıkma vakti"
+      ],
+      "body": [
+        "Giderler gelirleri zorluyor. Uzmanlar yeni yatırımlardan önce dengenin kurulmasını öneriyor."
+      ]
+    },
+    "filler.budget_rich": {
+      "title": [
+        "Kasa dolu, fikirler hazır",
+        "Bütçe rahat, şehir planları büyük"
+      ],
+      "body": [
+        "Belediye kasası güçlü. Yeni park, metro ve kültür projeleri için ideal zaman."
+      ]
+    }
+  },
+  "numbers": {
+    "population": "Nüfus",
+    "money": "Bütçe",
+    "happiness": "Mutluluk",
+    "traffic": "Trafik"
+  },
+  "weather_names": {
+    "clear": "Açık",
+    "cloudy": "Bulutlu",
+    "rain": "Yağmurlu",
+    "storm": "Fırtınalı",
+    "fog": "Sisli",
+    "snow": "Karlı"
+  },
+  "weather_now": "Şu an {weather}",
+  "day_parts": [
+    "Gece",
+    "Sabah",
+    "Öğleden sonra",
+    "Akşam"
+  ],
+  "months": [
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık"
+  ],
+  "weekdays": [
+    "Pazartesi",
+    "Salı",
+    "Çarşamba",
+    "Perşembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar"
+  ],
+  "date_format": "{day} {month} {year}, {weekday}"
+}

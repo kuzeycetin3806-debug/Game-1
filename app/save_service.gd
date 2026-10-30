@@ -32,9 +32,9 @@ func has_save() -> bool:
 
 
 ## Writes tmp, verifies it parses, then rotates main -> bak and tmp -> main.
-func save(sim: Simulation) -> Error:
+func save(sim: Simulation, meta: Dictionary = {}) -> Error:
 	DirAccess.make_dir_recursive_absolute(save_dir)
-	var data: Dictionary = SaveCodec.encode(sim, int(Clock.now_unix()), String(ProjectSettings.get_setting("application/config/version", "0.0.0")))
+	var data: Dictionary = SaveCodec.encode(sim, int(Clock.now_unix()), String(ProjectSettings.get_setting("application/config/version", "0.0.0")), meta)
 	var text: String = JSON.stringify(data)
 	var f: FileAccess = FileAccess.open(temp_path(), FileAccess.WRITE)
 	if f == null:

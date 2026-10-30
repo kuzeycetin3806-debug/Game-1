@@ -1,0 +1,416 @@
+{
+  "_comment": "English newspaper templates. Missing keys fall back to Turkish.",
+  "id": "news_en",
+  "version": 1,
+  "masthead": "The Nefeskent Post",
+  "tagline": [
+    "The city's pulse, every morning",
+    "A pinch of city with your coffee"
+  ],
+  "edition_line": "Issue {edition} · {date}",
+  "section_numbers": "By the numbers",
+  "section_weather": "Weather",
+  "section_more": "In brief",
+  "stories": {
+    "story.street_festival": {
+      "title": [
+        "Festival lights up {district}",
+        "Streets dance in {district}"
+      ],
+      "body": [
+        "The party ran until midnight. \"Busier than a holiday,\" said one shopkeeper; the budget got thinner, spirits got higher."
+      ]
+    },
+    "story.festival_cleanup": {
+      "title": [
+        "After the party: confetti and tea glasses"
+      ],
+      "body": [
+        "Crews were out at dawn. Expect a little dust in the air for a day."
+      ]
+    },
+    "story.rainy_cafe_rush": {
+      "title": [
+        "Rain falls, cafés fill up"
+      ],
+      "body": [
+        "Not a free table in town. \"We can't brew tea fast enough,\" laughed a barista."
+      ]
+    },
+    "story.heatwave": {
+      "title": [
+        "Heatwave grips the city"
+      ],
+      "body": [
+        "Asphalt softened and ice-cream queues grew. Stay in the shade and drink water."
+      ]
+    },
+    "story.parks_save_the_day": {
+      "title": [
+        "Parks save the day in {district}"
+      ],
+      "body": [
+        "Tree shade was the hottest property in town this week."
+      ]
+    },
+    "story.first_snow": {
+      "title": [
+        "First snow of the year!"
+      ],
+      "body": [
+        "Snowmen appeared on every corner; traffic slowed to a crawl."
+      ]
+    },
+    "story.fog_morning": {
+      "title": [
+        "Morning fog slows the roads"
+      ],
+      "body": [
+        "Visibility dropped and so did speeds. Patience, drivers."
+      ]
+    },
+    "story.jam_complaints": {
+      "title": [
+        "Drivers fed up in {district}"
+      ],
+      "body": [
+        "Hours in evening traffic sparked a wave of complaints. Calls for transit and bike lanes grow."
+      ]
+    },
+    "story.bike_lane_petition": {
+      "title": [
+        "Petition for bike lanes"
+      ],
+      "body": [
+        "Starting in {district}, hundreds have signed for protected bike lanes. The mayor's move."
+      ]
+    },
+    "story.new_bakery": {
+      "title": [
+        "New bakery opens in {district}"
+      ],
+      "body": [
+        "The queue for fresh bread turned the corner on day one."
+      ]
+    },
+    "story.lost_cat_found": {
+      "title": [
+        "Lost cat Pamuk is home"
+      ],
+      "body": [
+        "Found asleep on a café chair in {district}. The café promised free milk for life."
+      ]
+    },
+    "story.park_concert": {
+      "title": [
+        "Weekend concert in the park"
+      ],
+      "body": [
+        "Blankets, dogs and a saxophone: the best gathering of the weekend."
+      ]
+    },
+    "story.power_outage": {
+      "title": [
+        "Power cut in {district}"
+      ],
+      "body": [
+        "A transformer failed; neighbours chatted by candlelight until crews fixed it."
+      ]
+    },
+    "story.grid_upgrade_debate": {
+      "title": [
+        "Council debates the power grid"
+      ],
+      "body": [
+        "\"Plan first, then cables,\" was the mood in the chamber."
+      ]
+    },
+    "story.startup_moves_in": {
+      "title": [
+        "Start-up chooses Nefeskent"
+      ],
+      "body": [
+        "A new office in {district} is hiring. Good news for job seekers."
+      ]
+    },
+    "story.pothole_season": {
+      "title": [
+        "Pothole season is open"
+      ],
+      "body": [
+        "Crews patched the roads in {district}; expect slow traffic."
+      ]
+    },
+    "story.autumn_leaves": {
+      "title": [
+        "Autumn colours in the parks"
+      ],
+      "body": [
+        "{district} turned yellow and orange; cameras clicked all day."
+      ]
+    },
+    "story.storm_damage": {
+      "title": [
+        "Storm batters the city"
+      ],
+      "body": [
+        "Roof tiles flew and trees fell in {district}. Repairs come out of the budget."
+      ]
+    },
+    "story.night_market_buzz": {
+      "title": [
+        "Night market packed"
+      ],
+      "body": [
+        "Stalls, lights and live music: the city's new evening favourite."
+      ]
+    },
+    "story.tourists_arrive": {
+      "title": [
+        "Tourists discover Nefeskent"
+      ],
+      "body": [
+        "Green and happy, the city is suddenly on everyone's map."
+      ]
+    },
+    "built.residential": {
+      "title": [
+        "New homes ready: {building}"
+      ],
+      "title_many": [
+        "{count} new housing blocks finished"
+      ],
+      "body": [
+        "Moving vans lined the street; new neighbours already joined the balcony chats."
+      ]
+    },
+    "built.commercial": {
+      "title": [
+        "{building} opens its doors"
+      ],
+      "title_many": [
+        "{count} new shops open"
+      ],
+      "body": [
+        "The free tea at the opening ran out in minutes."
+      ]
+    },
+    "built.office": {
+      "title": [
+        "{building} opens for business"
+      ],
+      "title_many": [
+        "{count} new office buildings"
+      ],
+      "body": [
+        "Desks set, coffee machines on. Job ads are already up."
+      ]
+    },
+    "built.park": {
+      "title": [
+        "New green space: {building}"
+      ],
+      "title_many": [
+        "{count} new parks open"
+      ],
+      "body": [
+        "Benches filled and swings never stopped. The air feels cleaner already."
+      ]
+    },
+    "built.transit": {
+      "title": [
+        "{building} now in service"
+      ],
+      "title_many": [
+        "{count} new transit stops"
+      ],
+      "body": [
+        "First riders boarded after the ribbon cutting. Traffic relief expected."
+      ]
+    },
+    "milestone": {
+      "title": [
+        "Population hits {population}!"
+      ],
+      "body": [
+        "The city crossed a new threshold. Plans for schools and parks are on the table."
+      ]
+    },
+    "traffic_jam": {
+      "title": [
+        "Gridlock!"
+      ],
+      "body": [
+        "Rush hour filled the main roads around {district}. Transit and bike lanes are the talk of the town."
+      ]
+    },
+    "policy_enacted": {
+      "title": [
+        "New city policy: {policy}"
+      ],
+      "body": [
+        "Effects are expected in the coming days."
+      ]
+    },
+    "policy_effect": {
+      "title": [
+        "{policy} in effect"
+      ],
+      "body": [
+        "The decision is now visible on the streets. Everyone is talking about it."
+      ]
+    },
+    "policy_repealed": {
+      "title": [
+        "{policy} repealed"
+      ],
+      "body": [
+        "Supporters are disappointed, critics relieved."
+      ]
+    },
+    "weather.storm": {
+      "title": [
+        "Storm warning"
+      ],
+      "body": [
+        "Strong winds and downpours expected."
+      ]
+    },
+    "weather.snow": {
+      "title": [
+        "Snow is falling"
+      ],
+      "body": [
+        "Roads are slippery; a perfect day for kids."
+      ]
+    },
+    "weather.fog": {
+      "title": [
+        "Thick fog"
+      ],
+      "body": [
+        "Visibility is low. Drive slowly."
+      ]
+    },
+    "city_slept": {
+      "title": [
+        "The city wakes from a long sleep"
+      ],
+      "body": [
+        "While the mayor was away, the city kept quietly living."
+      ]
+    },
+    "demolished": {
+      "title": [
+        "Building demolished: {building}"
+      ],
+      "title_many": [
+        "{count} buildings demolished"
+      ],
+      "body": [
+        "What comes next is the question on everyone's lips."
+      ]
+    },
+    "filler.quiet": {
+      "title": [
+        "A quiet day"
+      ],
+      "body": [
+        "Nothing major to report. Sometimes the best news is no news."
+      ]
+    },
+    "filler.mood_high": {
+      "title": [
+        "Poll: residents are happy"
+      ],
+      "body": [
+        "Most people on the street say they love living here."
+      ]
+    },
+    "filler.mood_low": {
+      "title": [
+        "Poll: residents restless"
+      ],
+      "body": [
+        "More green, less traffic, says the street."
+      ]
+    },
+    "filler.traffic_busy": {
+      "title": [
+        "Traffic tests everyone's patience"
+      ],
+      "body": [
+        "Metro and bike lane ideas come up in every conversation."
+      ]
+    },
+    "filler.green_city": {
+      "title": [
+        "A green capital in the making"
+      ],
+      "body": [
+        "Parks and rooftop gardens keep the air clean."
+      ]
+    },
+    "filler.budget_tight": {
+      "title": [
+        "City coffers under strain"
+      ],
+      "body": [
+        "Costs are outpacing income. Balance first, experts say."
+      ]
+    },
+    "filler.budget_rich": {
+      "title": [
+        "Coffers full, ideas ready"
+      ],
+      "body": [
+        "A great time for new parks, transit and culture projects."
+      ]
+    }
+  },
+  "numbers": {
+    "population": "Population",
+    "money": "Budget",
+    "happiness": "Happiness",
+    "traffic": "Traffic"
+  },
+  "weather_names": {
+    "clear": "Clear",
+    "cloudy": "Cloudy",
+    "rain": "Rainy",
+    "storm": "Stormy",
+    "fog": "Foggy",
+    "snow": "Snowy"
+  },
+  "weather_now": "Now {weather}",
+  "day_parts": [
+    "Night",
+    "Morning",
+    "Afternoon",
+    "Evening"
+  ],
+  "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "weekdays": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "date_format": "{weekday}, {month} {day}, {year}"
+}

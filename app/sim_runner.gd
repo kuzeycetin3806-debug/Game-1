@@ -11,6 +11,8 @@ const AUTOSAVE_EVERY_TICKS: int = 6 # hourly
 
 var sim: Simulation
 var content: ContentDb
+## App-side data saved next to the city (newspaper archive, read markers). Not simulated.
+var meta: Dictionary = {}
 var catching_up: bool = false
 ## Set when the last load had to fall back to the backup file.
 var recovered_from_backup: bool = false
@@ -39,6 +41,7 @@ func load_or_create() -> void:
 	recovered_from_backup = bool(r.get("recovered", false))
 	if r.ok:
 		sim = r.sim
+		meta = r.meta
 	else:
 		if r.error != "ERR_SAVE_MISSING":
 			push_warning("SimRunner: no usable save (%s), founding a new city" % r.error)
@@ -51,11 +54,12 @@ func load_or_create() -> void:
 func new_city(city_seed: int = -1) -> void:
 	_abort_job()
 	_found_city(city_seed)
-	SaveService.save(sim)
+	SaveService.save(sim, meta)
 	EventBus.city_loaded.emit()
 
 
 func _found_city(city_seed: int) -> void:
+	meta = {}
 	if city_seed < 0:
 		city_seed = int(Time.get_unix_time_from_system()) ^ (Time.get_ticks_usec() & 0xFFFF)
 	var offset: int = int(Time.get_time_zone_from_system().get("bias", 0)) * 60
@@ -164,7 +168,7 @@ func save_now() -> void:
 	if sim == null or catching_up:
 		return
 	_ticks_since_save = 0
-	SaveService.save(sim)
+	SaveService.save(sim, meta)
 
 
 func _notification(what: int) -> void:

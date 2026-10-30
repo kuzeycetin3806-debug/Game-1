@@ -1,0 +1,13 @@
+{
+  "id": "editorial",
+  "version": 1,
+  "_comment": "Gazetenin yayın kuralları: haber türlerinin önem puanı (0-100), en fazla haber sayısı. story.* puanı olay tanımından gelir.",
+  "max_stories": 5,
+  "min_stories": 3,
+  "importance": {
+    "built.residential": 30, "built.commercial": 32, "built.office": 34, "built.park": 38, "built.transit": 50,
+    "big_building_bonus": 15, "many_bonus_per_extra": 4,
+    "milestone": 72, "traffic_jam": 56, "policy_enacted": 48, "policy_effect": 58, "policy_repealed": 44,
+    "weather.storm": 46, "weather.snow": 40, "weather.fog": 26, "city_slept": 22, "demolished": 24
+  }
+}
