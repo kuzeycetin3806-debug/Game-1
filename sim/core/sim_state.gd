@@ -29,6 +29,18 @@ var day_expense_cents: int = 0
 var milestone_index: int = 0 # how many population milestones are passed
 var traffic_jam_active: bool = false
 
+# --- since save v2 (M4) ---
+var weather: String = "clear"
+var weather_block: int = -1 # last 6-hour block whose weather was rolled
+var flags: Dictionary = {} # flag -> tick it was set
+var cooldowns: Dictionary = {} # event id -> first tick it may fire again
+## Scheduled follow-ups: [{tick, event, cause, seq}], kept sorted by (tick, seq).
+var pending: Array = []
+## Temporary effects: [{source, stat, amount, until}] (until = first tick it no longer applies).
+var modifiers: Array = []
+var policies: Dictionary = {} # policy id -> {since, active_from}
+var story_seq: int = 0 # monotonically increasing id for stories and schedules
+
 
 func building_by_id(id: int) -> BuildingInstance:
 	for b: BuildingInstance in buildings:
@@ -50,6 +62,9 @@ func to_dict() -> Dictionary:
 		"income_frac": income_frac, "expense_frac": expense_frac,
 		"day_income_cents": day_income_cents, "day_expense_cents": day_expense_cents,
 		"milestone_index": milestone_index, "traffic_jam_active": traffic_jam_active,
+		"weather": weather, "weather_block": weather_block, "flags": flags.duplicate(),
+		"cooldowns": cooldowns.duplicate(), "pending": pending.duplicate(true),
+		"modifiers": modifiers.duplicate(true), "policies": policies.duplicate(true), "story_seq": story_seq,
 	}
 
 
@@ -79,6 +94,14 @@ static func from_dict(d: Dictionary) -> SimState:
 	s.day_expense_cents = int(d.day_expense_cents)
 	s.milestone_index = int(d.milestone_index)
 	s.traffic_jam_active = bool(d.traffic_jam_active)
+	s.weather = String(d.weather)
+	s.weather_block = int(d.weather_block)
+	s.flags = SimJson.ints(d.flags) as Dictionary
+	s.cooldowns = SimJson.ints(d.cooldowns) as Dictionary
+	s.pending = SimJson.ints(d.pending) as Array
+	s.modifiers = SimJson.ints(d.modifiers) as Array
+	s.policies = SimJson.ints(d.policies) as Dictionary
+	s.story_seq = int(d.story_seq)
 	return s
 
 

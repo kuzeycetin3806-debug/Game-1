@@ -4,12 +4,26 @@ extends RefCounted
 ## NEVER delete an old step: players skip versions. Each new step gets a
 ## fixture in tests/fixtures/saves/ and a test.
 
-const CURRENT: int = 1
+const CURRENT: int = 2
 
 ## version N -> callable taking the v N dictionary and returning v N+1.
-## Empty for now: v1 is the first released format.
 static func steps() -> Dictionary:
-	return {}
+	return {1: _v1_to_v2}
+
+
+## v2 (M4): weather, event engine bookkeeping, policies; save root gains "meta".
+static func _v1_to_v2(d: Dictionary) -> Dictionary:
+	var s: Dictionary = d.state
+	s.weather = "clear"
+	s.weather_block = -1
+	s.flags = {}
+	s.cooldowns = {}
+	s.pending = []
+	s.modifiers = []
+	s.policies = {}
+	s.story_seq = 0
+	d.meta = {}
+	return d
 
 
 ## Returns {ok: bool, data: Dictionary, error: String, from_version: int}.

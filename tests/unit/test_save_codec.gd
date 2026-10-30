@@ -84,3 +84,26 @@ func test_v1_fixture_still_loads() -> void:
 	assert_gt(sim.state.buildings.size(), 10)
 	SimFixture.run(sim, 144)
 	assert_gt(sim.state.population, 0)
+
+
+func test_v1_fixture_migrates_to_current() -> void:
+	var d: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(FIXTURE_V1))
+	var r: Dictionary = SaveCodec.decode(d, SimFixture.content())
+	assert_true(r.ok, r.error)
+	assert_eq(r.migrated_from, 1)
+	var s: SimState = (r.sim as Simulation).state
+	assert_eq(s.weather, "clear")
+	assert_eq(s.policies, {})
+
+
+func test_canonical_hash_matches_state_hash() -> void:
+	var sim: Simulation = _played_sim()
+	var parsed: Dictionary = _roundtrip(sim.state.to_dict())
+	assert_eq(SimJson.canonical_hash(parsed), sim.state.hash())
+
+
+func test_meta_roundtrips_without_affecting_hash() -> void:
+	var sim: Simulation = _played_sim()
+	var r: Dictionary = SaveCodec.decode(_roundtrip(SaveCodec.encode(sim, 1, "0.1.0", {"read_tick": 42})), SimFixture.content())
+	assert_true(r.ok)
+	assert_eq(int(r.meta.read_tick), 42)
