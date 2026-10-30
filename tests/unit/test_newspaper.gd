@@ -62,13 +62,13 @@ func test_headline_is_most_important() -> void:
 		SimEvent.create("population_milestone", 5, {"population": 500}),
 		SimEvent.create("story", 3, {"id": "lost_cat_found", "importance": 15, "district": "Lale"}),
 	]
-	var ed: Dictionary = NewsDesk.build(sim, events, 1, 0, {}, editorial)
+	var ed: Dictionary = NewsDesk.build(sim, events, 2, 0, {}, editorial)
 	assert_eq(String(ed.stories[0].key), "milestone")
 
 
 func test_quiet_window_gets_fillers() -> void:
 	var sim: Simulation = SimFixture.new_sim()
-	var ed: Dictionary = NewsDesk.build(sim, [] as Array[SimEvent], 1, 0, {}, editorial)
+	var ed: Dictionary = NewsDesk.build(sim, [] as Array[SimEvent], 2, 0, {}, editorial)
 	assert_eq((ed.stories as Array).size(), int(editorial.min_stories))
 	assert_string_starts_with(String(ed.stories[0].key), "filler.")
 
