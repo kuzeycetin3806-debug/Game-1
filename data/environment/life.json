@@ -1,0 +1,19 @@
+{
+  "id": "street_life",
+  "version": 1,
+  "_comment": "Sokak hayatı görseli (sim'i etkilemez). max_*: kalite profiline göre üst sınır (düşük/orta/yüksek). Yoğunluk = nüfus tabanı × saat eğrisi × hava çarpanı.",
+  "cars": { "max": [40, 90, 160], "base": 12, "per_residents": 6, "speed": [9.0, 14.0], "lane_offset": 1.25 },
+  "pedestrians": { "max": [50, 120, 220], "base": 14, "per_residents": 4, "speed": [1.1, 1.7], "sidewalk_offset": 3.55 },
+  "pedestrian_curve": [[0, 60], [300, 30], [420, 350], [540, 600], [720, 1000], [900, 800], [1080, 1000], [1260, 600], [1440, 60]],
+  "weather": {
+    "clear": { "cars": 1.0, "pedestrians": 1.0 },
+    "cloudy": { "cars": 1.0, "pedestrians": 0.9 },
+    "rain": { "cars": 1.15, "pedestrians": 0.45 },
+    "storm": { "cars": 0.8, "pedestrians": 0.1 },
+    "fog": { "cars": 0.9, "pedestrians": 0.7 },
+    "snow": { "cars": 0.7, "pedestrians": 0.6 }
+  },
+  "tram": { "min_population": 150, "cars": 3, "length": 11.0, "gap": 0.8, "speed": 7.5, "dwell_seconds": 6.0 },
+  "car_colors": ["#f4efe6", "#e59f84", "#9dbad6", "#f2d3ae", "#a9c49e", "#c3b2d8", "#ff8a5c", "#5d6b7a", "#efbcbc"],
+  "people_colors": ["#e07a5f", "#3d405b", "#81b29a", "#f2cc8f", "#6d8bc7", "#b56576", "#ffffff", "#2b2d42"]
+}

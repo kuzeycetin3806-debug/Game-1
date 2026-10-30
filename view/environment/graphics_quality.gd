@@ -7,6 +7,7 @@ extends Node
 @export var world_environment: WorldEnvironment
 @export var city: CityRenderer
 @export var weather: WeatherView
+@export var life: StreetLife
 
 ## Keys match Settings.Quality (LOW, MEDIUM, HIGH).
 ## VARSAYIM: LOW caps at 30 FPS to save battery on weak phones.
@@ -39,6 +40,8 @@ func apply(q: int) -> void:
 	city.foliage_density = p.foliage
 	if weather != null:
 		weather.particle_density = p.particles
+	if life != null:
+		life.quality = q
 	Engine.max_fps = p.fps
 	_update_shadow_distance()
 
