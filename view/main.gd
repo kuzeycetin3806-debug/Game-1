@@ -30,6 +30,9 @@ func _ready() -> void:
 	var settings := SettingsView.new()
 	_ui_root.add_child(settings)
 	_hud.settings_requested.connect(settings.open)
+	var perf := PerfWatch.new()
+	add_child(perf)
+	perf.quality_lowered.connect(func() -> void: _hud.show_toast(tr("UI_QUALITY_LOWERED")))
 	if SimRunner.recovered_from_backup:
 		_hud.show_toast(tr("UI_RECOVERED"))
 	if OS.is_debug_build():

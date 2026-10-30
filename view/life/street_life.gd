@@ -56,6 +56,10 @@ func _ready() -> void:
 	person.rings = 1
 	_peds = _make_mm(person, true, false, people_mat)
 	_peds.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# LOD: people are specks from afar, cars soon after (camera distance from the map centre).
+	_peds.visibility_range_end = 420.0
+	_cars.visibility_range_end = 620.0
+	_cars.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var rail_mat := StandardMaterial3D.new()
 	rail_mat.albedo_color = Color("#5a5e66")
 	rail_mat.metallic = 0.6
