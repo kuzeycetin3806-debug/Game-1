@@ -1,0 +1,23 @@
+{
+  "name": "sehir-nefes-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Text backend for Şehir Nefes Alıyor: newspaper articles and citizen letters via the Anthropic API.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261030.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.156.0"
+  }
+}

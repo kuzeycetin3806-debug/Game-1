@@ -1,0 +1,27 @@
+# Cloudflare Worker for Şehir Nefes Alıyor text generation.
+# Setup (once):
+#   npx wrangler kv namespace create RATE
+#   npx wrangler kv namespace create CACHE
+#   -> paste the printed ids below
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#   npx wrangler deploy
+name = "sehir-nefes-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Model is configurable without a code change.
+MODEL = "claude-opus-5-5"
+# Requests per device per UTC day (newspapers + letters).
+DAILY_LIMIT = "60"
+# Seconds a generated text is cached for an identical request.
+CACHE_TTL = "2592000"
+
+[[kv_namespaces]]
+binding = "RATE"
+id = "REPLACE_WITH_RATE_NAMESPACE_ID"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "REPLACE_WITH_CACHE_NAMESPACE_ID"
