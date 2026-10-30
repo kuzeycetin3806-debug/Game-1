@@ -1,0 +1,20 @@
+{
+  "id": "notifications",
+  "version": 1,
+  "_comment": "Yerel bildirim kuralları. Uygulama arka plana geçince şehir horizon_hours ileri simüle edilir; öncelik puanı yüksek anlar seçilir. Sessiz saatlerdeki anlar quiet_end_minute'a kaydırılır.",
+  "horizon_hours": 24,
+  "max_per_day": 3,
+  "min_gap_minutes": 180,
+  "quiet_start_minute": 1320,
+  "quiet_end_minute": 480,
+  "morning_paper_minute": 510,
+  "priority": {
+    "population_milestone": 80,
+    "letter_received": 70,
+    "policy_took_effect": 65,
+    "big_building_completed": 60,
+    "story_min_importance": 55,
+    "traffic_jam": 45,
+    "morning_paper": 35
+  }
+}

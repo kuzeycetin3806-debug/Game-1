@@ -17,6 +17,10 @@ var catching_up: bool = false
 ## Set when the last load had to fall back to the backup file.
 var recovered_from_backup: bool = false
 
+## Local notifications planned when the app goes to the background.
+var notifier: LocalNotifier = LocalNotifier.for_platform()
+var notification_rules: Dictionary = {}
+
 var _job: CatchUpJob
 var _task_id: int = -1
 var _ticks_since_save: int = 0
@@ -24,6 +28,8 @@ var _ticks_since_save: int = 0
 
 func _ready() -> void:
 	content = ContentDb.load_default()
+	var rules: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/config/notifications.json"))
+	notification_rules = rules if rules is Dictionary else {}
 	if not content.is_valid():
 		for e: String in content.errors:
 			push_error(e)
@@ -173,7 +179,38 @@ func save_now() -> void:
 
 func _notification(what: int) -> void:
 	match what:
-		NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_WM_CLOSE_REQUEST:
+		NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_WM_CLOSE_REQUEST:
+			save_now()
+			schedule_notifications()
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			save_now()
 		NOTIFICATION_APPLICATION_RESUMED:
+			notifier.cancel_all()
 			begin_catch_up()
+
+
+## Forecasts the next hours on a clone and schedules the few moments worth a ping.
+## Returns what was scheduled (for tests and the debug panel).
+func schedule_notifications() -> Array[Dictionary]:
+	notifier.cancel_all()
+	if sim == null or catching_up or not Settings.notifications:
+		return []
+	if not notifier.permission_requested:
+		notifier.request_permission()
+	var plan: Array[Dictionary] = NotificationPlanner.plan(sim.clone(), notification_rules)
+	for n: Dictionary in plan:
+		notifier.schedule(int(n.at_unix), tr("NOTIF_TITLE"), notification_text(n))
+	return plan
+
+
+func notification_text(n: Dictionary) -> String:
+	var args: Array = []
+	for a: Variant in n.get("args", []):
+		var s: String = String(a)
+		if s.begins_with("story."):
+			s = String(TextService.writer().story_text({"key": s, "count": 1, "vars": {}}, 0).title)
+		elif s.begins_with("BLD_") or s.begins_with("POL_"):
+			s = tr(s)
+		args.append(s)
+	var tmpl: String = tr(String(n.key))
+	return tmpl % args if not args.is_empty() else tmpl

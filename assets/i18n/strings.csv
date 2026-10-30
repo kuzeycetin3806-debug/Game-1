@@ -134,3 +134,11 @@ UI_ON,Açık,On
 UI_OFF,Kapalı,Off
 UI_ABOUT,Sürüm %s · Nefeskent,Version %s · Nefeskent
 UI_QUALITY_LOWERED,Akıcılık için grafik kalitesi düşürüldü,Graphics lowered for smoother play
+NOTIF_TITLE,Nefeskent,Nefeskent
+NOTIF_MILESTONE,Nüfus %s oldu! Şehir seni kutlamak istiyor.,Population hit %s! The city wants to celebrate.
+NOTIF_LETTER,%s sana bir mektup yazdı.,%s wrote you a letter.
+NOTIF_POLICY,%s yürürlüğe girdi. Etkilerini gör.,%s is now in effect. See how it lands.
+NOTIF_BUILDING,%s açıldı. Kurdeleyi kesmeye gel!,%s just opened. Come cut the ribbon!
+NOTIF_STORY,Gazetede manşet: %s,Front page: %s
+NOTIF_TRAFFIC,Trafik kilitlendi; vatandaşlar sabırsız.,Traffic is gridlocked; people are restless.
+NOTIF_PAPER,Sabah gazeten kapında.,Your morning paper is here.
