@@ -70,3 +70,20 @@ UI_RECOVERED,Kayıt yedekten kurtarıldı,Save restored from backup
 ERR_CITY_BUSY,Şehir hâlâ uyanıyor,The city is still waking up
 ERR_BAD_TIME_SHIFT,Geçersiz zaman kayması,Invalid time shift
 EVT_CLOCK_REBASED,Saat geri alınmış; şehir yeni saate uydu,The clock went back; the city adjusted
+POL_BIKE_LANES,Bisiklet Yolları,Bike Lanes
+POL_BIKE_LANES_DESC,"Ana caddelere korumalı bisiklet şeritleri. Trafik azalır, hava temizlenir.","Protected bike lanes on main streets. Less traffic, cleaner air."
+POL_FREE_TRANSIT,Ücretsiz Toplu Taşıma,Free Transit
+POL_FREE_TRANSIT_DESC,Otobüs ve metro bedava. Pahalı ama herkes sever.,"Buses and metro for free. Pricey, but loved."
+POL_TAX_RELIEF,Vergi İndirimi,Tax Relief
+POL_TAX_RELIEF_DESC,"Gelir düşer, gönüller kabarır; şehre taşınmak cazipleşir.","Less income, happier hearts; moving here gets tempting."
+POL_TAX_HIKE,Vergi Artışı,Tax Hike
+POL_TAX_HIKE_DESC,"Kasa dolar, yüzler asılır.","The coffers fill, the faces fall."
+POL_GREEN_ROOFS,Yeşil Çatı Desteği,Green Roof Grants
+POL_GREEN_ROOFS_DESC,Çatılara bahçe hibesi. Etkisi bir haftada görülür.,Grants for rooftop gardens. Takes a week to show.
+POL_NIGHT_MARKET,Gece Pazarı,Night Market
+POL_NIGHT_MARKET_DESC,"Akşamları tezgâhlar, müzik ve kokoreç kokusu.","Evening stalls, music and the smell of street food."
+ERR_UNKNOWN_POLICY,Bilinmeyen karar,Unknown policy
+ERR_POLICY_ACTIVE,Bu karar zaten yürürlükte,Already in effect
+ERR_POLICY_NOT_ACTIVE,Bu karar yürürlükte değil,Not in effect
+ERR_POLICY_CONFLICT,Yürürlükteki bir kararla çelişiyor,Conflicts with an active policy
+ERR_POLICY_TOO_SMALL,Şehir bunun için henüz küçük,The city is too small for this

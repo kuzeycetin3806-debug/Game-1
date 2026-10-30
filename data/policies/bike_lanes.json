@@ -1,0 +1,14 @@
+{
+  "id": "bike_lanes",
+  "version": 1,
+  "name_key": "POL_BIKE_LANES",
+  "desc_key": "POL_BIKE_LANES_DESC",
+  "setup_cost": 30000,
+  "cost_per_day": 200,
+  "delay_hours": 72,
+  "effects": {
+    "traffic_relief": 120,
+    "happiness": 15,
+    "pollution": -10
+  }
+}

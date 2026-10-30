@@ -1,0 +1,28 @@
+{
+  "id": "autumn_leaves",
+  "version": 1,
+  "category": "nature",
+  "importance": 20,
+  "weight": 22,
+  "check": "daily",
+  "cooldown_days": 10,
+  "conditions": {
+    "season": [
+      "autumn"
+    ],
+    "has_building": {
+      "category:park": 1
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 15,
+      "hours": 24
+    }
+  ],
+  "vars": {
+    "district": "greenest"
+  }
+}

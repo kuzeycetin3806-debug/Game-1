@@ -1,0 +1,33 @@
+{
+  "id": "park_concert",
+  "version": 1,
+  "category": "culture",
+  "importance": 40,
+  "weight": 25,
+  "check": "daily",
+  "cooldown_days": 8,
+  "conditions": {
+    "weekdays": [
+      6,
+      7
+    ],
+    "weather": [
+      "clear",
+      "cloudy"
+    ],
+    "has_building": {
+      "category:park": 1
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 35,
+      "hours": 24
+    }
+  ],
+  "vars": {
+    "district": "greenest"
+  }
+}

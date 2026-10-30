@@ -1,0 +1,31 @@
+{
+  "id": "jam_complaints",
+  "version": 1,
+  "category": "traffic",
+  "importance": 45,
+  "weight": 35,
+  "check": "daily",
+  "cooldown_days": 7,
+  "conditions": {
+    "min": {
+      "traffic": 550
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": -30,
+      "hours": 48
+    },
+    {
+      "type": "follow_up",
+      "event": "bike_lane_petition",
+      "hours": 48,
+      "chance": 500
+    }
+  ],
+  "vars": {
+    "district": "busiest"
+  }
+}

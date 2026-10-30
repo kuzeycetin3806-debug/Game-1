@@ -1,0 +1,22 @@
+{
+  "id": "default_weather",
+  "version": 1,
+  "_comment": "Hava 6 saatlik dilimlerle değişir. persistence: önceki havanın sürme olasılığı (binde). Etkiler değiştirici olarak sistemlere eklenir.",
+  "block_hours": 6,
+  "persistence_permille": 620,
+  "seasons": {
+    "spring": { "clear": 40, "cloudy": 30, "rain": 25, "fog": 5 },
+    "summer": { "clear": 66, "cloudy": 18, "rain": 9, "storm": 7 },
+    "autumn": { "clear": 25, "cloudy": 30, "rain": 30, "fog": 15 },
+    "winter": { "clear": 20, "cloudy": 30, "rain": 14, "fog": 11, "snow": 25 }
+  },
+  "effects": {
+    "clear": { "happiness": 15 },
+    "cloudy": {},
+    "rain": { "traffic_demand": 150, "happiness": -20 },
+    "storm": { "traffic_demand": 260, "happiness": -55 },
+    "fog": { "traffic_demand": 90, "happiness": -5 },
+    "snow": { "traffic_demand": 320, "happiness": 10 }
+  },
+  "notable": ["storm", "snow", "fog"]
+}

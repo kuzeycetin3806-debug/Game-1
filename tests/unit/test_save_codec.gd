@@ -107,3 +107,15 @@ func test_meta_roundtrips_without_affecting_hash() -> void:
 	var r: Dictionary = SaveCodec.decode(_roundtrip(SaveCodec.encode(sim, 1, "0.1.0", {"read_tick": 42})), SimFixture.content())
 	assert_true(r.ok)
 	assert_eq(int(r.meta.read_tick), 42)
+
+
+func test_v2_fixture_still_loads() -> void:
+	# Frozen v2 save (M4). Never regenerate; write a migration instead.
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/saves/v2_city.json"))
+	assert_true(d is Dictionary, "fixture missing")
+	var r: Dictionary = SaveCodec.decode(d as Dictionary, SimFixture.content())
+	assert_true(r.ok, r.error)
+	var sim: Simulation = r.sim
+	assert_true(sim.state.policies.has("night_market"))
+	assert_ne(sim.state.weather_block, -1)
+	assert_true(sim.verify_replay())

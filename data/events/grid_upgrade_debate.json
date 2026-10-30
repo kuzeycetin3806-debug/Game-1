@@ -1,0 +1,14 @@
+{
+  "id": "grid_upgrade_debate",
+  "version": 1,
+  "category": "civic",
+  "importance": 30,
+  "weight": 1,
+  "check": "follow_up",
+  "cooldown_days": 0,
+  "conditions": {},
+  "effects": [],
+  "vars": {
+    "district": "random_built"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "bike_lane_petition",
+  "version": 1,
+  "category": "civic",
+  "importance": 40,
+  "weight": 1,
+  "check": "follow_up",
+  "cooldown_days": 0,
+  "conditions": {
+    "policies_none": [
+      "bike_lanes"
+    ]
+  },
+  "effects": [
+    {
+      "type": "flag",
+      "name": "petition_bike_lanes"
+    }
+  ],
+  "vars": {
+    "district": "busiest"
+  }
+}

@@ -11,6 +11,7 @@ func _initialize() -> void:
 		sim.step()
 	sim.apply_command(PlaceBuildingCommand.create("cafe", Vector2i(25, 25)))
 	sim.apply_command(PlaceBuildingCommand.create("pocket_park", Vector2i(26, 25)))
+	sim.apply_command(ChoosePolicyCommand.create("night_market", true))
 	for i: int in 300:
 		sim.step()
 	var path: String = "res://tests/fixtures/saves/v%d_city.json" % SaveMigrations.CURRENT

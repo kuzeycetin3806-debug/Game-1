@@ -1,0 +1,25 @@
+{
+  "id": "first_snow",
+  "version": 1,
+  "category": "nature",
+  "importance": 60,
+  "weight": 40,
+  "check": "daily",
+  "cooldown_days": 60,
+  "conditions": {
+    "season": [
+      "winter"
+    ],
+    "weather": [
+      "snow"
+    ]
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 30,
+      "hours": 24
+    }
+  ]
+}

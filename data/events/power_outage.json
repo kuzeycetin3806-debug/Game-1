@@ -1,0 +1,35 @@
+{
+  "id": "power_outage",
+  "version": 1,
+  "category": "mishap",
+  "importance": 50,
+  "weight": 8,
+  "check": "daily",
+  "cooldown_days": 25,
+  "conditions": {
+    "min": {
+      "buildings": 25
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": -35,
+      "hours": 12
+    },
+    {
+      "type": "money",
+      "amount": -6000
+    },
+    {
+      "type": "follow_up",
+      "event": "grid_upgrade_debate",
+      "hours": 24,
+      "chance": 600
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

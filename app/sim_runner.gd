@@ -25,6 +25,10 @@ func _ready() -> void:
 	if not content.is_valid():
 		for e: String in content.errors:
 			push_error(e)
+	# Tests drive the runner themselves; no background catch-up racing them.
+	if OS.get_environment("SEHIR_TEST") == "1":
+		_found_city(1)
+		return
 	load_or_create()
 
 

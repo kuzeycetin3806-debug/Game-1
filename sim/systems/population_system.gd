@@ -3,14 +3,14 @@ extends RefCounted
 ## Residents drift towards a target set by housing and happiness.
 
 
-static func target(capacity: int, happiness: int, content: ContentDb) -> int:
+static func target(capacity: int, happiness: int, content: ContentDb, attractiveness: int = 0) -> int:
 	var floor_pm: int = content.bal_int("population.vacancy_floor_permille", 450)
-	var fill: int = floor_pm + (SimConfig.PERMILLE - floor_pm) * happiness / SimConfig.PERMILLE
+	var fill: int = clampi(floor_pm + (SimConfig.PERMILLE - floor_pm) * happiness / SimConfig.PERMILLE + attractiveness, 0, SimConfig.PERMILLE)
 	return capacity * fill / SimConfig.PERMILLE
 
 
-static func step(state: SimState, agg: CityAggregates, content: ContentDb, rng: SimRng) -> void:
-	var tgt: int = target(agg.residents_capacity, state.happiness, content)
+static func step(state: SimState, agg: CityAggregates, content: ContentDb, rng: SimRng, mods: Dictionary = {}) -> void:
+	var tgt: int = target(agg.residents_capacity, state.happiness, content, int(mods.get("attractiveness", 0)))
 	var diff: int = tgt - state.population
 	var divisor: int = maxi(content.bal_int("population.move_divisor", 96), 1)
 	var delta: int = diff / divisor

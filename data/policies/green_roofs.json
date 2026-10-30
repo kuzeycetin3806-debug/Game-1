@@ -1,0 +1,13 @@
+{
+  "id": "green_roofs",
+  "version": 1,
+  "name_key": "POL_GREEN_ROOFS",
+  "desc_key": "POL_GREEN_ROOFS_DESC",
+  "setup_cost": 20000,
+  "cost_per_day": 300,
+  "delay_hours": 168,
+  "effects": {
+    "pollution": -25,
+    "happiness": 10
+  }
+}

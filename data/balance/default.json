@@ -92,5 +92,11 @@
     5000,
     10000,
     25000
-  ]
+  ],
+  "events": {
+    "_comment": "Olay yuvaları: her saat başı ve her gün daily_hour'da bir zar atılır.",
+    "daily_hour": 9,
+    "daily_chance_permille": 850,
+    "hourly_chance_permille": 90
+  }
 }

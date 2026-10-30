@@ -1,0 +1,30 @@
+{
+  "id": "pothole_season",
+  "version": 1,
+  "category": "traffic",
+  "importance": 30,
+  "weight": 18,
+  "check": "daily",
+  "cooldown_days": 9,
+  "conditions": {
+    "season": [
+      "winter",
+      "spring"
+    ]
+  },
+  "effects": [
+    {
+      "type": "money",
+      "amount": -2500
+    },
+    {
+      "type": "modifier",
+      "stat": "traffic_demand",
+      "amount": 60,
+      "hours": 48
+    }
+  ],
+  "vars": {
+    "district": "busiest"
+  }
+}

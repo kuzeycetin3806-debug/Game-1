@@ -1,0 +1,46 @@
+{
+  "id": "street_festival",
+  "version": 1,
+  "category": "culture",
+  "importance": 65,
+  "weight": 30,
+  "check": "daily",
+  "cooldown_days": 12,
+  "conditions": {
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "weather": [
+      "clear",
+      "cloudy"
+    ],
+    "min": {
+      "population": 150
+    },
+    "has_building": {
+      "category:park": 1
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 45,
+      "hours": 36
+    },
+    {
+      "type": "money",
+      "amount": -3000
+    },
+    {
+      "type": "follow_up",
+      "event": "festival_cleanup",
+      "hours": 20,
+      "chance": 700
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

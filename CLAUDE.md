@@ -162,6 +162,10 @@ tools/                yardımcı script'ler (veri doğrulama, determinizm karş�
 - Görsel katmandaki saf hesaplar (güneş, palet, kamera jest matematiği) `static func` olarak yazılır ve birim test edilir.
 - Yorumlar kısa; "neden"i açıklar. Kod tanımlayıcıları İngilizce.
 - Sihirli sayı yok: denge değerleri `data/` veya `SimConfig` içinde.
+- **`sim/` içinde `const` Array/Dictionary yok** (yalnızca yükleme anı doğrulama dosyaları hariç). Godot 4.4.1'de tick
+  başına çalışan statik koddan sabit tipli diziyi dolaşmak yığını bozdu (rastgele "double free"; M4'te bulundu).
+  Yerine `match`, düz sözlük sabiti (literal) veya `SimConfig` int sabitleri. `tests/unit/test_sim_code_rules.gd` denetler.
+- Sınıflar arası enum yerine `SimConfig` int sabitleri (ör. RNG akış kimlikleri `STREAM_*`; numaralar asla değişmez).
 
 ### Test kuralları
 - Her sim sistemi için `tests/unit/test_<sistem>.gd`.

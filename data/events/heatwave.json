@@ -1,0 +1,37 @@
+{
+  "id": "heatwave",
+  "version": 1,
+  "category": "nature",
+  "importance": 55,
+  "weight": 12,
+  "check": "daily",
+  "cooldown_days": 20,
+  "conditions": {
+    "season": [
+      "summer"
+    ],
+    "weather": [
+      "clear"
+    ]
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": -40,
+      "hours": 48
+    },
+    {
+      "type": "modifier",
+      "stat": "traffic_demand",
+      "amount": -80,
+      "hours": 48
+    },
+    {
+      "type": "follow_up",
+      "event": "parks_save_the_day",
+      "hours": 24,
+      "chance": 800
+    }
+  ]
+}

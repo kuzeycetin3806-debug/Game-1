@@ -10,6 +10,7 @@ func _script() -> Dictionary:
 		5: [PlaceBuildingCommand.create("apartment_mid", Vector2i(25, 25))],
 		60: [PlaceBuildingCommand.create("office_mid", Vector2i(25, 19)), PlaceBuildingCommand.create("cafe", Vector2i(27, 25))],
 		200: [PlaceBuildingCommand.create("metro_station", Vector2i(26, 26))],
+		250: [ChoosePolicyCommand.create("night_market", true)],
 		333: [DemolishCommand.create(1)],
 		400: [PlaceBuildingCommand.create("city_park", Vector2i(1, 1))],
 	}

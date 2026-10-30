@@ -1,0 +1,14 @@
+{
+  "id": "night_market",
+  "version": 1,
+  "name_key": "POL_NIGHT_MARKET",
+  "desc_key": "POL_NIGHT_MARKET_DESC",
+  "setup_cost": 8000,
+  "cost_per_day": 150,
+  "delay_hours": 48,
+  "effects": {
+    "income": 40,
+    "happiness": 20,
+    "pollution": 5
+  }
+}

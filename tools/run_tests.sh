@@ -8,4 +8,5 @@ if [ ! -d .godot ]; then
 fi
 # Never let tests touch the real save.
 export SEHIR_SAVE_DIR="user://test_saves"
+export SEHIR_TEST=1
 "$GODOT" --headless --path . -s addons/gut/gut_cmdln.gd -gconfig=res://.gutconfig.json "$@"

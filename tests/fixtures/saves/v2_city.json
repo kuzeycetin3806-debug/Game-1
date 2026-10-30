@@ -1,0 +1,473 @@
+{
+  "city_seed": 424242,
+  "commands": [
+    {
+      "cell": [
+        25,
+        25
+      ],
+      "def": "cafe",
+      "tick": 30,
+      "type": "place_building"
+    },
+    {
+      "cell": [
+        26,
+        25
+      ],
+      "def": "pocket_park",
+      "tick": 30,
+      "type": "place_building"
+    },
+    {
+      "enable": true,
+      "policy": "night_market",
+      "tick": 30,
+      "type": "choose_policy"
+    }
+  ],
+  "events": [
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "cost": 9000,
+        "def": "cafe",
+        "ready_tick": 54
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "cost": 5000,
+        "def": "pocket_park",
+        "ready_tick": 48
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "active_from": 318,
+        "cost": 8000,
+        "policy": "night_market"
+      },
+      "tick": 30,
+      "type": "policy_enacted"
+    },
+    {
+      "data": {
+        "category": "nature",
+        "cause": "",
+        "district": "Zeytinlik",
+        "district_block": "2,3",
+        "id": "autumn_leaves",
+        "importance": 20,
+        "seq": 1,
+        "weather": "fog"
+      },
+      "tick": 36,
+      "type": "story"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park"
+      },
+      "tick": 48,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe"
+      },
+      "tick": 54,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "category": "slice_of_life",
+        "cause": "",
+        "district": "Kestane",
+        "district_block": "3,2",
+        "id": "lost_cat_found",
+        "importance": 15,
+        "seq": 2,
+        "weather": "fog"
+      },
+      "tick": 72,
+      "type": "story"
+    },
+    {
+      "data": {
+        "category": "culture",
+        "cause": "",
+        "district": "Menekşe",
+        "district_block": "4,4",
+        "id": "night_market_buzz",
+        "importance": 25,
+        "seq": 3,
+        "weather": "rain"
+      },
+      "tick": 108,
+      "type": "story"
+    },
+    {
+      "data": {
+        "day": 29,
+        "expense": 23901,
+        "happiness": 755,
+        "income": 3226,
+        "money": 229325,
+        "month": 10,
+        "population": 217,
+        "year": 2025
+      },
+      "tick": 126,
+      "type": "day_started"
+    },
+    {
+      "data": {
+        "category": "economy",
+        "cause": "",
+        "id": "tourists_arrive",
+        "importance": 45,
+        "seq": 4,
+        "weather": "rain"
+      },
+      "tick": 180,
+      "type": "story"
+    },
+    {
+      "data": {
+        "day": 30,
+        "expense": 2240,
+        "happiness": 732,
+        "income": 3931,
+        "money": 231016,
+        "month": 10,
+        "population": 214,
+        "year": 2025
+      },
+      "tick": 270,
+      "type": "day_started"
+    },
+    {
+      "data": {
+        "policy": "night_market"
+      },
+      "tick": 318,
+      "type": "policy_took_effect"
+    },
+    {
+      "data": {
+        "category": "economy",
+        "cause": "",
+        "district": "Yeldeğirmeni",
+        "district_block": "1,2",
+        "id": "new_bakery",
+        "importance": 30,
+        "seq": 5,
+        "weather": "rain"
+      },
+      "tick": 324,
+      "type": "story"
+    }
+  ],
+  "game_version": "0.1.0",
+  "last_tick": 330,
+  "last_wall_time": 1761807600,
+  "meta": {
+
+  },
+  "save_version": 2,
+  "state": {
+    "block_traffic": {
+      "1,2": 25,
+      "2,2": 114,
+      "3,2": 22,
+      "4,4": 4
+    },
+    "buildings": [
+      {
+        "cell": [
+          13,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 1,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 2,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          15,
+          13
+        ],
+        "def": "cafe",
+        "id": 3,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          13
+        ],
+        "def": "office_mid",
+        "id": 4,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          17,
+          13
+        ],
+        "def": "shop_row",
+        "id": 5,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          14
+        ],
+        "def": "house_small",
+        "id": 6,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          14
+        ],
+        "def": "pocket_park",
+        "id": 7,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          15
+        ],
+        "def": "house_small",
+        "id": 8,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          14
+        ],
+        "def": "apartment_green",
+        "id": 9,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          13
+        ],
+        "def": "house_small",
+        "id": 10,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          8,
+          13
+        ],
+        "def": "house_small",
+        "id": 11,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          9,
+          13
+        ],
+        "def": "house_small",
+        "id": 12,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          14
+        ],
+        "def": "house_small",
+        "id": 13,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          10,
+          13
+        ],
+        "def": "cafe",
+        "id": 14,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          19
+        ],
+        "def": "city_park",
+        "id": 15,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          13
+        ],
+        "def": "house_small",
+        "id": 16,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          20,
+          13
+        ],
+        "def": "house_small",
+        "id": 17,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          14
+        ],
+        "def": "shop_row",
+        "id": 18,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe",
+        "id": 19,
+        "placed": 30,
+        "ready": 54
+      },
+      {
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park",
+        "id": 20,
+        "placed": 30,
+        "ready": 48
+      }
+    ],
+    "city_seed": 424242,
+    "cooldowns": {
+      "autumn_leaves": 1476,
+      "lost_cat_found": 792,
+      "new_bakery": 1764,
+      "night_market_buzz": 540,
+      "tourists_arrive": 2196
+    },
+    "day_expense_cents": 93334,
+    "day_income_cents": 170843,
+    "employed": 127,
+    "expense_frac": 0,
+    "flags": {
+
+    },
+    "green": 976,
+    "grid_size": 32,
+    "happiness": 731,
+    "income_frac": 116,
+    "milestone_index": 1,
+    "modifiers": [
+      {
+        "amount": 100,
+        "source": "tourists_arrive",
+        "stat": "income",
+        "until": 612
+      },
+      {
+        "amount": 30,
+        "source": "new_bakery",
+        "stat": "income",
+        "until": 756
+      },
+      {
+        "amount": 10,
+        "source": "new_bakery",
+        "stat": "happiness",
+        "until": 756
+      }
+    ],
+    "money_cents": 23179136,
+    "next_building_id": 21,
+    "pending": [],
+    "policies": {
+      "night_market": {
+        "active_from": 318,
+        "since": 30
+      }
+    },
+    "pollution": 0,
+    "population": 213,
+    "road_every": 6,
+    "start_unix": 1761609600,
+    "story_seq": 5,
+    "tick": 330,
+    "traffic": 83,
+    "traffic_jam_active": false,
+    "utc_offset_s": 10800,
+    "weather": "rain",
+    "weather_block": 81565
+  },
+  "state_hash": 1690166047
+}

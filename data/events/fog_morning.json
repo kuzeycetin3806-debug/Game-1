@@ -1,0 +1,26 @@
+{
+  "id": "fog_morning",
+  "version": 1,
+  "category": "traffic",
+  "importance": 20,
+  "weight": 30,
+  "check": "hourly",
+  "cooldown_days": 4,
+  "conditions": {
+    "weather": [
+      "fog"
+    ],
+    "hour_between": [
+      6,
+      10
+    ]
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "traffic_demand",
+      "amount": 100,
+      "hours": 4
+    }
+  ]
+}

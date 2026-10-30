@@ -1,0 +1,25 @@
+{
+  "id": "parks_save_the_day",
+  "version": 1,
+  "category": "nature",
+  "importance": 35,
+  "weight": 1,
+  "check": "follow_up",
+  "cooldown_days": 0,
+  "conditions": {
+    "has_building": {
+      "category:park": 2
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 25,
+      "hours": 24
+    }
+  ],
+  "vars": {
+    "district": "greenest"
+  }
+}

@@ -9,7 +9,7 @@ func _initialize() -> void:
 		if not JSON.parse_string(FileAccess.get_file_as_string(path)) is Dictionary:
 			errors.append("%s: invalid JSON" % path)
 	if errors.is_empty():
-		print("data OK: %d buildings" % db.buildings.size())
+		print("data OK: %d buildings, %d events, %d policies" % [db.buildings.size(), db.events.size(), db.policies.size()])
 		quit(0)
 	else:
 		for e: String in errors:

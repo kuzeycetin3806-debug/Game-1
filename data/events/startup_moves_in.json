@@ -1,0 +1,34 @@
+{
+  "id": "startup_moves_in",
+  "version": 1,
+  "category": "economy",
+  "importance": 50,
+  "weight": 15,
+  "check": "daily",
+  "cooldown_days": 15,
+  "conditions": {
+    "has_building": {
+      "category:office": 2
+    },
+    "min": {
+      "unemployment": 80
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "income",
+      "amount": 80,
+      "hours": 120
+    },
+    {
+      "type": "modifier",
+      "stat": "attractiveness",
+      "amount": 20,
+      "hours": 120
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

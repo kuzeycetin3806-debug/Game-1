@@ -1,0 +1,35 @@
+{
+  "id": "night_market_buzz",
+  "version": 1,
+  "category": "culture",
+  "importance": 25,
+  "weight": 30,
+  "check": "hourly",
+  "cooldown_days": 3,
+  "conditions": {
+    "policies_all": [
+      "night_market"
+    ],
+    "hour_between": [
+      19,
+      23
+    ]
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "income",
+      "amount": 50,
+      "hours": 4
+    },
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 15,
+      "hours": 4
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

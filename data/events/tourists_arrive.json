@@ -1,0 +1,23 @@
+{
+  "id": "tourists_arrive",
+  "version": 1,
+  "category": "economy",
+  "importance": 45,
+  "weight": 14,
+  "check": "daily",
+  "cooldown_days": 14,
+  "conditions": {
+    "min": {
+      "happiness": 700,
+      "green": 400
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "income",
+      "amount": 100,
+      "hours": 72
+    }
+  ]
+}

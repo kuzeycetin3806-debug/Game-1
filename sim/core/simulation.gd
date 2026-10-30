@@ -3,8 +3,6 @@ extends RefCounted
 ## Deterministic city simulation. Live play and offline catch-up both call
 ## step(); commands are applied between steps and stamped with the tick.
 
-enum Stream { POPULATION = 1, EVENTS = 2, CITIZENS = 3 }
-
 var state: SimState
 var content: ContentDb
 var grid: CityGrid
@@ -114,16 +112,23 @@ func step() -> Array[SimEvent]:
 	if _aggregates_dirty:
 		_refresh_aggregates()
 
+	WeatherSystem.step(state, content, local_s, events)
+	_check_policies(t, events)
+	var mods: Dictionary = ModifierSet.collect(state, content)
+
 	var prev_pop: int = state.population
-	PopulationSystem.step(state, aggregates, content, SimRng.for_tick(state.city_seed, t, Stream.POPULATION))
-	EconomySystem.step(state, aggregates, content)
-	TrafficSystem.step(state, aggregates, content, minute)
-	EnvironmentSystem.step(state, aggregates, content)
-	HappinessSystem.step(state, aggregates, content)
+	PopulationSystem.step(state, aggregates, content, SimRng.for_tick(state.city_seed, t, SimConfig.STREAM_POPULATION), mods)
+	EconomySystem.step(state, aggregates, content, mods)
+	TrafficSystem.step(state, aggregates, content, minute, mods)
+	EnvironmentSystem.step(state, aggregates, content, mods)
+	HappinessSystem.step(state, aggregates, content, mods)
 
 	_check_milestones(t, prev_pop, events)
 	_check_traffic(t, events)
+	# Events see this tick's stats; their effects apply from the next tick on.
+	EventEngine.step(self, local_s, events)
 	state.tick = t + 1
+	ModifierSet.prune(state)
 	_check_day_boundary(t, local_s, events)
 	event_log.append_all(events)
 	return events
@@ -156,6 +161,14 @@ func _complete_construction(t: int, events: Array[SimEvent]) -> void:
 		if b.ready_tick == t and b.placed_tick >= 0:
 			events.append(SimEvent.create("building_completed", t, {"building_id": b.id, "def": b.def_id, "cell": [b.cell.x, b.cell.y]}))
 			_aggregates_dirty = true
+
+
+func _check_policies(t: int, events: Array[SimEvent]) -> void:
+	var ids: Array = state.policies.keys()
+	ids.sort()
+	for id: String in ids:
+		if int(state.policies[id].active_from) == t and int(state.policies[id].since) != t:
+			events.append(SimEvent.create("policy_took_effect", t, {"policy": id}))
 
 
 func _check_milestones(t: int, prev_pop: int, events: Array[SimEvent]) -> void:

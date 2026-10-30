@@ -1,0 +1,29 @@
+{
+  "id": "rainy_cafe_rush",
+  "version": 1,
+  "category": "economy",
+  "importance": 20,
+  "weight": 25,
+  "check": "hourly",
+  "cooldown_days": 3,
+  "conditions": {
+    "weather": [
+      "rain"
+    ],
+    "hour_between": [
+      9,
+      19
+    ],
+    "has_building": {
+      "cafe": 1
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "income",
+      "amount": 60,
+      "hours": 6
+    }
+  ]
+}

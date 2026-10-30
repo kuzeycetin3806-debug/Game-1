@@ -1,0 +1,17 @@
+{
+  "id": "tax_relief",
+  "version": 1,
+  "name_key": "POL_TAX_RELIEF",
+  "desc_key": "POL_TAX_RELIEF_DESC",
+  "setup_cost": 0,
+  "cost_per_day": 0,
+  "delay_hours": 24,
+  "effects": {
+    "income": -150,
+    "happiness": 40,
+    "attractiveness": 30
+  },
+  "conflicts": [
+    "tax_hike"
+  ]
+}

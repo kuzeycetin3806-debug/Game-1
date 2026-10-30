@@ -30,7 +30,28 @@ static func empty_sim(money: int = 1_000_000) -> Simulation:
 	db.balance = c.balance.duplicate(true)
 	db.balance.start_money = money
 	db.map = map
+	db.weather = c.weather
+	db.events = c.events
+	db.event_order = c.event_order
+	db.policies = c.policies
+	db.policy_order = c.policy_order
 	return Simulation.new_game(db, SEED, START_UNIX, UTC_OFFSET)
+
+
+## Same content but with no random events (isolates systems from stories).
+static func quiet_sim() -> Simulation:
+	var sim: Simulation = empty_sim()
+	var db: ContentDb = sim.content
+	var quiet := ContentDb.new()
+	quiet.buildings = db.buildings
+	quiet.building_order = db.building_order
+	quiet.balance = db.balance
+	quiet.map = db.map
+	quiet.weather = db.weather
+	quiet.policies = db.policies
+	quiet.policy_order = db.policy_order
+	sim.content = quiet
+	return sim
 
 
 static func run(sim: Simulation, ticks: int) -> Array[SimEvent]:

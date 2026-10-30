@@ -1,0 +1,29 @@
+{
+  "id": "storm_damage",
+  "version": 1,
+  "category": "mishap",
+  "importance": 60,
+  "weight": 40,
+  "check": "daily",
+  "cooldown_days": 10,
+  "conditions": {
+    "weather": [
+      "storm"
+    ]
+  },
+  "effects": [
+    {
+      "type": "money",
+      "amount": -8000
+    },
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": -20,
+      "hours": 24
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

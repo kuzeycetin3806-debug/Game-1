@@ -15,8 +15,9 @@ static func demand(minute: int, content: ContentDb) -> int:
 	return int((curve[-1] as Array)[1])
 
 
-static func step(state: SimState, agg: CityAggregates, content: ContentDb, minute: int) -> void:
-	var dem: int = demand(minute, content)
+static func step(state: SimState, agg: CityAggregates, content: ContentDb, minute: int, mods: Dictionary = {}) -> void:
+	var dem: int = maxi(demand(minute, content) * (SimConfig.PERMILLE + int(mods.get("traffic_demand", 0))) / SimConfig.PERMILLE, 0)
+	var city_relief: int = clampi(int(mods.get("traffic_relief", 0)), 0, SimConfig.PERMILLE)
 	var cap: int = maxi(content.bal_int("traffic.road_capacity_per_tile", 40) * state.road_every * 2, 1)
 	var follow: int = maxi(content.bal_int("traffic.follow_divisor", 3), 1)
 	var res_fill: int = 0 if agg.residents_capacity == 0 else state.population * SimConfig.PERMILLE / agg.residents_capacity
@@ -38,6 +39,7 @@ static func step(state: SimState, agg: CityAggregates, content: ContentDb, minut
 			+ int(agg.block_work_trips.get(k, 0)) * work_fill / SimConfig.PERMILLE
 		var load: int = trips * dem / SimConfig.PERMILLE
 		load = load * (SimConfig.PERMILLE - int(agg.block_relief.get(k, 0))) / SimConfig.PERMILLE
+		load = load * (SimConfig.PERMILLE - city_relief) / SimConfig.PERMILLE
 		var target: int = clampi(load * SimConfig.PERMILLE / cap, 0, SimConfig.PERMILLE)
 		var cur: int = int(state.block_traffic.get(k, 0))
 		var moved: int = cur + _approach(target - cur, follow)

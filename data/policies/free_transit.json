@@ -1,0 +1,14 @@
+{
+  "id": "free_transit",
+  "version": 1,
+  "name_key": "POL_FREE_TRANSIT",
+  "desc_key": "POL_FREE_TRANSIT_DESC",
+  "setup_cost": 10000,
+  "cost_per_day": 1500,
+  "delay_hours": 24,
+  "effects": {
+    "traffic_relief": 200,
+    "happiness": 25
+  },
+  "min_population": 300
+}

@@ -1,0 +1,31 @@
+{
+  "id": "new_bakery",
+  "version": 1,
+  "category": "economy",
+  "importance": 30,
+  "weight": 20,
+  "check": "daily",
+  "cooldown_days": 10,
+  "conditions": {
+    "has_building": {
+      "category:residential": 4
+    }
+  },
+  "effects": [
+    {
+      "type": "modifier",
+      "stat": "income",
+      "amount": 30,
+      "hours": 72
+    },
+    {
+      "type": "modifier",
+      "stat": "happiness",
+      "amount": 10,
+      "hours": 72
+    }
+  ],
+  "vars": {
+    "district": "random_built"
+  }
+}

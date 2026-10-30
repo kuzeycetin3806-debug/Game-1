@@ -2,7 +2,6 @@ class_name SimClockMath
 extends RefCounted
 ## Integer calendar math for the sim (no Time singleton, no floats).
 
-const MONTH_TO_SEASON: Array[int] = [3, 3, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3] # Jan..Dec
 enum Season { SPRING, SUMMER, AUTUMN, WINTER }
 
 
@@ -34,5 +33,14 @@ static func civil_from_days(z: int) -> Dictionary:
 	return {"year": y + (1 if m <= 2 else 0), "month": m, "day": d}
 
 
+## A match, not a const lookup array: see the "no const containers in sim
+## hot paths" rule in CLAUDE.md (Godot 4.4.1 heap corruption).
 static func season_for_month(month: int) -> int:
-	return MONTH_TO_SEASON[clampi(month, 1, 12) - 1]
+	match clampi(month, 1, 12):
+		3, 4, 5:
+			return Season.SPRING
+		6, 7, 8:
+			return Season.SUMMER
+		9, 10, 11:
+			return Season.AUTUMN
+	return Season.WINTER

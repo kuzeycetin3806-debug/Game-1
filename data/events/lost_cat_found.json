@@ -1,0 +1,22 @@
+{
+  "id": "lost_cat_found",
+  "version": 1,
+  "category": "slice_of_life",
+  "importance": 15,
+  "weight": 8,
+  "check": "hourly",
+  "cooldown_days": 5,
+  "conditions": {
+    "hour_between": [
+      10,
+      20
+    ],
+    "min": {
+      "population": 100
+    }
+  },
+  "effects": [],
+  "vars": {
+    "district": "random_built"
+  }
+}
