@@ -7,6 +7,7 @@ extends SceneTree
 ##   [--away=hours]  close the app, let time pass, reopen (opens the newspaper)
 ##   [--weather=rain|snow|storm|fog|cloudy|clear]  [--policies]  open decisions  [--no-paper]  close any open paper
 ##   [--mailbox]  open the letters list  [--letter]  open the first open letter (use with --away)
+##   [--settings]  [--locale=en]  [--text-scale=0|1|2]
 
 var _out: String = "user://captures"
 var _hours: Array[float] = [9.0, 13.0, 19.0, 23.0]
@@ -25,6 +26,9 @@ var _weather: String = ""
 var _policies: bool = false
 var _close_paper: bool = false
 var _mailbox: String = ""
+var _settings: bool = false
+var _locale: String = ""
+var _text_scale: int = -1
 
 
 func _initialize() -> void:
@@ -59,6 +63,12 @@ func _initialize() -> void:
 			_policies = true
 		elif arg == "--mailbox" or arg == "--letter":
 			_mailbox = arg.trim_prefix("--")
+		elif arg == "--settings":
+			_settings = true
+		elif arg.begins_with("--locale="):
+			_locale = arg.trim_prefix("--locale=")
+		elif arg.begins_with("--text-scale="):
+			_text_scale = int(arg.trim_prefix("--text-scale="))
 		elif arg == "--no-paper":
 			_close_paper = true
 		elif arg == "--drawer":
@@ -75,6 +85,10 @@ func _initialize() -> void:
 func _run() -> void:
 	var settings: Node = root.get_node("Settings")
 	settings.call("set_quality", _quality)
+	if _locale != "":
+		TranslationServer.set_locale(_locale)
+	if _text_scale >= 0:
+		settings.set("text_scale_index", _text_scale)
 	change_scene_to_file("res://scenes/main.tscn")
 	for i: int in 5:
 		await process_frame
@@ -153,6 +167,10 @@ func _run() -> void:
 			if bool(ts.call("backend_idle")):
 				break
 			await process_frame
+		if _settings:
+			(current_scene.find_children("*", "SettingsView", true, false)[0] as Node).call("open")
+			for i: int in 3:
+				await process_frame
 		if _mailbox != "":
 			var mb: Node = current_scene.find_children("*", "MailboxView", true, false)[0]
 			mb.call("open")

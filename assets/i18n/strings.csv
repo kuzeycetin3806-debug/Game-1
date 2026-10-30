@@ -118,3 +118,19 @@ ERR_NO_SUCH_LETTER,Mektup bulunamadı,Letter not found
 ERR_LETTER_CLOSED,Bu mektup zaten kapandı,This letter is closed
 ERR_UNKNOWN_REPLY,Geçersiz cevap,Invalid reply
 UI_MAIL,Posta,Mail
+UI_SETTINGS,Ayarlar,Settings
+UI_LANGUAGE,Dil,Language
+UI_GRAPHICS,Grafik,Graphics
+UI_QUALITY_LOW,Düşük,Low
+UI_QUALITY_MEDIUM,Orta,Medium
+UI_QUALITY_HIGH,Yüksek,High
+UI_TEXT_SIZE,Yazı boyutu,Text size
+UI_TEXT_NORMAL,Normal,Normal
+UI_TEXT_LARGE,Büyük,Large
+UI_TEXT_XLARGE,Çok büyük,Extra large
+UI_HAPTICS,Titreşim,Haptics
+UI_NOTIFICATIONS,Bildirimler,Notifications
+UI_ON,Açık,On
+UI_OFF,Kapalı,Off
+UI_ABOUT,Sürüm %s · Nefeskent,Version %s · Nefeskent
+UI_QUALITY_LOWERED,Akıcılık için grafik kalitesi düşürüldü,Graphics lowered for smoother play

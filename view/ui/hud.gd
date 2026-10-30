@@ -7,6 +7,8 @@ extends Control
 const CATEGORIES: Array[String] = ["all", "residential", "commercial", "office", "park", "transit"]
 const TOAST_SECONDS: float = 2.6
 
+signal settings_requested
+
 var controller: BuildController
 
 var _money: Label
@@ -98,6 +100,13 @@ func _build_stats_bar() -> void:
 	_pop = _stat(row, "UI_POPULATION")
 	_happy = _stat(row, "UI_HAPPINESS")
 	_traffic = _stat(row, "UI_TRAFFIC")
+	var gear := Button.new()
+	gear.text = "⚙"
+	gear.flat = true
+	gear.custom_minimum_size = Vector2(48, 48)
+	gear.add_theme_font_size_override("font_size", 24)
+	gear.pressed.connect(func() -> void: settings_requested.emit())
+	row.add_child(gear)
 
 
 func _stat(parent: Container, caption_key: String) -> Label:
@@ -300,7 +309,16 @@ func _show_idle() -> void:
 		_policies.visible = false
 		_drawer.visible = not _drawer.visible
 		_refresh_cards())
-	row.add_child(build)
+	# Larger text does not fit four buttons in one row: Build gets its own row on top.
+	var two_rows: bool = Settings.text_scale_index > 0
+	if two_rows:
+		_bottom_box.add_child(build)
+		_bottom_box.move_child(build, 0)
+	else:
+		row.add_child(build)
+	var lift: float = -184.0 if two_rows else -112.0
+	_drawer.offset_bottom = lift
+	_policies.offset_bottom = lift
 	var decisions := _side_button(tr("UI_DECISIONS"))
 	decisions.pressed.connect(func() -> void:
 		_drawer.visible = false

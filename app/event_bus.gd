@@ -22,5 +22,8 @@ signal letter_text_updated(letter_id: int)
 ## Backend text for a newspaper edition arrived.
 signal newspaper_text_updated(edition_no: int)
 signal graphics_quality_changed(quality: int)
+signal locale_changed(locale: String)
+signal ui_scale_changed(scale: float)
+signal notification_settings_changed
 signal debug_time_offset_changed(offset_seconds: float)
 @warning_ignore_restore("unused_signal")
