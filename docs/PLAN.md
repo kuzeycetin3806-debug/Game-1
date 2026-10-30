@@ -1,6 +1,6 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ M4 ✅ — sıradaki: M5.**
+Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ M4 ✅ M5 ✅ — sıradaki: M6.**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
@@ -10,6 +10,8 @@ Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 ![M3: 2 gün sonra açılış özeti; 20 gün sonra (14 gün yetiştirildi, gerisi uyku)](images/m3_away.png)
 
 ![M4: gazete, kararlar, yağmur, sis, gece fırtınası](images/m4_paper_weather.png)
+
+![M5: posta kutusu, şablon mektup, backend'den gelen mektup ve gazete (yerel sahte model)](images/m5_letters_ai.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -210,3 +212,27 @@ düşük). Serbest metin istenirse ayrı karar.
   bekler, kendiliğinden açılmaz. Gece yarısı uygulama açıksa bile oyuncuyu bölmez.
 - VARSAYIM: Mektuplar ve vatandaşlar M5'te; gazetedeki alıntılar şimdilik şablon içi anonim seslerdir.
 - Performans: dolu şehirde 14 gün ~0,7 sn (0,35 ms/tick; thread'de).
+
+### M5 (tamamlandı)
+- Vatandaşlar (`sim/citizens`): 11 arketip, Türkçe ad havuzu, kişilik (civic/eco/thrift/social/patience), ilgi alanları,
+  ev mahallesi, ilgi alanına göre değişen ruh hali, kararları hatırlayan sınırlı hafıza (`data/citizens/memory_rules.json`).
+  Nüfusun ~1/10'u, 6–120 kişi; gece yarısı yeni gelenler eklenir, kimse silinmez.
+- Mektuplar: 13 konu (`letter_topics.json`) — koşul + ilgi + ruh hali kimin ne yazacağını belirler; günde en fazla bir
+  mektup, en fazla 4 açık mektup, 72 saatte cevapsız kalırsa küser ve hatırlar. `ReplyLetterCommand` hazır seçeneklerle
+  (etki + ruh hali + hafıza). Kayıt v3 + göç + fixture.
+- Metin: `LetterWriter` (yaşa göre resmî/samimi hitap, hafıza cümlesi, meslekli imza), TR/EN şablonlar; Posta ekranı,
+  HUD'da açık mektup sayacı, canlı oyunda "Yeni mektup" bildirimi.
+- Backend (`backend/`, Cloudflare Worker, TypeScript): `/v1/newspaper`, `/v1/letter`. İstemci sadece yapılandırılmış veri
+  yollar (oyuncu serbest metin yazmaz); zod ile sıkı doğrulama; Anthropic SDK, model ortam değişkeninden
+  (varsayılan `claude-opus-5-5`), `effort: low`, JSON şemalı çıktı, önbelleklenen sabit sistem istemi, `fallbacks: "default"`;
+  çıktı tekrar doğrulanır (uzunluk, bağlantı/işaret yok). Cihaz başına günlük sınır + yanıt önbelleği (KV).
+- İstemci: `TextService` kuyruğu (tek istek, zaman aşımı), metin dil bazında kaydın `meta` alanında; her hata → şablon.
+  Godot ↔ TS sözleşmesi: oyunun gerçek istek gövdeleri `backend/test/fixtures`'ta, vitest doğrular.
+- Doğrulama: 194 Godot testi (sahte HTTP sunucusuyla başarı/502/zaman aşımı/bozuk yanıt), 16 backend testi;
+  gerçek Worker kodu + sahte model ile uçtan uca ekran görüntüsü.
+- Bulunan hata: gazete "tr:1" ile mektup "tr:1" aynı yeniden-deneme anahtarını paylaşıyordu (regresyon testi var).
+- VARSAYIM: Backend adresi yer tutucu ve kapalı (`data/config/backend.json`); yayına alınınca açılır.
+  Mektuplara serbest metin cevap yok. Vatandaşların cinsiyeti tutulmuyor (Türkçe zamir ayrımı yok, ad listesi karışık).
+- VARSAYIM: Göç edilmiş kayıtlar (v1/v2) baştan oynatılamaz; göçten sonra deterministik devam ederler.
+- **Sizin yapmanız gerekenler:** Cloudflare hesabı + `wrangler kv namespace create` ×2 + `wrangler secret put
+  ANTHROPIC_API_KEY` + `wrangler deploy`; sonra Worker adresini `backend.json`'a yazıp `enabled: true`. Ayrıntı: `backend/README.md`.

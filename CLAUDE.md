@@ -99,6 +99,10 @@ Yeni autoload eklemek **mimari değişikliktir** → önce sor.
 - Yeni olay = `data/events/<id>.json` + her iki dilde `story.<id>` gazete şablonu; yeni karar = `data/policies/<id>.json`
   + `POL_<ID>`/`POL_<ID>_DESC`. Format ve kurallar: [`docs/events.md`](docs/events.md).
 - Gazete metni sim'i etkilemez; baskılar kaydın `meta` alanında veri olarak saklanır, okunurken yazıya dökülür.
+- Vatandaş verisi `data/citizens/` (arketip, ad, mektup konuları, hafıza kuralları). Yeni mektup konusu = `letter_topics.json`
+  + her iki dilde `letters_<dil>.json` içinde konu şablonu ve tüm seçenek etiketleri (test eder).
+- Yapay zekâ metni yalnızca yazıdır: oynanış (seçenekler, etkiler) her zaman veriden gelir. İstemci backend'e serbest
+  metin göndermez; istek gövdesi `app/text/AiPayloads` ↔ `backend/src/schemas.ts` sözleşmesine uyar.
 
 ### 2.6 Kayıt
 
@@ -211,6 +215,12 @@ godot --headless --path . -s tools/make_save_fixture.gd
 # Yetiştirme özeti görüntüsü: şehri kur, 50 saat "uygulama kapalı", yeniden aç
 xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/capture.gd -- --out=/tmp/shots --hours=10 --away=50
 
+# Backend sözleşme fixture'ları (AiPayloads veya backend şeması değişince)
+SEHIR_TEST=1 godot --headless --path . -s tools/make_backend_fixtures.gd
+
+# Oyunu yerel sahte backend'e bağla (anahtar/ağ gerekmez)
+(cd backend && npm run fake) & SEHIR_BACKEND_URL=http://127.0.0.1:8787 godot --path .
+
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd
 
@@ -220,7 +230,8 @@ godot --headless --path . --export-release "iOS" build/ios/sehir.ipa
 
 # Backend
 cd backend && npm install && npx wrangler dev       # yerel
-cd backend && npm test                              # birim testleri
+cd backend && npm test                              # birim + sözleşme testleri
+cd backend && npm run typecheck
 cd backend && npx wrangler secret put ANTHROPIC_API_KEY
 cd backend && npx wrangler deploy
 ```
