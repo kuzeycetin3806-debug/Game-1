@@ -35,8 +35,7 @@ static func fire(sim: Simulation, id: String, local_s: int, rng: SimRng, cause: 
 	var def: Dictionary = sim.content.events[id]
 	s.story_seq += 1
 	var vars: Dictionary = resolve_vars(sim, def, rng)
-	for raw: Variant in def.get("effects", []):
-		_apply_effect(sim, def, raw as Dictionary, rng, vars)
+	apply_effects(sim, String(def.id), def.get("effects", []), rng)
 	var cooldown_days: int = int(def.get("cooldown_days", 0))
 	if cooldown_days > 0:
 		s.cooldowns[id] = s.tick + cooldown_days * SimConfig.TICKS_PER_DAY
@@ -220,11 +219,17 @@ static func _fire_due_follow_ups(sim: Simulation, local_s: int, rng: SimRng, eve
 			fire(sim, id, local_s, rng, String(p.cause), events)
 
 
-static func _apply_effect(sim: Simulation, def: Dictionary, eff: Dictionary, rng: SimRng, _vars: Dictionary) -> void:
+## Applies an effect list (events, letter replies). `source` tags modifiers and follow-ups.
+static func apply_effects(sim: Simulation, source: String, effects: Array, rng: SimRng) -> void:
+	for raw: Variant in effects:
+		_apply_effect(sim, source, raw as Dictionary, rng)
+
+
+static func _apply_effect(sim: Simulation, source: String, eff: Dictionary, rng: SimRng) -> void:
 	var s: SimState = sim.state
 	match String(eff.type):
 		"modifier":
-			s.modifiers.append({"source": String(def.id), "stat": String(eff.stat), "amount": int(eff.amount),
+			s.modifiers.append({"source": source, "stat": String(eff.stat), "amount": int(eff.amount),
 				"until": s.tick + int(eff.hours) * SimConfig.TICKS_PER_DAY / 24})
 		"money":
 			var cents: int = int(eff.amount) * SimConfig.CENTS
@@ -241,7 +246,7 @@ static func _apply_effect(sim: Simulation, def: Dictionary, eff: Dictionary, rng
 			if rng.chance_permille(int(eff.get("chance", 1000))):
 				s.story_seq += 1
 				s.pending.append({"tick": s.tick + int(eff.hours) * SimConfig.TICKS_PER_DAY / 24, "event": String(eff.event),
-					"cause": String(def.id), "seq": s.story_seq})
+					"cause": source, "seq": s.story_seq})
 				s.pending.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 					return int(a.tick) < int(b.tick) or (int(a.tick) == int(b.tick) and int(a.seq) < int(b.seq)))
 

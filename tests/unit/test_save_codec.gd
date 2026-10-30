@@ -118,4 +118,20 @@ func test_v2_fixture_still_loads() -> void:
 	var sim: Simulation = r.sim
 	assert_true(sim.state.policies.has("night_market"))
 	assert_ne(sim.state.weather_block, -1)
+	# A migrated save continues deterministically, but cannot be replayed from
+	# its seed under newer rules (v3 founds citizens at tick 0). See verify_save.gd.
+	var twin: Simulation = (SaveCodec.decode(d as Dictionary, SimFixture.content()).sim) as Simulation
+	SimFixture.run(sim, 300)
+	SimFixture.run(twin, 300)
+	assert_eq(sim.state.hash(), twin.state.hash())
+
+
+func test_v3_fixture_loads_and_replays() -> void:
+	# Frozen v3 save (M5: citizens and letters). Never regenerate.
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/saves/v3_city.json"))
+	assert_true(d is Dictionary, "fixture missing")
+	var r: Dictionary = SaveCodec.decode(d as Dictionary, SimFixture.content())
+	assert_true(r.ok, r.error)
+	var sim: Simulation = r.sim
+	assert_gt(sim.state.citizens.size(), 0)
 	assert_true(sim.verify_replay())

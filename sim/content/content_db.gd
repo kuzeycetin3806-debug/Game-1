@@ -9,6 +9,7 @@ const MAP_PATH: String = "res://data/maps/nefeskent.json"
 const WEATHER_PATH: String = "res://data/environment/weather.json"
 const EVENTS_DIR: String = "res://data/events"
 const POLICIES_DIR: String = "res://data/policies"
+const CITIZENS_DIR: String = "res://data/citizens"
 
 var buildings: Dictionary = {} # id -> BuildingDef
 var building_order: Array[String] = [] # stable order for UI and iteration
@@ -19,6 +20,8 @@ var events: Dictionary = {} # id -> validated event dictionary
 var event_order: Array[String] = []
 var policies: Dictionary = {} # id -> validated policy dictionary
 var policy_order: Array[String] = []
+## {archetypes: Array, names: {first, last}, topics: Array, memory_rules: Array}; empty = no citizens.
+var citizens: Dictionary = {}
 var errors: Array[String] = []
 
 
@@ -42,6 +45,15 @@ static func from_dicts(building_dicts: Array, balance_dict: Dictionary, map_dict
 	db.weather = extra.get("weather", {})
 	db._add_records(extra.get("events", []), db.events, db.event_order, EventSchema.validate)
 	db._add_records(extra.get("policies", []), db.policies, db.policy_order, PolicySchema.validate)
+	var cit: Dictionary = extra.get("citizens", {})
+	if not cit.is_empty():
+		db.errors.append_array(CitizenSchema.validate(cit, EventSchema.validate))
+		db.citizens = {
+			"archetypes": SimJson.ints((cit.archetypes as Dictionary).get("archetypes", [])),
+			"names": cit.names,
+			"topics": SimJson.ints((cit.topics as Dictionary).get("topics", [])),
+			"memory_rules": SimJson.ints((cit.get("memory_rules", {}) as Dictionary).get("rules", [])),
+		}
 	db._validate_cross_refs()
 	return db
 
@@ -71,6 +83,12 @@ static func load_default() -> ContentDb:
 		"weather": weather_v if weather_v is Dictionary else {},
 		"events": _read_dir(EVENTS_DIR, dir_errors),
 		"policies": _read_dir(POLICIES_DIR, dir_errors),
+		"citizens": {
+			"archetypes": _read_json(CITIZENS_DIR.path_join("archetypes.json")),
+			"names": _read_json(CITIZENS_DIR.path_join("names_tr.json")),
+			"topics": _read_json(CITIZENS_DIR.path_join("letter_topics.json")),
+			"memory_rules": _read_json(CITIZENS_DIR.path_join("memory_rules.json")),
+		},
 	}
 	var db: ContentDb = from_dicts(dicts, balance_v if balance_v is Dictionary else {}, map_v if map_v is Dictionary else {}, extra)
 	if not weather_v is Dictionary:

@@ -1,0 +1,1324 @@
+{
+  "city_seed": 424242,
+  "commands": [
+    {
+      "cell": [
+        25,
+        25
+      ],
+      "def": "cafe",
+      "tick": 30,
+      "type": "place_building"
+    },
+    {
+      "cell": [
+        26,
+        25
+      ],
+      "def": "pocket_park",
+      "tick": 30,
+      "type": "place_building"
+    },
+    {
+      "enable": true,
+      "policy": "night_market",
+      "tick": 30,
+      "type": "choose_policy"
+    }
+  ],
+  "events": [
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "cost": 9000,
+        "def": "cafe",
+        "ready_tick": 54
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "cost": 5000,
+        "def": "pocket_park",
+        "ready_tick": 48
+      },
+      "tick": 30,
+      "type": "building_placed"
+    },
+    {
+      "data": {
+        "active_from": 318,
+        "cost": 8000,
+        "policy": "night_market"
+      },
+      "tick": 30,
+      "type": "policy_enacted"
+    },
+    {
+      "data": {
+        "category": "nature",
+        "cause": "",
+        "district": "Zeytinlik",
+        "district_block": "2,3",
+        "id": "autumn_leaves",
+        "importance": 20,
+        "seq": 1,
+        "weather": "fog"
+      },
+      "tick": 36,
+      "type": "story"
+    },
+    {
+      "data": {
+        "citizen": 16,
+        "letter_id": 1,
+        "topic": "happy_citizen"
+      },
+      "tick": 42,
+      "type": "letter_received"
+    },
+    {
+      "data": {
+        "building_id": 20,
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park"
+      },
+      "tick": 48,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "building_id": 19,
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe"
+      },
+      "tick": 54,
+      "type": "building_completed"
+    },
+    {
+      "data": {
+        "category": "slice_of_life",
+        "cause": "",
+        "district": "Kestane",
+        "district_block": "3,2",
+        "id": "lost_cat_found",
+        "importance": 15,
+        "seq": 2,
+        "weather": "fog"
+      },
+      "tick": 72,
+      "type": "story"
+    },
+    {
+      "data": {
+        "category": "culture",
+        "cause": "",
+        "district": "Menekşe",
+        "district_block": "4,4",
+        "id": "night_market_buzz",
+        "importance": 25,
+        "seq": 3,
+        "weather": "rain"
+      },
+      "tick": 108,
+      "type": "story"
+    },
+    {
+      "data": {
+        "day": 29,
+        "expense": 23901,
+        "happiness": 755,
+        "income": 3226,
+        "money": 229325,
+        "month": 10,
+        "population": 217,
+        "year": 2025
+      },
+      "tick": 126,
+      "type": "day_started"
+    },
+    {
+      "data": {
+        "category": "economy",
+        "cause": "",
+        "id": "tourists_arrive",
+        "importance": 45,
+        "seq": 4,
+        "weather": "rain"
+      },
+      "tick": 180,
+      "type": "story"
+    },
+    {
+      "data": {
+        "day": 30,
+        "expense": 2240,
+        "happiness": 732,
+        "income": 3931,
+        "money": 231016,
+        "month": 10,
+        "population": 214,
+        "year": 2025
+      },
+      "tick": 270,
+      "type": "day_started"
+    },
+    {
+      "data": {
+        "policy": "night_market"
+      },
+      "tick": 318,
+      "type": "policy_took_effect"
+    },
+    {
+      "data": {
+        "category": "economy",
+        "cause": "",
+        "district": "Yeldeğirmeni",
+        "district_block": "1,2",
+        "id": "new_bakery",
+        "importance": 30,
+        "seq": 5,
+        "weather": "rain"
+      },
+      "tick": 324,
+      "type": "story"
+    }
+  ],
+  "game_version": "0.1.0",
+  "last_tick": 330,
+  "last_wall_time": 1761807600,
+  "meta": {
+
+  },
+  "save_version": 3,
+  "state": {
+    "block_traffic": {
+      "1,2": 25,
+      "2,2": 114,
+      "3,2": 22,
+      "4,4": 4
+    },
+    "buildings": [
+      {
+        "cell": [
+          13,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 1,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          13
+        ],
+        "def": "apartment_mid",
+        "id": 2,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          15,
+          13
+        ],
+        "def": "cafe",
+        "id": 3,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          13
+        ],
+        "def": "office_mid",
+        "id": 4,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          17,
+          13
+        ],
+        "def": "shop_row",
+        "id": 5,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          14
+        ],
+        "def": "house_small",
+        "id": 6,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          14,
+          14
+        ],
+        "def": "pocket_park",
+        "id": 7,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          15
+        ],
+        "def": "house_small",
+        "id": 8,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          16,
+          14
+        ],
+        "def": "apartment_green",
+        "id": 9,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          13
+        ],
+        "def": "house_small",
+        "id": 10,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          8,
+          13
+        ],
+        "def": "house_small",
+        "id": 11,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          9,
+          13
+        ],
+        "def": "house_small",
+        "id": 12,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          7,
+          14
+        ],
+        "def": "house_small",
+        "id": 13,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          10,
+          13
+        ],
+        "def": "cafe",
+        "id": 14,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          13,
+          19
+        ],
+        "def": "city_park",
+        "id": 15,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          13
+        ],
+        "def": "house_small",
+        "id": 16,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          20,
+          13
+        ],
+        "def": "house_small",
+        "id": 17,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          19,
+          14
+        ],
+        "def": "shop_row",
+        "id": 18,
+        "placed": -1,
+        "ready": 0
+      },
+      {
+        "cell": [
+          25,
+          25
+        ],
+        "def": "cafe",
+        "id": 19,
+        "placed": 30,
+        "ready": 54
+      },
+      {
+        "cell": [
+          26,
+          25
+        ],
+        "def": "pocket_park",
+        "id": 20,
+        "placed": 30,
+        "ready": 48
+      }
+    ],
+    "citizens": [
+      {
+        "age": 26,
+        "archetype": "barista",
+        "first": "Tolga",
+        "home_block": "3,2",
+        "id": 1,
+        "interests": [
+          "cafes",
+          "culture",
+          "cycling"
+        ],
+        "joined_tick": 0,
+        "last": "Toprak",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 63,
+        "occupation": "OCC_BARISTA",
+        "traits": {
+          "civic": 49,
+          "eco": 43,
+          "patience": 61,
+          "social": 75,
+          "thrift": 30
+        }
+      },
+      {
+        "age": 50,
+        "archetype": "nurse",
+        "first": "Rıza",
+        "home_block": "3,2",
+        "id": 2,
+        "interests": [
+          "commute",
+          "quiet",
+          "transit"
+        ],
+        "joined_tick": 0,
+        "last": "Eren",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": -15
+          }
+        ],
+        "mood": 64,
+        "occupation": "OCC_NURSE",
+        "traits": {
+          "civic": 85,
+          "eco": 60,
+          "patience": 80,
+          "social": 53,
+          "thrift": 71
+        }
+      },
+      {
+        "age": 72,
+        "archetype": "retiree_gardener",
+        "first": "Ilgın",
+        "home_block": "2,2",
+        "id": 3,
+        "interests": [
+          "parks",
+          "environment",
+          "quiet"
+        ],
+        "joined_tick": 0,
+        "last": "Özkan",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": -15
+          }
+        ],
+        "mood": 68,
+        "occupation": "OCC_RETIREE",
+        "traits": {
+          "civic": 46,
+          "eco": 66,
+          "patience": 78,
+          "social": 40,
+          "thrift": 79
+        }
+      },
+      {
+        "age": 26,
+        "archetype": "founder",
+        "first": "Elif",
+        "home_block": "3,2",
+        "id": 4,
+        "interests": [
+          "business",
+          "transit",
+          "cafes"
+        ],
+        "joined_tick": 0,
+        "last": "Sezer",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 69,
+        "occupation": "OCC_FOUNDER",
+        "traits": {
+          "civic": 63,
+          "eco": 31,
+          "patience": 30,
+          "social": 75,
+          "thrift": 25
+        }
+      },
+      {
+        "age": 63,
+        "archetype": "shop_owner",
+        "first": "Melis",
+        "home_block": "1,2",
+        "id": 5,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Çetin",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 49,
+          "eco": 40,
+          "patience": 21,
+          "social": 85,
+          "thrift": 82
+        }
+      },
+      {
+        "age": 43,
+        "archetype": "shop_owner",
+        "first": "Kaan",
+        "home_block": "3,2",
+        "id": 6,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Güneş",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 41,
+          "eco": 60,
+          "patience": 38,
+          "social": 61,
+          "thrift": 64
+        }
+      },
+      {
+        "age": 30,
+        "archetype": "barista",
+        "first": "Mehmet",
+        "home_block": "1,2",
+        "id": 7,
+        "interests": [
+          "cafes",
+          "culture",
+          "cycling"
+        ],
+        "joined_tick": 0,
+        "last": "Güneş",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 63,
+        "occupation": "OCC_BARISTA",
+        "traits": {
+          "civic": 20,
+          "eco": 62,
+          "patience": 62,
+          "social": 95,
+          "thrift": 23
+        }
+      },
+      {
+        "age": 19,
+        "archetype": "barista",
+        "first": "Bora",
+        "home_block": "2,2",
+        "id": 8,
+        "interests": [
+          "cafes",
+          "culture",
+          "cycling"
+        ],
+        "joined_tick": 0,
+        "last": "Özkan",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 63,
+        "occupation": "OCC_BARISTA",
+        "traits": {
+          "civic": 29,
+          "eco": 44,
+          "patience": 46,
+          "social": 95,
+          "thrift": 41
+        }
+      },
+      {
+        "age": 40,
+        "archetype": "young_parent",
+        "first": "Burak",
+        "home_block": "1,2",
+        "id": 9,
+        "interests": [
+          "kids",
+          "parks",
+          "quiet"
+        ],
+        "joined_tick": 0,
+        "last": "Uçar",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": -15
+          }
+        ],
+        "mood": 68,
+        "occupation": "OCC_PARENT",
+        "traits": {
+          "civic": 61,
+          "eco": 82,
+          "patience": 48,
+          "social": 75,
+          "thrift": 65
+        }
+      },
+      {
+        "age": 40,
+        "archetype": "nurse",
+        "first": "Yusuf",
+        "home_block": "1,2",
+        "id": 10,
+        "interests": [
+          "commute",
+          "quiet",
+          "transit"
+        ],
+        "joined_tick": 0,
+        "last": "Sezer",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": -15
+          }
+        ],
+        "mood": 64,
+        "occupation": "OCC_NURSE",
+        "traits": {
+          "civic": 68,
+          "eco": 60,
+          "patience": 52,
+          "social": 66,
+          "thrift": 57
+        }
+      },
+      {
+        "age": 20,
+        "archetype": "student",
+        "first": "Tolga",
+        "home_block": "2,2",
+        "id": 11,
+        "interests": [
+          "culture",
+          "transit",
+          "environment"
+        ],
+        "joined_tick": 0,
+        "last": "Koç",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 76,
+        "occupation": "OCC_STUDENT",
+        "traits": {
+          "civic": 41,
+          "eco": 78,
+          "patience": 55,
+          "social": 68,
+          "thrift": 46
+        }
+      },
+      {
+        "age": 53,
+        "archetype": "shop_owner",
+        "first": "Emre",
+        "home_block": "3,2",
+        "id": 12,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Bulut",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 75,
+          "eco": 25,
+          "patience": 37,
+          "social": 51,
+          "thrift": 94
+        }
+      },
+      {
+        "age": 67,
+        "archetype": "retired_teacher",
+        "first": "Serkan",
+        "home_block": "3,2",
+        "id": 13,
+        "interests": [
+          "parks",
+          "culture",
+          "kids"
+        ],
+        "joined_tick": 0,
+        "last": "Korkmaz",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 76,
+        "occupation": "OCC_RETIRED_TEACHER",
+        "traits": {
+          "civic": 64,
+          "eco": 51,
+          "patience": 68,
+          "social": 46,
+          "thrift": 52
+        }
+      },
+      {
+        "age": 48,
+        "archetype": "shop_owner",
+        "first": "Damla",
+        "home_block": "1,2",
+        "id": 14,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Özdemir",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 79,
+          "eco": 47,
+          "patience": 28,
+          "social": 65,
+          "thrift": 91
+        }
+      },
+      {
+        "age": 24,
+        "archetype": "student",
+        "first": "Çağlar",
+        "home_block": "1,2",
+        "id": 15,
+        "interests": [
+          "culture",
+          "transit",
+          "environment"
+        ],
+        "joined_tick": 0,
+        "last": "Bayram",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 76,
+        "occupation": "OCC_STUDENT",
+        "traits": {
+          "civic": 44,
+          "eco": 63,
+          "patience": 57,
+          "social": 60,
+          "thrift": 20
+        }
+      },
+      {
+        "age": 76,
+        "archetype": "retiree_gardener",
+        "first": "Defne",
+        "home_block": "2,2",
+        "id": 16,
+        "interests": [
+          "parks",
+          "environment",
+          "quiet"
+        ],
+        "joined_tick": 0,
+        "last": "Uçar",
+        "last_letter_tick": 42,
+        "letters_sent": 1,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": -15
+          }
+        ],
+        "mood": 68,
+        "occupation": "OCC_RETIREE",
+        "traits": {
+          "civic": 49,
+          "eco": 83,
+          "patience": 92,
+          "social": 55,
+          "thrift": 91
+        }
+      },
+      {
+        "age": 58,
+        "archetype": "shop_owner",
+        "first": "Ela",
+        "home_block": "3,2",
+        "id": 17,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Özdemir",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 41,
+          "eco": 21,
+          "patience": 27,
+          "social": 57,
+          "thrift": 94
+        }
+      },
+      {
+        "age": 54,
+        "archetype": "artist",
+        "first": "Buse",
+        "home_block": "1,2",
+        "id": 18,
+        "interests": [
+          "culture",
+          "parks",
+          "cafes"
+        ],
+        "joined_tick": 0,
+        "last": "Coşkun",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 79,
+        "occupation": "OCC_ARTIST",
+        "traits": {
+          "civic": 44,
+          "eco": 69,
+          "patience": 48,
+          "social": 64,
+          "thrift": 20
+        }
+      },
+      {
+        "age": 41,
+        "archetype": "shop_owner",
+        "first": "Pınar",
+        "home_block": "3,2",
+        "id": 19,
+        "interests": [
+          "business",
+          "budget",
+          "traffic"
+        ],
+        "joined_tick": 0,
+        "last": "Bulut",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 75,
+        "occupation": "OCC_SHOP_OWNER",
+        "traits": {
+          "civic": 49,
+          "eco": 33,
+          "patience": 53,
+          "social": 84,
+          "thrift": 78
+        }
+      },
+      {
+        "age": 35,
+        "archetype": "artist",
+        "first": "Zeynep",
+        "home_block": "3,2",
+        "id": 20,
+        "interests": [
+          "culture",
+          "parks",
+          "cafes"
+        ],
+        "joined_tick": 0,
+        "last": "Yılmaz",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "building_placed",
+            "ref": "pocket_park",
+            "tick": 30,
+            "valence": 15
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 79,
+        "occupation": "OCC_ARTIST",
+        "traits": {
+          "civic": 64,
+          "eco": 55,
+          "patience": 59,
+          "social": 53,
+          "thrift": 45
+        }
+      },
+      {
+        "age": 31,
+        "archetype": "founder",
+        "first": "Levent",
+        "home_block": "2,2",
+        "id": 21,
+        "interests": [
+          "business",
+          "transit",
+          "cafes"
+        ],
+        "joined_tick": 0,
+        "last": "Sezer",
+        "last_letter_tick": -100000,
+        "letters_sent": 0,
+        "memory": [
+          {
+            "kind": "building_placed",
+            "ref": "cafe",
+            "tick": 30,
+            "valence": 10
+          },
+          {
+            "kind": "policy_enacted",
+            "ref": "night_market",
+            "tick": 30,
+            "valence": 15
+          }
+        ],
+        "mood": 69,
+        "occupation": "OCC_FOUNDER",
+        "traits": {
+          "civic": 51,
+          "eco": 47,
+          "patience": 18,
+          "social": 62,
+          "thrift": 31
+        }
+      }
+    ],
+    "city_seed": 424242,
+    "cooldowns": {
+      "autumn_leaves": 1476,
+      "lost_cat_found": 792,
+      "new_bakery": 1764,
+      "night_market_buzz": 540,
+      "tourists_arrive": 2196
+    },
+    "day_expense_cents": 93334,
+    "day_income_cents": 170843,
+    "employed": 127,
+    "expense_frac": 0,
+    "flags": {
+
+    },
+    "green": 976,
+    "grid_size": 32,
+    "happiness": 731,
+    "income_frac": 116,
+    "letters": [
+      {
+        "citizen": 16,
+        "district": "Çınaraltı",
+        "id": 1,
+        "memory": {
+          "kind": "policy_enacted",
+          "ref": "night_market",
+          "tick": 30,
+          "valence": -15
+        },
+        "reply": "",
+        "reply_tick": -1,
+        "status": "open",
+        "tick": 42,
+        "tone": "thanks",
+        "topic": "happy_citizen"
+      }
+    ],
+    "milestone_index": 1,
+    "modifiers": [
+      {
+        "amount": 100,
+        "source": "tourists_arrive",
+        "stat": "income",
+        "until": 612
+      },
+      {
+        "amount": 30,
+        "source": "new_bakery",
+        "stat": "income",
+        "until": 756
+      },
+      {
+        "amount": 10,
+        "source": "new_bakery",
+        "stat": "happiness",
+        "until": 756
+      }
+    ],
+    "money_cents": 23179136,
+    "next_building_id": 21,
+    "next_citizen_id": 22,
+    "next_letter_id": 2,
+    "pending": [],
+    "policies": {
+      "night_market": {
+        "active_from": 318,
+        "since": 30
+      }
+    },
+    "pollution": 0,
+    "population": 213,
+    "road_every": 6,
+    "start_unix": 1761609600,
+    "story_seq": 5,
+    "tick": 330,
+    "traffic": 83,
+    "traffic_jam_active": false,
+    "utc_offset_s": 10800,
+    "weather": "rain",
+    "weather_block": 81565
+  },
+  "state_hash": 708739176
+}

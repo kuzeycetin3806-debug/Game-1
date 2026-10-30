@@ -1,0 +1,578 @@
+{
+  "id": "letter_topics",
+  "version": 1,
+  "_comment": "Mektup konuları. interests: yazabilecek vatandaşın ilgi alanlarından en az biri. conditions: olay koşullarıyla aynı biçim. mood: [min,max] yazar ruh hali. options: oyuncunun hazır cevapları; effects olay etkileriyle aynı biçim, mood: yazarın ruh haline etki, memory: hafızaya yazılan değer.",
+  "topics": [
+    {
+      "id": "traffic_complaint",
+      "tone": "complaint",
+      "weight": 30,
+      "interests": [
+        "traffic",
+        "commute"
+      ],
+      "conditions": {
+        "min": {
+          "traffic": 350
+        }
+      },
+      "mood": [
+        -100,
+        20
+      ],
+      "options": [
+        {
+          "id": "promise_transit",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 8,
+              "hours": 24
+            }
+          ],
+          "mood": 15,
+          "memory": 10
+        },
+        {
+          "id": "ask_patience",
+          "effects": [],
+          "mood": -5,
+          "memory": -5
+        },
+        {
+          "id": "suggest_bike",
+          "effects": [],
+          "mood": 5,
+          "memory": 3
+        }
+      ]
+    },
+    {
+      "id": "park_request",
+      "tone": "request",
+      "weight": 25,
+      "interests": [
+        "parks",
+        "kids",
+        "environment"
+      ],
+      "conditions": {
+        "max": {
+          "green": 500
+        }
+      },
+      "mood": [
+        -100,
+        60
+      ],
+      "options": [
+        {
+          "id": "promise_park",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 6,
+              "hours": 24
+            }
+          ],
+          "mood": 15,
+          "memory": 8
+        },
+        {
+          "id": "explain_budget",
+          "effects": [],
+          "mood": -2,
+          "memory": 0
+        }
+      ]
+    },
+    {
+      "id": "park_thanks",
+      "tone": "thanks",
+      "weight": 20,
+      "interests": [
+        "parks",
+        "kids",
+        "environment"
+      ],
+      "conditions": {
+        "has_building": {
+          "category:park": 2
+        }
+      },
+      "mood": [
+        0,
+        100
+      ],
+      "options": [
+        {
+          "id": "thank_back",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 4,
+              "hours": 12
+            }
+          ],
+          "mood": 10,
+          "memory": 6
+        },
+        {
+          "id": "invite_planting",
+          "effects": [
+            {
+              "type": "money",
+              "amount": -1500
+            },
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 12,
+              "hours": 48
+            }
+          ],
+          "mood": 20,
+          "memory": 12
+        }
+      ]
+    },
+    {
+      "id": "job_worry",
+      "tone": "complaint",
+      "weight": 20,
+      "interests": [
+        "business",
+        "budget"
+      ],
+      "conditions": {
+        "min": {
+          "unemployment": 120
+        }
+      },
+      "mood": [
+        -100,
+        30
+      ],
+      "options": [
+        {
+          "id": "promise_jobs",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "attractiveness",
+              "amount": -5,
+              "hours": 48
+            }
+          ],
+          "mood": 10,
+          "memory": 6
+        },
+        {
+          "id": "explain_growth",
+          "effects": [],
+          "mood": 0,
+          "memory": 0
+        }
+      ]
+    },
+    {
+      "id": "noise_complaint",
+      "tone": "complaint",
+      "weight": 25,
+      "interests": [
+        "quiet",
+        "kids"
+      ],
+      "conditions": {
+        "policies_all": [
+          "night_market"
+        ]
+      },
+      "mood": [
+        -100,
+        40
+      ],
+      "options": [
+        {
+          "id": "quiet_hours",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "income",
+              "amount": -20,
+              "hours": 48
+            },
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 5,
+              "hours": 48
+            }
+          ],
+          "mood": 15,
+          "memory": 8
+        },
+        {
+          "id": "apologize",
+          "effects": [],
+          "mood": 0,
+          "memory": -3
+        }
+      ]
+    },
+    {
+      "id": "budget_worry",
+      "tone": "complaint",
+      "weight": 15,
+      "interests": [
+        "budget",
+        "business"
+      ],
+      "conditions": {
+        "max": {
+          "money": 20000
+        }
+      },
+      "mood": [
+        -100,
+        50
+      ],
+      "options": [
+        {
+          "id": "cut_costs",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": -5,
+              "hours": 48
+            }
+          ],
+          "mood": 10,
+          "memory": 5
+        },
+        {
+          "id": "reassure",
+          "effects": [],
+          "mood": -3,
+          "memory": -2
+        }
+      ]
+    },
+    {
+      "id": "festival_invite",
+      "tone": "invitation",
+      "weight": 15,
+      "interests": [
+        "culture",
+        "cafes"
+      ],
+      "conditions": {
+        "season": [
+          "spring",
+          "summer"
+        ],
+        "min": {
+          "happiness": 550
+        }
+      },
+      "mood": [
+        10,
+        100
+      ],
+      "options": [
+        {
+          "id": "attend",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 15,
+              "hours": 24
+            }
+          ],
+          "mood": 20,
+          "memory": 12
+        },
+        {
+          "id": "decline_politely",
+          "effects": [],
+          "mood": -5,
+          "memory": -3
+        }
+      ]
+    },
+    {
+      "id": "bike_lanes_praise",
+      "tone": "thanks",
+      "weight": 30,
+      "interests": [
+        "cycling",
+        "environment",
+        "transit"
+      ],
+      "conditions": {
+        "policies_all": [
+          "bike_lanes"
+        ]
+      },
+      "mood": [
+        0,
+        100
+      ],
+      "options": [
+        {
+          "id": "thank_back",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 4,
+              "hours": 12
+            }
+          ],
+          "mood": 10,
+          "memory": 6
+        },
+        {
+          "id": "ride_together",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 10,
+              "hours": 24
+            }
+          ],
+          "mood": 18,
+          "memory": 10
+        }
+      ]
+    },
+    {
+      "id": "tax_complaint",
+      "tone": "complaint",
+      "weight": 35,
+      "interests": [
+        "budget",
+        "business"
+      ],
+      "conditions": {
+        "policies_all": [
+          "tax_hike"
+        ]
+      },
+      "mood": [
+        -100,
+        30
+      ],
+      "options": [
+        {
+          "id": "explain_taxes",
+          "effects": [],
+          "mood": -3,
+          "memory": -3
+        },
+        {
+          "id": "promise_review",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 6,
+              "hours": 24
+            }
+          ],
+          "mood": 10,
+          "memory": 4
+        }
+      ]
+    },
+    {
+      "id": "cafe_idea",
+      "tone": "request",
+      "weight": 15,
+      "interests": [
+        "cafes",
+        "culture"
+      ],
+      "conditions": {
+        "has_building": {
+          "cafe": 1
+        }
+      },
+      "mood": [
+        0,
+        100
+      ],
+      "options": [
+        {
+          "id": "support_event",
+          "effects": [
+            {
+              "type": "money",
+              "amount": -2000
+            },
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 10,
+              "hours": 48
+            }
+          ],
+          "mood": 18,
+          "memory": 10
+        },
+        {
+          "id": "maybe_later",
+          "effects": [],
+          "mood": -4,
+          "memory": -2
+        }
+      ]
+    },
+    {
+      "id": "snow_day",
+      "tone": "request",
+      "weight": 30,
+      "interests": [
+        "kids",
+        "commute",
+        "traffic"
+      ],
+      "conditions": {
+        "season": [
+          "winter"
+        ],
+        "weather": [
+          "snow"
+        ]
+      },
+      "mood": [
+        -100,
+        100
+      ],
+      "options": [
+        {
+          "id": "clear_roads",
+          "effects": [
+            {
+              "type": "money",
+              "amount": -1500
+            },
+            {
+              "type": "modifier",
+              "stat": "traffic_demand",
+              "amount": -120,
+              "hours": 24
+            }
+          ],
+          "mood": 12,
+          "memory": 8
+        },
+        {
+          "id": "enjoy_snow",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 6,
+              "hours": 24
+            }
+          ],
+          "mood": 5,
+          "memory": 3
+        }
+      ]
+    },
+    {
+      "id": "transit_wish",
+      "tone": "request",
+      "weight": 20,
+      "interests": [
+        "transit",
+        "commute",
+        "environment"
+      ],
+      "conditions": {
+        "min": {
+          "population": 250
+        },
+        "policies_none": [
+          "free_transit"
+        ]
+      },
+      "mood": [
+        -100,
+        100
+      ],
+      "options": [
+        {
+          "id": "promise_metro",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 5,
+              "hours": 24
+            }
+          ],
+          "mood": 12,
+          "memory": 8
+        },
+        {
+          "id": "explain_cost",
+          "effects": [],
+          "mood": -2,
+          "memory": 0
+        }
+      ]
+    },
+    {
+      "id": "happy_citizen",
+      "tone": "thanks",
+      "weight": 12,
+      "interests": [
+        "culture",
+        "parks",
+        "cafes",
+        "quiet",
+        "kids",
+        "business",
+        "traffic",
+        "cycling",
+        "budget",
+        "transit",
+        "environment",
+        "commute"
+      ],
+      "conditions": {
+        "min": {
+          "happiness": 700
+        }
+      },
+      "mood": [
+        40,
+        100
+      ],
+      "options": [
+        {
+          "id": "thank_back",
+          "effects": [
+            {
+              "type": "modifier",
+              "stat": "happiness",
+              "amount": 4,
+              "hours": 12
+            }
+          ],
+          "mood": 8,
+          "memory": 5
+        }
+      ]
+    }
+  ]
+}

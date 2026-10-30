@@ -98,5 +98,20 @@
     "daily_hour": 9,
     "daily_chance_permille": 850,
     "hourly_chance_permille": 90
+  },
+  "citizens": {
+    "_comment": "Adlı vatandaşlar: nüfusun per_residents'ta biri, min/max arası. Mektup: her gün letter_hour'da zar.",
+    "per_residents": 10,
+    "min": 6,
+    "max": 120,
+    "letter_hour": 10,
+    "letter_chance_permille": 650,
+    "max_open_letters": 4,
+    "expire_hours": 72,
+    "memory_size": 6,
+    "mood_follow_divisor": 4,
+    "letter_cooldown_days": 5,
+    "ignored_mood": -12,
+    "ignored_memory": -10
   }
 }

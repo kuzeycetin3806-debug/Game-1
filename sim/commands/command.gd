@@ -40,6 +40,8 @@ static func from_dict(d: Dictionary) -> Command:
 			cmd = DemolishCommand.create(int(d.building_id))
 		"choose_policy":
 			cmd = ChoosePolicyCommand.create(String(d.policy), bool(d.enable))
+		"reply_letter":
+			cmd = ReplyLetterCommand.create(int(d.letter_id), String(d.option))
 		"realign_clock":
 			cmd = RealignClockCommand.create(int(d.shift_seconds))
 		_:

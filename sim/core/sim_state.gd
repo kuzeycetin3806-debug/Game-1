@@ -41,6 +41,13 @@ var modifiers: Array = []
 var policies: Dictionary = {} # policy id -> {since, active_from}
 var story_seq: int = 0 # monotonically increasing id for stories and schedules
 
+# --- since save v3 (M5) ---
+var citizens: Array[Citizen] = []
+var next_citizen_id: int = 1
+## [{id, citizen, topic, tone, tick, status: open|answered|expired, reply, reply_tick, district, memory}]
+var letters: Array = []
+var next_letter_id: int = 1
+
 
 func building_by_id(id: int) -> BuildingInstance:
 	for b: BuildingInstance in buildings:
@@ -65,6 +72,8 @@ func to_dict() -> Dictionary:
 		"weather": weather, "weather_block": weather_block, "flags": flags.duplicate(),
 		"cooldowns": cooldowns.duplicate(), "pending": pending.duplicate(true),
 		"modifiers": modifiers.duplicate(true), "policies": policies.duplicate(true), "story_seq": story_seq,
+		"citizens": citizens.map(func(c: Citizen) -> Dictionary: return c.to_dict()),
+		"next_citizen_id": next_citizen_id, "letters": letters.duplicate(true), "next_letter_id": next_letter_id,
 	}
 
 
@@ -102,6 +111,11 @@ static func from_dict(d: Dictionary) -> SimState:
 	s.modifiers = SimJson.ints(d.modifiers) as Array
 	s.policies = SimJson.ints(d.policies) as Dictionary
 	s.story_seq = int(d.story_seq)
+	for raw: Variant in d.citizens:
+		s.citizens.append(Citizen.from_dict(raw as Dictionary))
+	s.next_citizen_id = int(d.next_citizen_id)
+	s.letters = SimJson.ints(d.letters) as Array
+	s.next_letter_id = int(d.next_letter_id)
 	return s
 
 

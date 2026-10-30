@@ -19,6 +19,10 @@ func _initialize() -> void:
 		quit(1)
 		return
 	var sim: Simulation = r.sim
+	if int(r.migrated_from) < SaveMigrations.CURRENT:
+		print("%s: written as v%d, migrated to v%d; a migrated save cannot be replayed from its seed under newer rules. Skipped." % [path, r.migrated_from, SaveMigrations.CURRENT])
+		quit(0)
+		return
 	var t0: int = Time.get_ticks_msec()
 	var ok: bool = sim.verify_replay()
 	print("%s: tick %d, %d commands, replay %s in %d ms" % [path, sim.state.tick, sim.command_log.size(), "MATCHES" if ok else "DIVERGES", Time.get_ticks_msec() - t0])

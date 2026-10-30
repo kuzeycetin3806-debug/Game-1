@@ -39,6 +39,8 @@ static func new_game(p_content: ContentDb, city_seed: int, start_unix: int, utc_
 	# Start the town already lived-in so the first session is not empty.
 	sim._refresh_aggregates()
 	sim._settle_initial_mood()
+	if not p_content.citizens.is_empty():
+		CitizenSystem.grow(sim, SimRng.for_tick(s.city_seed, 0, SimConfig.STREAM_CITIZENS))
 	return sim
 
 
@@ -92,6 +94,7 @@ func apply_command(cmd: Command) -> Dictionary:
 	if err != "":
 		return {"ok": false, "error": err, "events": [] as Array[SimEvent]}
 	var events: Array[SimEvent] = cmd.apply(self)
+	CitizenSystem.observe(self, events)
 	command_log.append(cmd)
 	event_log.append_all(events)
 	return {"ok": true, "error": "", "events": events}
@@ -127,6 +130,8 @@ func step() -> Array[SimEvent]:
 	_check_traffic(t, events)
 	# Events see this tick's stats; their effects apply from the next tick on.
 	EventEngine.step(self, local_s, events)
+	CitizenSystem.step(self, local_s, events)
+	CitizenSystem.observe(self, events)
 	state.tick = t + 1
 	ModifierSet.prune(state)
 	_check_day_boundary(t, local_s, events)

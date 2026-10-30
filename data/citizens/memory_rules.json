@@ -1,0 +1,217 @@
+{
+  "id": "memory_rules",
+  "version": 1,
+  "_comment": "Hangi olay hangi ilgi alanındaki vatandaşın hafızasına nasıl yazılır. match: olay verisinde eşleşmesi gereken alanlar (policy, category, def, id). valence: + iyi, - kötü hatıra.",
+  "rules": [
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "bike_lanes"
+      },
+      "interests": [
+        "cycling",
+        "environment"
+      ],
+      "valence": 20
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "bike_lanes"
+      },
+      "interests": [
+        "traffic"
+      ],
+      "valence": -5
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "free_transit"
+      },
+      "interests": [
+        "transit",
+        "commute",
+        "environment"
+      ],
+      "valence": 20
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "tax_relief"
+      },
+      "interests": [
+        "budget",
+        "business"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "tax_hike"
+      },
+      "interests": [
+        "budget",
+        "business"
+      ],
+      "valence": -20
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "green_roofs"
+      },
+      "interests": [
+        "environment",
+        "parks"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "night_market"
+      },
+      "interests": [
+        "cafes",
+        "culture",
+        "business"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "policy_enacted",
+      "match": {
+        "policy": "night_market"
+      },
+      "interests": [
+        "quiet"
+      ],
+      "valence": -15
+    },
+    {
+      "event": "policy_repealed",
+      "match": {
+        "policy": "tax_hike"
+      },
+      "interests": [
+        "budget",
+        "business"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "policy_repealed",
+      "match": {
+        "policy": "bike_lanes"
+      },
+      "interests": [
+        "cycling"
+      ],
+      "valence": -20
+    },
+    {
+      "event": "building_placed",
+      "match": {
+        "category": "park"
+      },
+      "interests": [
+        "parks",
+        "kids",
+        "environment"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "building_placed",
+      "match": {
+        "category": "transit"
+      },
+      "interests": [
+        "transit",
+        "commute",
+        "cycling"
+      ],
+      "valence": 15
+    },
+    {
+      "event": "building_placed",
+      "match": {
+        "category": "commercial"
+      },
+      "interests": [
+        "cafes",
+        "business"
+      ],
+      "valence": 10
+    },
+    {
+      "event": "building_placed",
+      "match": {
+        "category": "office"
+      },
+      "interests": [
+        "business"
+      ],
+      "valence": 10
+    },
+    {
+      "event": "building_demolished",
+      "match": {
+        "category": "park"
+      },
+      "interests": [
+        "parks",
+        "kids",
+        "environment"
+      ],
+      "valence": -25
+    },
+    {
+      "event": "building_demolished",
+      "match": {
+        "category": "commercial"
+      },
+      "interests": [
+        "cafes",
+        "business"
+      ],
+      "valence": -10
+    },
+    {
+      "event": "story",
+      "match": {
+        "id": "street_festival"
+      },
+      "interests": [
+        "culture",
+        "cafes"
+      ],
+      "valence": 10
+    },
+    {
+      "event": "story",
+      "match": {
+        "id": "power_outage"
+      },
+      "interests": [
+        "business",
+        "quiet"
+      ],
+      "valence": -10
+    },
+    {
+      "event": "story",
+      "match": {
+        "id": "jam_complaints"
+      },
+      "interests": [
+        "traffic",
+        "commute"
+      ],
+      "valence": -10
+    }
+  ]
+}

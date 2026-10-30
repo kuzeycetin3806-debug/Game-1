@@ -1,0 +1,403 @@
+{
+  "id": "archetypes",
+  "version": 1,
+  "_comment": "Vatandaş arketipleri. traits: 0-100 aralıkları (civic: belediyeye ilgi, eco: çevre, thrift: tutumluluk, social: sosyallik, patience: sabır). interests: mektup konuları ve hafıza kuralları bu etiketlerle eşleşir.",
+  "archetypes": [
+    {
+      "id": "retired_teacher",
+      "occupation_key": "OCC_RETIRED_TEACHER",
+      "weight": 10,
+      "age": [
+        61,
+        79
+      ],
+      "traits": {
+        "civic": [
+          60,
+          95
+        ],
+        "eco": [
+          40,
+          80
+        ],
+        "thrift": [
+          50,
+          90
+        ],
+        "social": [
+          40,
+          80
+        ],
+        "patience": [
+          50,
+          90
+        ]
+      },
+      "interests": [
+        "parks",
+        "culture",
+        "kids"
+      ]
+    },
+    {
+      "id": "barista",
+      "occupation_key": "OCC_BARISTA",
+      "weight": 10,
+      "age": [
+        19,
+        30
+      ],
+      "traits": {
+        "civic": [
+          20,
+          60
+        ],
+        "eco": [
+          40,
+          90
+        ],
+        "thrift": [
+          20,
+          60
+        ],
+        "social": [
+          60,
+          95
+        ],
+        "patience": [
+          30,
+          70
+        ]
+      },
+      "interests": [
+        "cafes",
+        "culture",
+        "cycling"
+      ]
+    },
+    {
+      "id": "cyclist_engineer",
+      "occupation_key": "OCC_ENGINEER",
+      "weight": 8,
+      "age": [
+        25,
+        45
+      ],
+      "traits": {
+        "civic": [
+          40,
+          80
+        ],
+        "eco": [
+          60,
+          95
+        ],
+        "thrift": [
+          40,
+          70
+        ],
+        "social": [
+          30,
+          70
+        ],
+        "patience": [
+          30,
+          60
+        ]
+      },
+      "interests": [
+        "cycling",
+        "traffic",
+        "environment"
+      ]
+    },
+    {
+      "id": "shop_owner",
+      "occupation_key": "OCC_SHOP_OWNER",
+      "weight": 10,
+      "age": [
+        35,
+        65
+      ],
+      "traits": {
+        "civic": [
+          40,
+          80
+        ],
+        "eco": [
+          20,
+          60
+        ],
+        "thrift": [
+          60,
+          95
+        ],
+        "social": [
+          50,
+          85
+        ],
+        "patience": [
+          20,
+          60
+        ]
+      },
+      "interests": [
+        "business",
+        "budget",
+        "traffic"
+      ]
+    },
+    {
+      "id": "student",
+      "occupation_key": "OCC_STUDENT",
+      "weight": 9,
+      "age": [
+        18,
+        24
+      ],
+      "traits": {
+        "civic": [
+          30,
+          80
+        ],
+        "eco": [
+          50,
+          95
+        ],
+        "thrift": [
+          20,
+          60
+        ],
+        "social": [
+          60,
+          95
+        ],
+        "patience": [
+          20,
+          60
+        ]
+      },
+      "interests": [
+        "culture",
+        "transit",
+        "environment"
+      ]
+    },
+    {
+      "id": "young_parent",
+      "occupation_key": "OCC_PARENT",
+      "weight": 10,
+      "age": [
+        28,
+        42
+      ],
+      "traits": {
+        "civic": [
+          50,
+          85
+        ],
+        "eco": [
+          50,
+          85
+        ],
+        "thrift": [
+          50,
+          85
+        ],
+        "social": [
+          40,
+          80
+        ],
+        "patience": [
+          20,
+          60
+        ]
+      },
+      "interests": [
+        "kids",
+        "parks",
+        "quiet"
+      ]
+    },
+    {
+      "id": "taxi_driver",
+      "occupation_key": "OCC_TAXI_DRIVER",
+      "weight": 7,
+      "age": [
+        30,
+        60
+      ],
+      "traits": {
+        "civic": [
+          30,
+          70
+        ],
+        "eco": [
+          10,
+          50
+        ],
+        "thrift": [
+          50,
+          85
+        ],
+        "social": [
+          50,
+          90
+        ],
+        "patience": [
+          10,
+          40
+        ]
+      },
+      "interests": [
+        "traffic",
+        "budget",
+        "commute"
+      ]
+    },
+    {
+      "id": "artist",
+      "occupation_key": "OCC_ARTIST",
+      "weight": 6,
+      "age": [
+        24,
+        55
+      ],
+      "traits": {
+        "civic": [
+          30,
+          70
+        ],
+        "eco": [
+          50,
+          90
+        ],
+        "thrift": [
+          10,
+          50
+        ],
+        "social": [
+          50,
+          90
+        ],
+        "patience": [
+          40,
+          80
+        ]
+      },
+      "interests": [
+        "culture",
+        "parks",
+        "cafes"
+      ]
+    },
+    {
+      "id": "nurse",
+      "occupation_key": "OCC_NURSE",
+      "weight": 8,
+      "age": [
+        26,
+        55
+      ],
+      "traits": {
+        "civic": [
+          50,
+          85
+        ],
+        "eco": [
+          40,
+          70
+        ],
+        "thrift": [
+          50,
+          80
+        ],
+        "social": [
+          50,
+          80
+        ],
+        "patience": [
+          40,
+          80
+        ]
+      },
+      "interests": [
+        "commute",
+        "quiet",
+        "transit"
+      ]
+    },
+    {
+      "id": "founder",
+      "occupation_key": "OCC_FOUNDER",
+      "weight": 5,
+      "age": [
+        26,
+        40
+      ],
+      "traits": {
+        "civic": [
+          40,
+          80
+        ],
+        "eco": [
+          30,
+          70
+        ],
+        "thrift": [
+          20,
+          60
+        ],
+        "social": [
+          60,
+          90
+        ],
+        "patience": [
+          10,
+          40
+        ]
+      },
+      "interests": [
+        "business",
+        "transit",
+        "cafes"
+      ]
+    },
+    {
+      "id": "retiree_gardener",
+      "occupation_key": "OCC_RETIREE",
+      "weight": 7,
+      "age": [
+        63,
+        85
+      ],
+      "traits": {
+        "civic": [
+          40,
+          80
+        ],
+        "eco": [
+          60,
+          95
+        ],
+        "thrift": [
+          60,
+          95
+        ],
+        "social": [
+          30,
+          70
+        ],
+        "patience": [
+          60,
+          95
+        ]
+      },
+      "interests": [
+        "parks",
+        "environment",
+        "quiet"
+      ]
+    }
+  ]
+}

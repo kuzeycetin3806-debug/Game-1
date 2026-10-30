@@ -35,6 +35,7 @@ static func empty_sim(money: int = 1_000_000) -> Simulation:
 	db.event_order = c.event_order
 	db.policies = c.policies
 	db.policy_order = c.policy_order
+	db.citizens = c.citizens
 	return Simulation.new_game(db, SEED, START_UNIX, UTC_OFFSET)
 
 
@@ -50,6 +51,7 @@ static func quiet_sim() -> Simulation:
 	quiet.weather = db.weather
 	quiet.policies = db.policies
 	quiet.policy_order = db.policy_order
+	quiet.citizens = db.citizens
 	sim.content = quiet
 	return sim
 
