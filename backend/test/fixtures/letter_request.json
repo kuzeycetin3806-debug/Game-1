@@ -1,0 +1,43 @@
+{
+  "citizen": {
+    "age": 32,
+    "district": "Yeldeğirmeni",
+    "first": "Zeynep",
+    "interests": [
+      "commute",
+      "quiet",
+      "transit"
+    ],
+    "last": "Toprak",
+    "mood": 89,
+    "occupation": "Hemşire",
+    "traits": {
+      "civic": 85,
+      "eco": 56,
+      "patience": 69,
+      "social": 74,
+      "thrift": 65
+    }
+  },
+  "city": {
+    "date": "",
+    "name": "Nefeskent",
+    "season": "autumn",
+    "stats": {
+      "happiness": 723,
+      "money": 221023,
+      "population": 213,
+      "traffic": 5
+    },
+    "weather": "rain"
+  },
+  "lang": "tr",
+  "letter_id": 6,
+  "options": [
+    "Güzel sözleriniz için teşekkürler"
+  ],
+  "template_body": "Bu sabah kafede otururken etrafa baktım ve gülümsedim. Nefeskent gerçekten nefes alıyor.",
+  "template_subject": "Sadece teşekkür etmek istedim",
+  "tone": "thanks",
+  "topic": "happy_citizen"
+}

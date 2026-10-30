@@ -28,7 +28,13 @@ Then set the Worker URL in the game: `data/config/backend.json` → `"url"` and 
 ## Develop
 
 ```bash
-npm test          # vitest, fake Anthropic client + in-memory KV
+npm test          # vitest, fake Anthropic client + in-memory KV (+ game payload contract)
 npm run typecheck
-npx wrangler dev  # local; put ANTHROPIC_API_KEY in backend/.dev.vars (gitignored)
+npm run fake      # real handler, FAKE model, on :8787 — no key, no network
+npx wrangler dev  # real model locally; put ANTHROPIC_API_KEY in backend/.dev.vars (gitignored)
 ```
+
+Point the game at a local server with `SEHIR_BACKEND_URL=http://127.0.0.1:8787`.
+
+`test/fixtures/*_request.json` are real bodies the game sends; regenerate with
+`godot --headless --path .. -s tools/make_backend_fixtures.gd` after changing either side.

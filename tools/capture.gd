@@ -147,6 +147,12 @@ func _run() -> void:
 				(n as Control).visible = false
 			for i: int in 2:
 				await process_frame
+		# Let backend text (SEHIR_BACKEND_URL) arrive before the shot.
+		var ts: Node = root.get_node("TextService")
+		for i: int in 300:
+			if bool(ts.call("backend_idle")):
+				break
+			await process_frame
 		if _mailbox != "":
 			var mb: Node = current_scene.find_children("*", "MailboxView", true, false)[0]
 			mb.call("open")
@@ -155,6 +161,10 @@ func _run() -> void:
 					if String((raw as Dictionary).status) == "open":
 						mb.call("show_letter", int((raw as Dictionary).id))
 						break
+			for i: int in 300:
+				await process_frame
+				if i > 3 and bool(ts.call("backend_idle")):
+					break
 			for i: int in 3:
 				await process_frame
 		var img: Image = root.get_texture().get_image()

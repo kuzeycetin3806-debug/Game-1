@@ -118,6 +118,7 @@ func show_letter(id: int) -> void:
 	_close.text = tr("UI_BACK")
 	_clear(_list_box)
 	_clear(_letter_box)
+	TextService.request_letter_text(l) # letters from catch-up get their text when first opened
 	var page: Dictionary = TextService.letter_page(l)
 	_letter_box.add_child(_label(String(page.subject), 24, INK, _bold))
 	_letter_box.add_child(_rule())

@@ -9,6 +9,8 @@ const SETTINGS_PATH: String = "user://settings.cfg"
 const DEFAULT_LOCALE: String = "tr"
 
 var locale: String = DEFAULT_LOCALE
+## Random per install; identifies the device to the text backend (rate limit). Not personal data.
+var device_id: String = ""
 
 var graphics_quality: Quality = Quality.MEDIUM:
 	set(value):
@@ -32,13 +34,18 @@ func _load() -> void:
 	else:
 		graphics_quality = int(cfg.get_value("graphics", "quality", _default_quality())) as Quality
 		locale = String(cfg.get_value("general", "locale", DEFAULT_LOCALE))
+		device_id = String(cfg.get_value("general", "device_id", ""))
 	TranslationServer.set_locale(locale)
+	if device_id.length() != 32:
+		device_id = Crypto.new().generate_random_bytes(16).hex_encode()
+		_save()
 
 
 func _save() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("graphics", "quality", graphics_quality)
 	cfg.set_value("general", "locale", locale)
+	cfg.set_value("general", "device_id", device_id)
 	cfg.save(SETTINGS_PATH)
 
 

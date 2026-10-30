@@ -1,0 +1,8 @@
+{
+  "id": "backend",
+  "version": 1,
+  "_comment": "Yapay zekâ metin servisi (backend/). VARSAYIM: yer tutucu adres; Worker yayına alınınca url'yi değiştirip enabled'ı true yapın. Anahtar burada DEĞİL, Worker secret'ındadır. Test/araçlar SEHIR_BACKEND_URL ile ezebilir.",
+  "url": "https://sehir-nefes-api.example.workers.dev",
+  "enabled": false,
+  "timeout_s": 10
+}

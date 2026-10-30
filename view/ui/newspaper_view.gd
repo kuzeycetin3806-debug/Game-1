@@ -72,6 +72,10 @@ func _ready() -> void:
 	bar.add_child(close)
 	_next = _nav_button("›", func() -> void: show_edition(_index + 1))
 	bar.add_child(_next)
+	EventBus.newspaper_text_updated.connect(func(n: int) -> void:
+		var a: Array = TextService.archive()
+		if visible and _index >= 0 and _index < a.size() and int(a[_index].edition) == n:
+			show_edition(_index))
 	EventBus.newspaper_published.connect(func(_ed: Dictionary, auto_open: bool) -> void:
 		if auto_open:
 			open_latest())

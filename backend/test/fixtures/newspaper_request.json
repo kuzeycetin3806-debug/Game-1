@@ -1,0 +1,63 @@
+{
+  "city": {
+    "date": "Sayı 2 · 3 Kasım 2025, Pazartesi",
+    "name": "Nefeskent",
+    "season": "autumn",
+    "stats": {
+      "happiness": 723,
+      "money": 221023,
+      "population": 213,
+      "traffic": 5
+    },
+    "weather": "rain"
+  },
+  "edition": 2,
+  "lang": "tr",
+  "stories": [
+    {
+      "count": 1,
+      "facts": {
+        "policy": "Bisiklet Yolları"
+      },
+      "key": "policy_effect:bike_lanes",
+      "template_body": "Belediyenin hamlesi meyvesini vermeye başladı. Rakamlar önümüzdeki günlerde netleşecek.",
+      "template_title": "Karar sahada: Bisiklet Yolları"
+    },
+    {
+      "count": 1,
+      "facts": {
+
+      },
+      "key": "story.tourists_arrive",
+      "template_body": "\"Böyle huzurlu bir şehir görmedik\" diyen bir turist kartpostal almaya doyamadı.",
+      "template_title": "Yeşil ve mutlu şehir ziyaretçi akınına uğradı"
+    },
+    {
+      "count": 1,
+      "facts": {
+        "building": "Kafe"
+      },
+      "key": "built.commercial",
+      "template_body": "Vitrinler parladı, kapı zilleri çalmaya başladı. Yeni iş imkânları da cabası.",
+      "template_title": "Mahallenin yeni gözdesi: Kafe"
+    },
+    {
+      "count": 1,
+      "facts": {
+        "district": "Menekşe"
+      },
+      "key": "story.new_bakery",
+      "template_body": "Taze ekmek ve poğaça kuyruğu daha ilk gün köşeyi döndü. Esnaf \"Mahalle bizi bağrına bastı\" dedi.",
+      "template_title": "Menekşe Mahallesi'ne yeni fırın açıldı"
+    },
+    {
+      "count": 1,
+      "facts": {
+
+      },
+      "key": "story.rainy_cafe_rush",
+      "template_body": "Islak sokaklar, buğulu camlar ve tıklım tıklım kafeler. Yağmur, şehir ekonomisine beklenmedik bir can suyu oldu.",
+      "template_title": "Şemsiyeler kapıda, herkes içeride"
+    }
+  ]
+}
