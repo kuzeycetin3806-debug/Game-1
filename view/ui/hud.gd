@@ -28,6 +28,8 @@ var _paper_button: Button
 var _paper_dot: Control
 ## Set by main: the newspaper overlay the "Gazete" button opens.
 var newspaper: NewspaperView
+var mailbox: MailboxView
+var _mail_badge: Label
 
 
 func _ready() -> void:
@@ -43,6 +45,9 @@ func _ready() -> void:
 	EventBus.city_changed.connect(_refresh_cards)
 	EventBus.newspaper_published.connect(func(_e: Dictionary, _a: bool) -> void: _refresh_paper_dot())
 	EventBus.newspaper_closed.connect(_refresh_paper_dot)
+	EventBus.mailbox_closed.connect(_refresh_mail_badge)
+	EventBus.city_changed.connect(_refresh_mail_badge)
+	EventBus.tick_advanced.connect(func(_t: int) -> void: _refresh_mail_badge())
 
 
 func bind(p_controller: BuildController) -> void:
@@ -270,8 +275,27 @@ func _show_idle() -> void:
 	_paper_dot.position = Vector2(8, 8)
 	_paper_dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_paper_button.add_child(_paper_dot)
+	var mail := _side_button(tr("UI_MAIL"))
+	mail.pressed.connect(func() -> void:
+		_drawer.visible = false
+		_policies.visible = false
+		if mailbox != null:
+			mailbox.open())
+	row.add_child(mail)
+	_mail_badge = Label.new()
+	_mail_badge.add_theme_font_size_override("font_size", 13)
+	_mail_badge.add_theme_color_override("font_color", Color.WHITE)
+	var badge_bg := StyleBoxFlat.new()
+	badge_bg.bg_color = UiTheme.ACCENT
+	badge_bg.set_corner_radius_all(10)
+	badge_bg.content_margin_left = 6
+	badge_bg.content_margin_right = 6
+	_mail_badge.add_theme_stylebox_override("normal", badge_bg)
+	_mail_badge.position = Vector2(4, 2)
+	_mail_badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mail.add_child(_mail_badge)
 	var build := _big_button(tr("UI_BUILD"), true)
-	build.size_flags_stretch_ratio = 1.6
+	build.size_flags_stretch_ratio = 1.4
 	build.pressed.connect(func() -> void:
 		_policies.visible = false
 		_drawer.visible = not _drawer.visible
@@ -283,12 +307,22 @@ func _show_idle() -> void:
 		_policies.visible = not _policies.visible)
 	row.add_child(decisions)
 	_refresh_paper_dot()
+	_refresh_mail_badge()
 
 
 func _side_button(text: String) -> Button:
 	var b := _big_button(text, false)
-	b.add_theme_font_size_override("font_size", 17)
+	b.add_theme_font_size_override("font_size", 15)
+	b.clip_text = true
 	return b
+
+
+func _refresh_mail_badge() -> void:
+	if _mail_badge == null or not is_instance_valid(_mail_badge) or SimRunner.sim == null:
+		return
+	var n: int = CitizenSystem.open_letters(SimRunner.sim.state)
+	_mail_badge.text = str(n)
+	_mail_badge.visible = n > 0
 
 
 func _refresh_paper_dot() -> void:
@@ -416,6 +450,11 @@ func _on_sim_event(e: RefCounted) -> void:
 			var pol: Dictionary = SimRunner.content.policies.get(String(ev.data.policy), {})
 			if not pol.is_empty():
 				show_toast(tr("EVT_POLICY_TOOK_EFFECT") % tr(String(pol.name_key)))
+		"letter_received":
+			var c: Citizen = CitizenSystem.citizen_by_id(SimRunner.sim.state, int(ev.data.citizen))
+			if c != null:
+				show_toast(tr("EVT_LETTER_RECEIVED") % c.full_name())
+			_refresh_mail_badge()
 		"story":
 			# Live stories: a short teaser; the full text waits for tomorrow's paper.
 			var t: Dictionary = TextService.writer().story_text({"key": "story." + String(ev.data.id), "count": 1, "vars": {"district": String(ev.data.get("district", ""))}}, int(ev.data.seq))

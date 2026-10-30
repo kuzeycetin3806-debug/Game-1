@@ -14,6 +14,9 @@ func _ready() -> void:
 	_ui_root.add_child(CatchUpOverlay.new())
 	_ui_root.add_child(paper)
 	_hud.newspaper = paper
+	var mailbox := MailboxView.new()
+	_ui_root.add_child(mailbox)
+	_hud.mailbox = mailbox
 	if SimRunner.recovered_from_backup:
 		_hud.show_toast(tr("UI_RECOVERED"))
 	if OS.is_debug_build():

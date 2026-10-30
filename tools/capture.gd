@@ -6,6 +6,7 @@ extends SceneTree
 ##   [--zoom=distance] [--focus=cellx,celly] [--prefix=name] [--drawer]  open the build drawer
 ##   [--away=hours]  close the app, let time pass, reopen (opens the newspaper)
 ##   [--weather=rain|snow|storm|fog|cloudy|clear]  [--policies]  open decisions  [--no-paper]  close any open paper
+##   [--mailbox]  open the letters list  [--letter]  open the first open letter (use with --away)
 
 var _out: String = "user://captures"
 var _hours: Array[float] = [9.0, 13.0, 19.0, 23.0]
@@ -23,6 +24,7 @@ var _away_hours: float = 0.0
 var _weather: String = ""
 var _policies: bool = false
 var _close_paper: bool = false
+var _mailbox: String = ""
 
 
 func _initialize() -> void:
@@ -55,6 +57,8 @@ func _initialize() -> void:
 			_weather = arg.trim_prefix("--weather=")
 		elif arg == "--policies":
 			_policies = true
+		elif arg == "--mailbox" or arg == "--letter":
+			_mailbox = arg.trim_prefix("--")
 		elif arg == "--no-paper":
 			_close_paper = true
 		elif arg == "--drawer":
@@ -142,6 +146,16 @@ func _run() -> void:
 			for n: Node in current_scene.find_children("*", "NewspaperView", true, false):
 				(n as Control).visible = false
 			for i: int in 2:
+				await process_frame
+		if _mailbox != "":
+			var mb: Node = current_scene.find_children("*", "MailboxView", true, false)[0]
+			mb.call("open")
+			if _mailbox == "letter":
+				for raw: Variant in sim.state.letters:
+					if String((raw as Dictionary).status) == "open":
+						mb.call("show_letter", int((raw as Dictionary).id))
+						break
+			for i: int in 3:
 				await process_frame
 		var img: Image = root.get_texture().get_image()
 		var path: String = "%s/%s_%05.2f.png" % [_out, _prefix, h]

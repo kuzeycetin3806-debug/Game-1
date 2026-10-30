@@ -16,6 +16,11 @@ signal command_rejected(error_key: String)
 ## A newspaper edition (NewsDesk data) was published; auto_open after an absence.
 signal newspaper_published(edition: Dictionary, auto_open: bool)
 signal newspaper_closed
+signal mailbox_closed
+## Backend text for a letter arrived (or changed); views showing it should redraw.
+signal letter_text_updated(letter_id: int)
+## Backend text for a newspaper edition arrived.
+signal newspaper_text_updated(edition_no: int)
 signal graphics_quality_changed(quality: int)
 signal debug_time_offset_changed(offset_seconds: float)
 @warning_ignore_restore("unused_signal")

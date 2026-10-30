@@ -96,3 +96,25 @@ UI_POLICY_PENDING,%s sonra etkili,In effect in %s
 UI_POLICY_COST,Kurulum %s · Günlük %s,Setup %s · Daily %s
 UI_POLICY_DELAY,Etkisi %s içinde başlar,Takes effect within %s
 EVT_POLICY_TOOK_EFFECT,%s yürürlüğe girdi,%s is now in effect
+OCC_RETIRED_TEACHER,Emekli öğretmen,Retired teacher
+OCC_BARISTA,Barista,Barista
+OCC_ENGINEER,Mühendis,Engineer
+OCC_SHOP_OWNER,Esnaf,Shopkeeper
+OCC_STUDENT,Öğrenci,Student
+OCC_PARENT,Veli,Parent
+OCC_TAXI_DRIVER,Taksici,Taxi driver
+OCC_ARTIST,Ressam,Artist
+OCC_NURSE,Hemşire,Nurse
+OCC_FOUNDER,Girişimci,Founder
+OCC_RETIREE,Emekli,Retiree
+UI_LETTERS,Mektuplar,Letters
+UI_NO_LETTERS,Henüz mektup yok. Şehir sizi tanıdıkça yazacak.,No letters yet. People will write as they get to know you.
+UI_LETTER_OPEN,Cevap bekliyor,Awaiting reply
+UI_LETTER_ANSWERED,Cevaplandı,Answered
+UI_LETTER_EXPIRED,Cevapsız kaldı,Unanswered
+UI_BACK,Geri,Back
+EVT_LETTER_RECEIVED,Yeni mektup: %s,New letter: %s
+ERR_NO_SUCH_LETTER,Mektup bulunamadı,Letter not found
+ERR_LETTER_CLOSED,Bu mektup zaten kapandı,This letter is closed
+ERR_UNKNOWN_REPLY,Geçersiz cevap,Invalid reply
+UI_MAIL,Posta,Mail

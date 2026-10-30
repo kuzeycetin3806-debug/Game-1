@@ -1,0 +1,197 @@
+{
+  "id": "letters_en",
+  "version": 1,
+  "_comment": "English letter templates; missing keys fall back to Turkish.",
+  "greeting": {
+    "formal": [
+      "Dear Mayor,",
+      "Dear Madam or Sir Mayor,"
+    ],
+    "casual": [
+      "Hi Mayor,",
+      "Hello there, Mayor,"
+    ]
+  },
+  "signoff": {
+    "complaint": [
+      "Respectfully,"
+    ],
+    "request": [
+      "Thanks in advance,"
+    ],
+    "thanks": [
+      "Warmly,"
+    ],
+    "invitation": [
+      "Hope to see you,"
+    ]
+  },
+  "signature": "{name}\n{occupation} · {district}",
+  "topics": {
+    "traffic_complaint": {
+      "subject": [
+        "This traffic can't go on"
+      ],
+      "body": [
+        "Every morning I wait for ages at the same junction. Leaving {district} has become an adventure. Can we find a fix?"
+      ]
+    },
+    "park_request": {
+      "subject": [
+        "A park for our kids"
+      ],
+      "body": [
+        "There is no safe green space for children in {district}. Even a small park would change everything."
+      ]
+    },
+    "park_thanks": {
+      "subject": [
+        "Thank you for the parks"
+      ],
+      "body": [
+        "I decided to write to you during my morning walk in the park. The city feels so much greener."
+      ]
+    },
+    "job_worry": {
+      "subject": [
+        "Jobs are getting scarce"
+      ],
+      "body": [
+        "Many people around me are looking for work. Do you have a plan for new workplaces?"
+      ]
+    },
+    "noise_complaint": {
+      "subject": [
+        "The night market and our sleep"
+      ],
+      "body": [
+        "The night market is lovely, but the music until midnight keeps our baby awake. Could there be a time limit?"
+      ]
+    },
+    "budget_worry": {
+      "subject": [
+        "How are the city's finances?"
+      ],
+      "body": [
+        "I read the coffers are nearly empty. Wouldn't a little saving help?"
+      ]
+    },
+    "festival_invite": {
+      "subject": [
+        "You're invited to our street party"
+      ],
+      "body": [
+        "We're throwing a small party in {district}: music, pastries and good company. We'd love to see you."
+      ]
+    },
+    "bike_lanes_praise": {
+      "subject": [
+        "The bike lanes are great!"
+      ],
+      "body": [
+        "I cycle to work now and never wait in traffic. Thank you for the protected lanes!"
+      ]
+    },
+    "tax_complaint": {
+      "subject": [
+        "Taxes are heavy"
+      ],
+      "body": [
+        "The latest tax rise is hard on small businesses. Could it be reviewed?"
+      ]
+    },
+    "cafe_idea": {
+      "subject": [
+        "A poetry night at the café"
+      ],
+      "body": [
+        "We'd like to host a monthly poetry and music night at our local café. A little support would mean a lot."
+      ]
+    },
+    "snow_day": {
+      "subject": [
+        "It snowed — what about the roads?"
+      ],
+      "body": [
+        "The kids are thrilled, but I can't get to work. Will the roads be cleared?"
+      ]
+    },
+    "transit_wish": {
+      "subject": [
+        "Our metro dream"
+      ],
+      "body": [
+        "As the city grows, life without a car gets harder. A metro line would change our lives."
+      ]
+    },
+    "happy_citizen": {
+      "subject": [
+        "Just wanted to say thanks"
+      ],
+      "body": [
+        "No complaints — I'm simply happy living here. Thank you for your work."
+      ]
+    }
+  },
+  "options": {
+    "promise_transit": "We're working on transit",
+    "ask_patience": "Please be patient",
+    "suggest_bike": "Have you tried cycling?",
+    "promise_park": "A park for your area is planned",
+    "explain_budget": "The budget can't stretch yet",
+    "thank_back": "Thank you for your kind words",
+    "invite_planting": "Let's plant trees together (1,500 TL)",
+    "promise_jobs": "We're bringing new jobs",
+    "explain_growth": "Jobs will come as we grow",
+    "quiet_hours": "Let's set night market hours",
+    "apologize": "Sorry for the trouble",
+    "cut_costs": "We'll cut costs",
+    "reassure": "Don't worry, it's under control",
+    "attend": "I'd love to come",
+    "decline_politely": "I can't make it this time",
+    "ride_together": "Let's ride together one Sunday",
+    "explain_taxes": "Taxes build our future",
+    "promise_review": "We'll review the taxes",
+    "support_event": "Let's support it (2,000 TL)",
+    "maybe_later": "Maybe later",
+    "clear_roads": "Send crews to clear the roads (1,500 TL)",
+    "enjoy_snow": "Enjoy the snow",
+    "promise_metro": "A metro plan is on my desk",
+    "explain_cost": "A metro is costly; patience"
+  },
+  "memory": {
+    "policy_enacted": {
+      "pos": [
+        "We still talk about your {policy} decision."
+      ],
+      "neg": [
+        "I still can't accept the {policy} decision."
+      ]
+    },
+    "building_placed": {
+      "pos": [
+        "I was so glad to see the new {building}."
+      ]
+    },
+    "building_demolished": {
+      "neg": [
+        "I was sad when the {building} was demolished."
+      ]
+    },
+    "letter_ignored": {
+      "neg": [
+        "My last letter went unanswered, but I'm writing again."
+      ]
+    },
+    "letter_answered": {
+      "pos": [
+        "I loved that you answered me last time."
+      ],
+      "neg": [
+        "Your last answer didn't quite convince me."
+      ]
+    }
+  },
+  "you_replied": "Your reply: {reply}",
+  "expired": "This letter went unanswered."
+}

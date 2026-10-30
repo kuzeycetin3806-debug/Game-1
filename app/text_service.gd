@@ -12,12 +12,14 @@ const FALLBACK_LANG: String = "tr"
 
 var editorial: Dictionary = {}
 var _templates: Dictionary = {} # lang -> Dictionary
+var _letter_templates: Dictionary = {} # lang -> Dictionary
 
 
 func _ready() -> void:
 	editorial = _read(TEMPLATE_DIR.path_join("editorial.json"))
 	for lang: String in ["tr", "en"]:
 		_templates[lang] = _read(TEMPLATE_DIR.path_join("news_%s.json" % lang))
+		_letter_templates[lang] = _read(TEMPLATE_DIR.path_join("letters_%s.json" % lang))
 	EventBus.catch_up_finished.connect(_on_catch_up_finished)
 	EventBus.sim_event_emitted.connect(_on_sim_event)
 	EventBus.city_loaded.connect(func() -> void: _maybe_first_edition.call_deferred())
@@ -72,6 +74,22 @@ func writer(lang: String = "") -> TemplateWriter:
 		lang = TranslationServer.get_locale().substr(0, 2)
 	var t: Dictionary = _templates.get(lang, _templates[FALLBACK_LANG])
 	return TemplateWriter.create(t, _templates[FALLBACK_LANG], func(k: String) -> String: return TranslationServer.translate(k))
+
+
+## Rendered letter page (template text; M5 backend text replaces subject/body when present).
+func letter_page(letter: Dictionary, lang: String = "") -> Dictionary:
+	var sim: Simulation = SimRunner.sim
+	var c: Citizen = CitizenSystem.citizen_by_id(sim.state, int(letter.citizen))
+	var topic: Dictionary = CitizenSystem.topic_def(sim, String(letter.topic))
+	var page: Dictionary = letter_writer(lang).render(letter, c.to_dict() if c != null else {}, topic.get("options", []))
+	return page
+
+
+func letter_writer(lang: String = "") -> LetterWriter:
+	if lang == "":
+		lang = TranslationServer.get_locale().substr(0, 2)
+	var t: Dictionary = _letter_templates.get(lang, _letter_templates[FALLBACK_LANG])
+	return LetterWriter.create(t, _letter_templates[FALLBACK_LANG], func(k: String) -> String: return TranslationServer.translate(k))
 
 
 func _on_catch_up_finished(s: RefCounted) -> void:

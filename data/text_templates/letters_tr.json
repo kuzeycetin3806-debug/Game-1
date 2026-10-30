@@ -1,0 +1,257 @@
+{
+  "id": "letters_tr",
+  "version": 1,
+  "_comment": "Mektup şablonları. Değişkenler: {name}, {first}, {district}, {occupation}, {building}, {policy}. Varyant seçimi mektup numarasından türetilir.",
+  "greeting": {
+    "formal": [
+      "Sayın Başkanım,",
+      "Değerli Belediye Başkanımız,",
+      "Sayın Başkan,"
+    ],
+    "casual": [
+      "Merhaba Başkan,",
+      "Selam Başkanım,",
+      "Merhaba,"
+    ]
+  },
+  "signoff": {
+    "complaint": [
+      "Saygılarımla,",
+      "Cevabınızı bekliyorum,"
+    ],
+    "request": [
+      "Şimdiden teşekkürler,",
+      "Umutla bekliyorum,"
+    ],
+    "thanks": [
+      "Sevgilerimle,",
+      "Minnetle,"
+    ],
+    "invitation": [
+      "Görüşmek dileğiyle,",
+      "Sizi aramızda görmek isteriz,"
+    ]
+  },
+  "signature": "{name}\n{occupation} · {district} Mahallesi",
+  "topics": {
+    "traffic_complaint": {
+      "subject": [
+        "Bu trafik böyle gitmez",
+        "Kavşakta ömrümüz geçiyor"
+      ],
+      "body": [
+        "Her sabah işe giderken aynı kavşakta dakikalarca bekliyorum. Akşamları da durum farklı değil. {district} Mahallesi'nden çıkmak bir maceraya dönüştü. Bir çözüm bulamaz mıyız?",
+        "Kornalar, egzoz, bitmeyen kuyruk... {district} Mahallesi'nde trafik artık sabrımızı zorluyor. Toplu taşıma ya da başka bir fikir, ne olursa razıyız."
+      ]
+    },
+    "park_request": {
+      "subject": [
+        "Çocuklarımız için bir park",
+        "Biraz yeşil istiyoruz"
+      ],
+      "body": [
+        "{district} Mahallesi'nde çocukların oynayabileceği güvenli bir yeşil alan yok. Küçük bir park bile mahallenin havasını değiştirirdi.",
+        "Balkondan baktığımda betondan başka bir şey göremiyorum. Birkaç ağaç, bir bank, belki bir salıncak... Çok şey mi istiyorum?"
+      ]
+    },
+    "park_thanks": {
+      "subject": [
+        "Parklar için teşekkürler",
+        "Yeşilin hatırına"
+      ],
+      "body": [
+        "Bu sabah parkta yürüyüş yaparken size yazmaya karar verdim. Ağaçların gölgesinde kahvemi içerken şehrin ne kadar güzelleştiğini fark ettim.",
+        "Torunlarımla her akşam parka gidiyoruz. Yüzlerindeki gülümseme için teşekkür etmek istedim."
+      ]
+    },
+    "job_worry": {
+      "subject": [
+        "İş bulmak zorlaştı",
+        "Mahallede işsizlik derdi"
+      ],
+      "body": [
+        "Son aylarda çevremde iş arayan çok kişi var. Gençler şehirden gitmeyi düşünüyor. Yeni işyerleri için bir planınız var mı?",
+        "Dükkânlara gelen müşteri azaldı, iş ilanları da öyle. {district} Mahallesi biraz canlanmaya muhtaç."
+      ]
+    },
+    "noise_complaint": {
+      "subject": [
+        "Gece pazarı ve uykularımız",
+        "Biraz sessizlik lütfen"
+      ],
+      "body": [
+        "Gece pazarının şehre renk kattığını biliyorum ama gece yarısına kadar süren müzik bebeğimizi uyutmuyor. Bir saat sınırı konamaz mı?",
+        "Pazarın kokusu güzel, kalabalığı neşeli; ama sabah erken kalkan biri olarak gecelerimi geri istiyorum."
+      ]
+    },
+    "budget_worry": {
+      "subject": [
+        "Belediye kasası nasıl?",
+        "Bütçe konusunda endişeliyim"
+      ],
+      "body": [
+        "Gazetede okudum, kasada fazla para kalmamış. Vergilerimizin nereye gittiğini merak ediyorum. Biraz tasarruf iyi olmaz mı?",
+        "Bir esnaf olarak hesap kitap bilirim. Şehrin bütçesi beni düşündürüyor; borçla büyümek uzun sürmez."
+      ]
+    },
+    "festival_invite": {
+      "subject": [
+        "Mahalle şenliğine davetlisiniz",
+        "Bu hafta sonu bizimle misiniz?"
+      ],
+      "body": [
+        "{district} Mahallesi'nde küçük bir şenlik düzenliyoruz: müzik, börek ve bol sohbet. Aramızda olursanız çok seviniriz.",
+        "Komşularla birlikte bir sokak şenliği hazırlıyoruz. Başkanımızı da aramızda görmek isteriz!"
+      ]
+    },
+    "bike_lanes_praise": {
+      "subject": [
+        "Bisiklet yolları harika!",
+        "Pedal çevirmek hiç bu kadar keyifli olmamıştı"
+      ],
+      "body": [
+        "Artık işe bisikletle gidiyorum ve trafikte hiç beklemiyorum. Korumalı şeritler için teşekkürler!",
+        "Kızımla hafta sonları bisiklete biniyoruz. Güvenli yollar sayesinde içim rahat."
+      ]
+    },
+    "tax_complaint": {
+      "subject": [
+        "Vergiler ağır geliyor",
+        "Bu vergi artışı neden?"
+      ],
+      "body": [
+        "Son vergi artışı küçük işletmeleri zorluyor. Kira, fatura, şimdi de vergi... Bu yükü nasıl taşıyacağız?",
+        "Belediyenin paraya ihtiyacı olduğunu anlıyorum ama artış bizi zorladı. Bir gözden geçirme mümkün mü?"
+      ]
+    },
+    "cafe_idea": {
+      "subject": [
+        "Kafede şiir akşamı fikri",
+        "Küçük bir kültür önerisi"
+      ],
+      "body": [
+        "Mahallemizdeki kafede ayda bir şiir ve müzik akşamı düzenlemek istiyoruz. Belediyenin küçük bir desteği bizi çok mutlu eder.",
+        "Kafe sahibiyle konuştuk: yerel sanatçılar için bir sergi açabiliriz. Ne dersiniz?"
+      ]
+    },
+    "snow_day": {
+      "subject": [
+        "Kar yağdı, yollar ne olacak?",
+        "Kar tatili mi, kar çilesi mi?"
+      ],
+      "body": [
+        "Sabah kapıyı açtığımda her yer bembeyazdı. Çocuklar sevinçli ama ben işe nasıl gideceğimi bilmiyorum. Yollar açılacak mı?",
+        "Kar güzel ama {district} Mahallesi'nin yokuşları buz pateni pistine döndü. Tuzlama yapılabilir mi?"
+      ]
+    },
+    "transit_wish": {
+      "subject": [
+        "Metro hayalimiz",
+        "Toplu taşıma için bir dilek"
+      ],
+      "body": [
+        "Şehir büyüdükçe arabasız yaşamak zorlaşıyor. Bir metro hattı ya da daha sık otobüs hayatımızı değiştirirdi.",
+        "Her gün aynı yolu arabayla gidiyorum ve suçluluk duyuyorum. Bize güzel bir toplu taşıma seçeneği sunar mısınız?"
+      ]
+    },
+    "happy_citizen": {
+      "subject": [
+        "Sadece teşekkür etmek istedim",
+        "Güzel bir şehirde yaşıyoruz"
+      ],
+      "body": [
+        "Bir şikâyetim yok, sadece şunu söylemek istedim: Bu şehirde yaşamaktan mutluyum. Emekleriniz için teşekkürler.",
+        "Bu sabah kafede otururken etrafa baktım ve gülümsedim. Nefeskent gerçekten nefes alıyor."
+      ]
+    }
+  },
+  "options": {
+    "promise_transit": "Toplu taşıma üzerinde çalışıyoruz",
+    "ask_patience": "Biraz sabır rica ediyorum",
+    "suggest_bike": "Bisikleti denediniz mi?",
+    "promise_park": "Mahallenize bir park düşünüyoruz",
+    "explain_budget": "Bütçe şimdilik el vermiyor",
+    "thank_back": "Güzel sözleriniz için teşekkürler",
+    "invite_planting": "Birlikte fidan dikelim (1.500 TL)",
+    "promise_jobs": "Yeni işyerleri için çalışıyoruz",
+    "explain_growth": "Şehir büyüdükçe iş de gelecek",
+    "quiet_hours": "Gece pazarına saat sınırı koyalım",
+    "apologize": "Rahatsızlık için özür dilerim",
+    "cut_costs": "Giderleri kısacağız",
+    "reassure": "Endişelenmeyin, kontrol bizde",
+    "attend": "Seve seve gelirim",
+    "decline_politely": "Bu sefer gelemeyeceğim",
+    "ride_together": "Bir pazar birlikte pedal çevirelim",
+    "explain_taxes": "Vergiler şehrin geleceği için",
+    "promise_review": "Vergileri gözden geçireceğiz",
+    "support_event": "Etkinliği destekleyelim (2.000 TL)",
+    "maybe_later": "Belki ileride",
+    "clear_roads": "Ekipler yolları açsın (1.500 TL)",
+    "enjoy_snow": "Karın tadını çıkarın",
+    "promise_metro": "Metro planı masamızda",
+    "explain_cost": "Metro pahalı, sabır gerek"
+  },
+  "memory": {
+    "policy_enacted": {
+      "pos": [
+        "{policy} kararınızı hâlâ konuşuyoruz, çok yerinde bir karardı.",
+        "{policy} kararından beri şehre bakışım değişti."
+      ],
+      "neg": [
+        "{policy} kararını hâlâ sindiremedim, açıkçası.",
+        "{policy} kararından beri içimde bir burukluk var."
+      ]
+    },
+    "policy_repealed": {
+      "pos": [
+        "{policy} kararının kaldırılması iyi oldu."
+      ],
+      "neg": [
+        "{policy} kararını kaldırmanız beni üzdü."
+      ]
+    },
+    "building_placed": {
+      "pos": [
+        "Geçenlerde yeni bir {building} açılmasına çok sevindim.",
+        "Yeni {building} mahalleye iyi geldi."
+      ],
+      "neg": [
+        "Yeni {building} pek içime sinmedi."
+      ]
+    },
+    "building_demolished": {
+      "pos": [
+        "Eski binanın yıkılması iyi oldu."
+      ],
+      "neg": [
+        "{building} yıkıldığında çok üzülmüştüm.",
+        "{building} yerinde değil artık; hâlâ alışamadım."
+      ]
+    },
+    "letter_ignored": {
+      "neg": [
+        "Geçen yazdığım mektuba cevap alamamıştım, yine de yazıyorum.",
+        "Son mektubum cevapsız kalmıştı; umarım bu sefer okursunuz."
+      ]
+    },
+    "letter_answered": {
+      "pos": [
+        "Geçen sefer bana cevap vermeniz çok hoşuma gitmişti.",
+        "Önceki cevabınız için tekrar teşekkürler."
+      ],
+      "neg": [
+        "Geçen cevabınız beni pek ikna etmemişti."
+      ]
+    },
+    "story": {
+      "pos": [
+        "Geçen günlerdeki güzel hava hâlâ aklımda."
+      ],
+      "neg": [
+        "Son yaşananlar hepimizi biraz yordu."
+      ]
+    }
+  },
+  "you_replied": "Cevabınız: {reply}",
+  "expired": "Bu mektup cevapsız kaldı."
+}
