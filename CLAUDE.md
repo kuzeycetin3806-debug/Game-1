@@ -221,12 +221,20 @@ SEHIR_TEST=1 godot --headless --path . -s tools/make_backend_fixtures.gd
 # Oyunu yerel sahte backend'e bağla (anahtar/ağ gerekmez)
 (cd backend && npm run fake) & SEHIR_BACKEND_URL=http://127.0.0.1:8787 godot --path .
 
+# Soğuk açılış duman testi (yeni oyuncu: kayıt yazıldı mı, ilk gazete basıldı mı); dışa aktarılmış oyun için yol ver
+tools/startup_smoke.sh [build/linux/sehir.x86_64]
+
+# Performans ölçümü (dolu şehir, her kalite profili)
+xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/perf_probe.gd
+
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd
 
-# Dışa aktarma (export_presets.cfg gerekli)
-godot --headless --path . --export-release "Android" build/android/sehir.apk
-godot --headless --path . --export-release "iOS" build/ios/sehir.ipa
+# Dışa aktarma (export_presets.cfg; şablonlar ~/.local/share/godot/export_templates/4.4.1.stable)
+godot --headless --path . --export-release "Linux" build/linux/sehir.x86_64
+godot --headless --path . --export-pack "Linux" build/linux/pack.zip          # paket içeriğini incelemek için
+godot --headless --path . --export-debug "Android" build/android/sehir-debug.apk  # Android SDK gerekir (CI'da hazır)
+godot --headless --path . --export-release "iOS" build/ios/sehir.ipa              # macOS + Xcode gerekir
 
 # Backend
 cd backend && npm install && npx wrangler dev       # yerel
@@ -248,3 +256,5 @@ cd backend && npx wrangler deploy
   render yolu değişimi, yeni 3. taraf bağımlılık.
 - `addons/` altındaki 3. taraf koda dokunma; gerekiyorsa sarmalayıcı yaz.
 - Gizli anahtarları, kişisel verileri asla repoya koyma. `.env`, `*.keystore`, `export_credentials.cfg` `.gitignore`'da.
+- Dışa aktarma filtresi: JSON veri `include_filter="*.json"` ile girer; `tests/ tools/ backend/ docs/ addons/gut/` hariçtir.
+  Yeni veri türü eklenirse paket içeriğini `--export-pack ... .zip` ile kontrol et.

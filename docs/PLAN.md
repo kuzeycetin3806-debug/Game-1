@@ -1,6 +1,6 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **Plan onaylandı. M0 ✅ M1 ✅ M2 ✅ M3 ✅ M4 ✅ M5 ✅ — sıradaki: M6.**
+Durum: **M0–M6 ✅ (bildirim eklentisi kararı bekleniyor). Sonraki adımlar: aşağıda "Açık işler".**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
@@ -12,6 +12,8 @@ Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 ![M4: gazete, kararlar, yağmur, sis, gece fırtınası](images/m4_paper_weather.png)
 
 ![M5: posta kutusu, şablon mektup, backend'den gelen mektup ve gazete (yerel sahte model)](images/m5_letters_ai.png)
+
+![M6: sabah ve gece sokak hayatı, bugünün gündemi, ayarlar, dışa aktarılmış sürüm](images/m6_life_polish.png)
 Kalıcı kurallar için bkz. [`../CLAUDE.md`](../CLAUDE.md).
 
 Her aşama: küçük commit'ler → aşama sonunda testler + headless çalıştırma → kısa özet.
@@ -236,3 +238,31 @@ düşük). Serbest metin istenirse ayrı karar.
 - VARSAYIM: Göç edilmiş kayıtlar (v1/v2) baştan oynatılamaz; göçten sonra deterministik devam ederler.
 - **Sizin yapmanız gerekenler:** Cloudflare hesabı + `wrangler kv namespace create` ×2 + `wrangler secret put
   ANTHROPIC_API_KEY` + `wrangler deploy`; sonra Worker adresini `backend.json`'a yazıp `enabled: true`. Ayrıntı: `backend/README.md`.
+
+### M6 (tamamlandı — bildirim eklentisi hariç)
+- Sokak hayatı (`view/life`): arabalar (gece farlar), yayalar, merkez caddede raylı tramvay. MultiMesh + önceden ayrılmış
+  tampon; sayılar nüfus × saat × hava (`data/environment/life.json`); konumlar zamanın saf fonksiyonu (`LifeMath`).
+- Ayarlar: dil (TR/EN, arayüz yeniden kurulur), grafik, yazı boyutu (tüm arayüz katmanı ölçeklenir; büyükte alt çubuk iki
+  satır), titreşim, bildirimler. Test/araç ayarları da `SEHIR_SAVE_DIR`'da, gerçek ayarlara dokunmaz.
+- Oturum akışı: açılış → yetiştirme → gazete → **Bugünün gündemi** (cevap bekleyen mektuplar, yürürlüğe girecek kararlar,
+  inşaatlar, en zayıf alana tek öneri; dokununca ilgili ekran) → 1–2 karar. Panellerde yumuşak geçiş, onaylarda titreşim.
+- Bildirimler: `NotificationPlanner` arka plana geçerken şehrin kopyasını 24 saat ileri koşturur, önemli anları seçer
+  (günde ≤3, ≥3 saat ara, 22:00–08:00 sessiz → sabaha kayar; `data/config/notifications.json`). `LocalNotifier` şimdilik
+  sadece kaydeder; **gerçek Android/iOS teslimi eklenti kararını bekliyor.**
+- Performans: dolu şehirde 96 draw call / 210k üçgen (bütçe 150 / 300k). İlk oturumda FPS < 45 ise kalite bir kademe düşer
+  (bir kez). Uzakta yaya/araç gizlenir. Ölçüm aracı `tools/perf_probe.gd`, sonuçlar `docs/perf.md`.
+- Export: uygulama simgesi (+ Android uyarlanabilir katmanlar), açılış ekranı, `export_presets.cfg` (Android arm64 API 24+,
+  iOS 15, Linux). Dışa aktarılan paket incelendi: veri dahil; test/araç/backend/GUT hariç. Dışa aktarılmış Linux sürümü gerçek
+  render ile çalıştırıldı.
+- CI `export` işi: soğuk açılış duman testi (editör + dışa aktarılmış oyun), Android **debug APK** artefaktı (runner'ın SDK'sı).
+- Bulunan hatalar: yeni şehir ilk otomatik kayda kadar diske yazılmıyordu; soğuk açılışta ilk gazete hiç basılmıyordu
+  (autoload sırası). İkisi de düzeltildi; `tools/startup_smoke.sh` bunları yakalar.
+- VARSAYIM: Paket adı `com.nefeskent.sehirnefesaliyor`. Ses yok (ses varlığı yok). Sadece arm64 Android.
+
+## Açık işler (karar/erişim gerektirenler)
+1. **Bildirim eklentisi** (CLAUDE.md: yeni 3. taraf bağımlılık → onay): hazır bir Godot 4.4 yerel bildirim eklentisi mi,
+   yoksa kendi küçük Android (Kotlin) + iOS (Swift) eklentimiz mi? `LocalNotifier`'a alt sınıf olarak takılır.
+2. **Backend yayını**: Cloudflare hesabı + `ANTHROPIC_API_KEY` (bkz. `backend/README.md`), sonra `data/config/backend.json`.
+3. **Mağaza imzası**: release keystore (Android) ve Apple geliştirici hesabı/Team ID (iOS; derleme macOS gerektirir).
+4. Gerçek low-poly model seti ve ses (şu an prosedürel yer tutucular).
+5. Cihazda FPS ölçümü (orta seviye Android) → `docs/perf.md`.
