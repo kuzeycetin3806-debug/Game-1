@@ -46,3 +46,64 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
+
+  export:
+    needs: gut
+    runs-on: ubuntu-24.04
+    env:
+      GODOT_VERSION: 4.4.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Cache Godot and export templates
+        id: cache-export
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-export-${{ env.GODOT_VERSION }}
+      - name: Download Godot and templates
+        if: steps.cache-export.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot && cd ~/godot
+          curl -sSL -o g.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q g.zip && rm g.zip
+          T=~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          mkdir -p "$T"
+          curl -sSL -o t.tpz "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          unzip -oqj t.tpz templates/version.txt templates/linux_release.x86_64 templates/linux_debug.x86_64 \
+            templates/android_debug.apk templates/android_release.apk templates/android_source.zip -d "$T"
+          rm t.tpz
+      - name: Import
+        run: ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --path . --import || true
+      - name: Cold-start smoke (editor build)
+        run: GODOT=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 tools/startup_smoke.sh
+      - name: Export Linux and smoke-test the exported game
+        run: |
+          G=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64
+          mkdir -p build/linux
+          $G --headless --path . --export-release "Linux" build/linux/sehir.x86_64
+          GODOT=$G tools/startup_smoke.sh "$PWD/build/linux/sehir.x86_64"
+      - name: Export Android debug APK
+        run: |
+          G=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64
+          KS=$RUNNER_TEMP/debug.keystore
+          keytool -genkeypair -v -keystore "$KS" -storepass android -alias androiddebugkey -keypass android \
+            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          mkdir -p ~/.config/godot
+          printf '[gd_resource type="EditorSettings" format=3]\n\n[resource]\nexport/android/android_sdk_path = "%s"\nexport/android/java_sdk_path = "%s"\nexport/android/debug_keystore = "%s"\nexport/android/debug_keystore_user = "androiddebugkey"\nexport/android/debug_keystore_pass = "android"\n' \
+            "$ANDROID_SDK_ROOT" "$JAVA_HOME" "$KS" > ~/.config/godot/editor_settings-4.4.tres
+          export GODOT_ANDROID_KEYSTORE_DEBUG_PATH="$KS" GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android
+          mkdir -p build/android
+          $G --headless --path . --export-debug "Android" build/android/sehir-debug.apk
+          test -s build/android/sehir-debug.apk
+          "$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)/apksigner" verify --print-certs build/android/sehir-debug.apk | head -3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sehir-nefes-aliyor-debug-apk
+          path: build/android/sehir-debug.apk
+          retention-days: 14
