@@ -38,6 +38,8 @@ func _ready() -> void:
 	EventBus.catch_up_finished.connect(_on_catch_up_finished)
 	EventBus.sim_event_emitted.connect(_on_sim_event)
 	EventBus.city_loaded.connect(func() -> void: _maybe_first_edition.call_deferred())
+	# SimRunner is an earlier autoload: on a cold start the city was loaded before we connected.
+	_maybe_first_edition.call_deferred()
 
 
 ## Builds the next edition from everything since the previous one.

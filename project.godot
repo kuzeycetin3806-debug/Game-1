@@ -14,6 +14,10 @@ config/name="Şehir Nefes Alıyor"
 config/version="0.1.0"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
+config/icon="res://assets/icon/icon.png"
+boot_splash/bg_color=Color(0.58, 0.78, 0.93, 1)
+boot_splash/image="res://assets/icon/splash.png"
+boot_splash/fullsize=false
 
 [autoload]
 

@@ -52,6 +52,8 @@ func load_or_create() -> void:
 		if r.error != "ERR_SAVE_MISSING":
 			push_warning("SimRunner: no usable save (%s), founding a new city" % r.error)
 		_found_city(-1)
+		# Persist the new town at once; otherwise a crash before the first autosave loses it.
+		SaveService.save(sim, meta)
 	EventBus.city_loaded.emit()
 	begin_catch_up()
 
