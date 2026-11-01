@@ -25,8 +25,17 @@ func add_preamble(events: Array[SimEvent]) -> void:
 
 
 func run() -> void:
-	for i: int in steps:
+	run_some(steps)
+
+
+## Runs up to `n` more ticks; returns true when the job is finished. Lets
+## builds without threads (the web export) catch up a slice per frame.
+func run_some(n: int) -> bool:
+	var end: int = mini(done + n, steps)
+	for i: int in range(done, end):
 		summary.add(sim.step())
 		done = i + 1
-	summary.finish(sim.state)
-	finished = true
+	if done >= steps and not finished:
+		summary.finish(sim.state)
+		finished = true
+	return finished

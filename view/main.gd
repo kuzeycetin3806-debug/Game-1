@@ -8,6 +8,11 @@ extends Node
 @onready var _debug_panel: DebugPanel = %DebugPanel
 
 
+func _enter_tree() -> void:
+	# Before any child builds its labels.
+	UiFonts.install_symbol_fallback(ThemeDB.fallback_font)
+
+
 func _ready() -> void:
 	_ui_root.theme = UiTheme.build()
 	_hud.bind(_city.build_controller)

@@ -54,6 +54,20 @@ func test_reopen_after_three_days_catches_up_exactly() -> void:
 	assert_eq(summary.days.size(), 3)
 
 
+func test_without_threads_catches_up_in_slices() -> void:
+	# The web export has no threads; same result, a slice per frame.
+	var ref: Simulation = _reference(2 * 144)
+	Clock.frozen_unix_time = T0 + 2.0 * DAY
+	SimRunner._threaded = false
+	SimRunner.load_or_create()
+	assert_true(SimRunner.catching_up)
+	await wait_frames(1)
+	assert_true(SimRunner.catching_up, "288 ticks need more than one slice")
+	await _finish_catch_up()
+	SimRunner._threaded = true
+	assert_eq(SimRunner.sim.state.hash(), ref.state.hash())
+
+
 func test_catch_up_result_is_saved() -> void:
 	Clock.frozen_unix_time = T0 + DAY
 	SimRunner.load_or_create()

@@ -65,7 +65,7 @@ jobs:
           path: |
             ~/godot
             ~/.local/share/godot/export_templates
-          key: godot-export-${{ env.GODOT_VERSION }}
+          key: godot-export-${{ env.GODOT_VERSION }}-web
       - name: Download Godot and templates
         if: steps.cache-export.outputs.cache-hit != 'true'
         run: |
@@ -76,7 +76,8 @@ jobs:
           mkdir -p "$T"
           curl -sSL -o t.tpz "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
           unzip -oqj t.tpz templates/version.txt templates/linux_release.x86_64 templates/linux_debug.x86_64 \
-            templates/android_debug.apk templates/android_release.apk templates/android_source.zip -d "$T"
+            templates/android_debug.apk templates/android_release.apk templates/android_source.zip \
+            templates/web_nothreads_release.zip -d "$T"
           rm t.tpz
       - name: Import
         run: ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --path . --import || true
@@ -88,6 +89,15 @@ jobs:
           mkdir -p build/linux
           $G --headless --path . --export-release "Linux" build/linux/sehir.x86_64
           GODOT=$G tools/startup_smoke.sh "$PWD/build/linux/sehir.x86_64"
+      - name: Build the browser version (web page files)
+        run: |
+          GODOT=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 tools/make_web_site.sh
+          # The page host takes at most 15 MB per file.
+          test "$(stat -c %s build/site/engine.gz.wasm)" -lt 15000000
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sehir-nefes-aliyor-web
+          path: build/site/
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.10.2"

@@ -13,7 +13,7 @@ Geliştirme planı ve aşamalar: [`docs/PLAN.md`](docs/PLAN.md). Bu dosya kalıc
 | Katman | Seçim |
 |---|---|
 | Motor | Godot **4.4.x** (stable), GDScript, **Mobile** render yolu |
-| Hedef | Android (API 24+), iOS 15+; dikey (portrait) ekran |
+| Hedef | Android (API 24+), iOS 15+; dikey (portrait) ekran. Deneme için tarayıcı sürümü (Web, iş parçacıksız, Compatibility render) |
 | Test | GUT 9.x (`addons/gut`), headless çalışır |
 | Kayıt | `user://` altında sürüm numaralı JSON |
 | Yapay zekâ metni | Ayrı backend: Cloudflare Worker (TypeScript), `backend/` klasöründe |
@@ -233,6 +233,9 @@ gradle -p platform/android assembleDebug assembleRelease
 
 # Performans ölçümü (dolu şehir, her kalite profili)
 xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/perf_probe.gd
+
+# Tarayıcı sürümü (claude.ai sayfası için; iş parçacıksız web şablonu gerekir) → build/site/
+tools/make_web_site.sh
 
 # Veri doğrulama (tüm data/*.json şema kontrolü)
 godot --headless --path . -s tools/validate_data.gd

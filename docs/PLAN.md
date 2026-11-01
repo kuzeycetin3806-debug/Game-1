@@ -266,3 +266,5 @@ düşük). Serbest metin istenirse ayrı karar.
 3. **Mağaza imzası**: yok. CI debug imzalı APK üretir (yan yükleme için); iOS kurulum Apple hesabı olmadan mümkün değil.
 4. Gerçek low-poly model seti ve ses (şu an prosedürel yer tutucular).
 5. Cihazda FPS ölçümü: Ayarlar → "Performans testi" (~40 sn) → sonuç `docs/perf.md`'ye işlenip varsayılan kalite ayarlanacak.
+6. **Tarayıcı sürümü** (deneme için): `tools/make_web_site.sh` → claude.ai sayfası. VARSAYIM: web yalnızca Compatibility render
+   yolunu destekler (mobil uygulamada Mobile render değişmez); iş parçacığı olmadığı için yetiştirme kare başına dilimlerle yapılır.

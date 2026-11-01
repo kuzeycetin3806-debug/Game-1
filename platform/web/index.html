@@ -1,0 +1,148 @@
+<title>Şehir Nefes Alıyor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: the game fills the screen; a night-sky loading card sits over it until the engine starts. Single dark look by choice. */
+:root {
+  --night: #141a2b;
+  --dusk: #2a2f4f;
+  --paper: #f7f1e3;
+  --ink-soft: #b9b3c9;
+  --window: #ffb85c;
+  --bad: #ff8a73;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--night);
+  color: var(--paper);
+  font-family: var(--body);
+  overflow: hidden;
+  touch-action: none;
+}
+#canvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  display: block; outline: none;
+  background: var(--night);
+}
+#boot {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  padding-block: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: radial-gradient(120% 70% at 50% 100%, var(--dusk) 0%, var(--night) 70%);
+  transition: opacity .5s ease;
+}
+#boot.gone { opacity: 0; pointer-events: none; }
+.card { width: min(22rem, 100%); display: grid; gap: 1.1rem; text-align: center; }
+.skyline { height: 64px; display: flex; align-items: flex-end; justify-content: center; gap: 5px; }
+.skyline i {
+  width: 16px; background: var(--dusk); border-radius: 2px 2px 0 0;
+  background-image: radial-gradient(circle, var(--window) 1.4px, transparent 1.6px);
+  background-size: 6px 8px; background-position: 2px 3px;
+}
+h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 2.1rem; line-height: 1.05; text-wrap: balance; letter-spacing: -.01em; }
+.tag { margin: 0; color: var(--ink-soft); font-size: .95rem; line-height: 1.45; }
+.bar { height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--paper) 14%, transparent); overflow: hidden; }
+.bar b { display: block; height: 100%; width: 0%; background: var(--window); transition: width .2s; }
+#status { margin: 0; font-size: .85rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; min-height: 1.3em; }
+#status.err { color: var(--bad); }
+.hint { margin: 0; font-size: .8rem; color: var(--ink-soft); opacity: .8; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { #boot, .bar b { transition: none; } }
+</style>
+
+<canvas id="canvas" tabindex="0">Tarayıcın HTML5 canvas desteklemiyor.</canvas>
+
+<div id="boot" role="status" aria-live="polite">
+  <div class="card">
+    <div class="skyline" aria-hidden="true">
+      <i style="height:30px"></i><i style="height:48px"></i><i style="height:22px"></i><i style="height:60px"></i><i style="height:38px"></i><i style="height:26px"></i><i style="height:44px"></i>
+    </div>
+    <h1>Şehir Nefes Alıyor</h1>
+    <p class="tag">Nefeskent'in belediye başkanı sensin. Şehir sen yokken de yaşar; geri döndüğünde gazete seni bekler.</p>
+    <div class="bar" aria-hidden="true"><b id="fill"></b></div>
+    <p id="status">Şehir hazırlanıyor…</p>
+    <p class="hint">Telefonda dikey tutarak oyna. İlk açılışta yaklaşık 10 MB iner; şehrin bu tarayıcıda kayıtlı kalır.</p>
+  </div>
+</div>
+
+<script>
+// The host serves only common web file types, so the gzipped engine (~9 MB, 44 MB
+// unpacked) and the game data travel under .wasm names; map Godot's requests to them.
+(function () {
+  const realFetch = window.fetch.bind(window);
+  window.fetch = function (input, init) {
+    const url = typeof input === "string" ? input : (input && input.url) || "";
+    if (/(^|\/)index\.pck(\?|$)/.test(url)) {
+      return realFetch("game.pck.wasm").then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return new Response(r.body, { status: 200, headers: { "Content-Type": "application/octet-stream" } });
+      });
+    }
+    if (/(^|\/)index\.wasm(\?|$)/.test(url)) {
+      if (typeof DecompressionStream !== "function") {
+        return Promise.reject(new Error("no-decompress"));
+      }
+      return realFetch("engine.gz.wasm").then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const body = r.body.pipeThrough(new DecompressionStream("gzip"));
+        return new Response(body, { status: 200, headers: { "Content-Type": "application/wasm" } });
+      });
+    }
+    return realFetch(input, init);
+  };
+})();
+</script>
+<script src="index.js"></script>
+<script>
+(function () {
+  const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":495184,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
+  const boot = document.getElementById("boot");
+  const fill = document.getElementById("fill");
+  const status = document.getElementById("status");
+
+  function fail(msg) {
+    status.textContent = msg;
+    status.className = "err";
+  }
+
+  if (typeof Engine === "undefined") {
+    fail("Oyun dosyaları yüklenemedi. Sayfayı yenileyip tekrar dene.");
+    return;
+  }
+  const missing = Engine.getMissingFeatures({ threads: false });
+  if (missing.length) {
+    fail("Bu tarayıcı oyunu çalıştıramıyor (" + missing.join(", ") + "). Güncel Chrome, Safari veya Firefox ile dene.");
+    return;
+  }
+  if (typeof DecompressionStream !== "function") {
+    fail("Bu tarayıcı çok eski. Güncel Chrome, Safari veya Firefox ile dene.");
+    return;
+  }
+
+  const engine = new Engine(GODOT_CONFIG);
+  engine.startGame({
+    onProgress: function (current, total) {
+      if (total > 0) {
+        const pct = Math.min(100, Math.round((current / total) * 100));
+        fill.style.width = pct + "%";
+        status.textContent = "İniyor: %" + pct;
+      } else {
+        status.textContent = "İniyor…";
+      }
+    },
+  }).then(function () {
+    fill.style.width = "100%";
+    status.textContent = "Şehir kuruluyor…";
+    setTimeout(function () { boot.classList.add("gone"); }, 400);
+  }, function (err) {
+    console.error(err);
+    fail("Oyun başlatılamadı: " + (err && err.message ? err.message : err));
+  });
+})();
+</script>

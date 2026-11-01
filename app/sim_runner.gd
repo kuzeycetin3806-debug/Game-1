@@ -8,6 +8,8 @@ const LIVE_MAX_TICKS: int = 6
 ## Live stepping budget per frame (gap <= LIVE_MAX_TICKS anyway).
 const MAX_TICKS_PER_FRAME: int = 8
 const AUTOSAVE_EVERY_TICKS: int = 6 # hourly
+## Without threads (web export) the catch-up runs this many ticks per frame.
+const COOP_TICKS_PER_FRAME: int = 24
 
 var sim: Simulation
 var content: ContentDb
@@ -26,6 +28,8 @@ var _job: CatchUpJob
 ## untouched: no ticks, no saves, no commands.
 var _real_sim: Simulation = null
 var _task_id: int = -1
+## False on builds without threads (web): catch-up then runs in slices per frame.
+var _threaded: bool = not OS.has_feature("nothreads")
 var _ticks_since_save: int = 0
 
 
@@ -94,7 +98,8 @@ func begin_catch_up() -> void:
 	_job = CatchUpJob.create(sim.clone(), steps)
 	_job.add_preamble(preamble)
 	EventBus.catch_up_started.emit(steps)
-	_task_id = WorkerThreadPool.add_task(_job.run, false, "city catch-up")
+	if _threaded:
+		_task_id = WorkerThreadPool.add_task(_job.run, false, "city catch-up")
 
 
 func catch_up_progress() -> float:
@@ -152,9 +157,13 @@ func _process(_delta: float) -> void:
 
 func _poll_job() -> void:
 	EventBus.catch_up_progressed.emit(catch_up_progress())
-	if not WorkerThreadPool.is_task_completed(_task_id):
-		return
-	WorkerThreadPool.wait_for_task_completion(_task_id)
+	if not _threaded:
+		if not _job.run_some(COOP_TICKS_PER_FRAME):
+			return
+	else:
+		if not WorkerThreadPool.is_task_completed(_task_id):
+			return
+		WorkerThreadPool.wait_for_task_completion(_task_id)
 	_task_id = -1
 	var job: CatchUpJob = _job
 	_job = null

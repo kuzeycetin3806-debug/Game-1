@@ -68,6 +68,27 @@ func test_job_on_worker_thread_matches() -> void:
 	assert_eq(job.sim.state.hash(), a.state.hash())
 
 
+func test_job_in_slices_matches_one_go() -> void:
+	# The web build has no threads: it runs the job a slice per frame.
+	var a := CatchUpJob.create(SimFixture.new_sim(), 300)
+	a.run()
+	var b := CatchUpJob.create(SimFixture.new_sim(), 300)
+	var slices: int = 0
+	while not b.run_some(24):
+		slices += 1
+	assert_eq(slices, 12)
+	assert_eq(b.done, 300)
+	assert_eq(b.sim.state.hash(), a.sim.state.hash())
+	assert_eq(b.summary.simulated_ticks(), a.summary.simulated_ticks())
+	assert_false(b.run_some(24) == false, "stays finished")
+
+
+func test_empty_job_finishes_on_first_slice() -> void:
+	var j := CatchUpJob.create(SimFixture.new_sim(), 0)
+	assert_true(j.run_some(24))
+	assert_true(j.finished)
+
+
 func test_clone_is_independent() -> void:
 	var a: Simulation = SimFixture.new_sim()
 	var b: Simulation = a.clone()

@@ -1,5 +1,12 @@
 # Telefonda test kılavuzu (Android)
 
+## En hızlısı: tarayıcıda oyna
+
+Kurulum gerekmez: https://claude.ai/artifact/9rCKJ9Zba2VqvkTctfBd9e (kendi hesabınla açılır).
+İlk açılışta ~10 MB iner; şehir o tarayıcıda kayıtlı kalır. Web sürümü masaüstü/mobil tarayıcının
+WebGL 2 desteğiyle "Compatibility" render yoluyla çalışır: bildirim yok, görüntü telefondaki uygulamadan biraz
+farklı (tilt-shift bulanıklığı yok). Performans ölçümü için APK daha doğru sonuç verir.
+
 ## 1. APK'yı indir ve kur
 1. GitHub → **Actions** → en son yeşil **tests** çalışması → sayfanın altındaki **Artifacts** →
    `sehir-nefes-aliyor-debug-apk` (zip). Her `main` gönderiminde yenisi üretilir, 14 gün saklanır.
