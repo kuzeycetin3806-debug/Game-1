@@ -1,6 +1,6 @@
 # Geliştirme Planı — Şehir Nefes Alıyor
 
-Durum: **M0–M6 ✅ (bildirim eklentisi kararı bekleniyor). Sonraki adımlar: aşağıda "Açık işler".**
+Durum: **M0–M6 ✅ + kendi bildirim eklentimiz (Android/iOS) ve cihaz içi performans testi. Cihazda deneme: [`TESTING.md`](TESTING.md).**
 Repo başlangıçta tamamen boştu (commit yok, dosya yok).
 
 ![M1 gün döngüsü: 08:00, 13:00, 17:23, 21:00](images/m1_day_cycle.png)
@@ -260,9 +260,9 @@ düşük). Serbest metin istenirse ayrı karar.
 - VARSAYIM: Paket adı `com.nefeskent.sehirnefesaliyor`. Ses yok (ses varlığı yok). Sadece arm64 Android.
 
 ## Açık işler (karar/erişim gerektirenler)
-1. **Bildirim eklentisi** (CLAUDE.md: yeni 3. taraf bağımlılık → onay): hazır bir Godot 4.4 yerel bildirim eklentisi mi,
-   yoksa kendi küçük Android (Kotlin) + iOS (Swift) eklentimiz mi? `LocalNotifier`'a alt sınıf olarak takılır.
-2. **Backend yayını**: Cloudflare hesabı + `ANTHROPIC_API_KEY` (bkz. `backend/README.md`), sonra `data/config/backend.json`.
-3. **Mağaza imzası**: release keystore (Android) ve Apple geliştirici hesabı/Team ID (iOS; derleme macOS gerektirir).
+1. ~~Bildirim eklentisi~~ → **karar: kendi eklentimiz.** Android: `platform/android` (Kotlin, Godot v2 eklenti, AlarmManager),
+   CI'da AAR + Gradle APK; iOS: `platform/ios` (GDExtension, UNUserNotificationCenter), elle tetiklenen `ios.yml` (macOS dakikası gerekir).
+2. **Backend yayını**: API anahtarı yok → kapalı; oyun şablon metinle tam çalışır. Anahtar gelirse `backend/README.md`.
+3. **Mağaza imzası**: yok. CI debug imzalı APK üretir (yan yükleme için); iOS kurulum Apple hesabı olmadan mümkün değil.
 4. Gerçek low-poly model seti ve ses (şu an prosedürel yer tutucular).
-5. Cihazda FPS ölçümü (orta seviye Android) → `docs/perf.md`.
+5. Cihazda FPS ölçümü: Ayarlar → "Performans testi" (~40 sn) → sonuç `docs/perf.md`'ye işlenip varsayılan kalite ayarlanacak.

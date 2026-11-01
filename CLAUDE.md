@@ -17,7 +17,7 @@ Geliştirme planı ve aşamalar: [`docs/PLAN.md`](docs/PLAN.md). Bu dosya kalıc
 | Test | GUT 9.x (`addons/gut`), headless çalışır |
 | Kayıt | `user://` altında sürüm numaralı JSON |
 | Yapay zekâ metni | Ayrı backend: Cloudflare Worker (TypeScript), `backend/` klasöründe |
-| Bildirim | Yerel bildirim eklentisi (Android/iOS), sadece önemli olaylar |
+| Bildirim | Kendi eklentimiz: `platform/android` (Kotlin AAR, `addons/sehir_notifications` dışa aktarma eklentisi) + `platform/ios` (GDExtension); sadece önemli olaylar |
 
 > **API anahtarı asla istemciye konmaz.** İstemci sadece kendi backend'imizle konuşur; anahtar Worker secret'ıdır.
 > Backend yoksa / erişilemezse oyun **şablon tabanlı yedek metin** ile tam çalışır.
@@ -130,7 +130,8 @@ Yeni autoload eklemek **mimari değişikliktir** → önce sor.
 project.godot
 CLAUDE.md
 docs/                 PLAN.md, perf.md, kararlar (ADR) ve tasarım notları
-addons/               gut/ ve diğer 3. taraf eklentiler (değiştirilmez)
+addons/               gut/ (3. taraf, değiştirilmez); sehir_notifications/ (bizim, Android dışa aktarma eklentisi)
+platform/             yerel eklenti kaynakları: android/ (Gradle, Kotlin), ios/ (GDExtension, macOS'ta derlenir)
 sim/                  SAF SİMÜLASYON ÇEKİRDEĞİ (Node yok)
   core/               Simulation, SimState, SimRng, SimConfig, SimClockMath
   systems/            population, economy, happiness, traffic, environment
@@ -223,6 +224,12 @@ SEHIR_TEST=1 godot --headless --path . -s tools/make_backend_fixtures.gd
 
 # Soğuk açılış duman testi (yeni oyuncu: kayıt yazıldı mı, ilk gazete basıldı mı); dışa aktarılmış oyun için yol ver
 tools/startup_smoke.sh [build/linux/sehir.x86_64]
+
+# Cihaz içi performans testi: oyunda Ayarlar → "Performans testi"; masaüstünde GPU ile:
+xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/run_benchmark.gd
+
+# Android bildirim eklentisi (AAR; Google Maven erişimi gerekir) → addons/sehir_notifications/bin/
+gradle -p platform/android assembleDebug assembleRelease
 
 # Performans ölçümü (dolu şehir, her kalite profili)
 xvfb-run -a godot --path . --rendering-method mobile --resolution 540x960 -s tools/perf_probe.gd
