@@ -21,7 +21,7 @@ backend/.wrangler/
 Thumbs.db
 backend/dist/
 # Godot Android build template (installed by CI / editor) and plugin build outputs
-android/
+/android/
 platform/android/build/
 platform/android/.gradle/
 addons/sehir_notifications/bin/*.aar
