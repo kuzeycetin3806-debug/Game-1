@@ -1,0 +1,20 @@
+; iOS notifications GDExtension. Disabled by default (a .gdextension with only
+; iOS libraries makes desktop/Android builds log "no library for this platform").
+; To enable for an iOS export on macOS:
+;   platform/ios/build.sh
+;   mkdir -p addons/sehir_notifications_ios/bin && cp -R platform/ios/out/*.xcframework addons/sehir_notifications_ios/bin/
+;   cp platform/ios/sehir_notifications.gdextension.in addons/sehir_notifications_ios/sehir_notifications.gdextension
+[configuration]
+
+entry_symbol = "sehir_notifications_init"
+compatibility_minimum = "4.4"
+
+[libraries]
+
+ios.release = "res://addons/sehir_notifications_ios/bin/libsehir_notifications.ios.xcframework"
+ios.debug = "res://addons/sehir_notifications_ios/bin/libsehir_notifications.ios.xcframework"
+
+[dependencies]
+
+ios.release = {"res://addons/sehir_notifications_ios/bin/libgodot-cpp.ios.xcframework": ""}
+ios.debug = {"res://addons/sehir_notifications_ios/bin/libgodot-cpp.ios.xcframework": ""}

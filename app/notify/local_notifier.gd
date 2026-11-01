@@ -1,15 +1,18 @@
 class_name LocalNotifier
 extends RefCounted
 ## Platform adapter for local notifications. This base class records what it
-## would do (desktop, tests). A plugin-backed subclass is added once the
-## Android/iOS notification plugin is chosen (see docs/PLAN.md, M6).
+## would do (desktop, tests); AndroidNotifier / IosNotifier deliver for real
+## through our own plugins (platform/android, platform/ios).
 
 var scheduled: Array[Dictionary] = [] # {at_unix, title, body}
 var permission_requested: bool = false
 
 
 static func for_platform() -> LocalNotifier:
-	# VARSAYIM: no notification plugin yet; every platform uses the recording notifier.
+	if AndroidNotifier.available():
+		return AndroidNotifier.new()
+	if IosNotifier.available():
+		return IosNotifier.new()
 	return LocalNotifier.new()
 
 
@@ -19,6 +22,10 @@ func is_supported() -> bool:
 
 func request_permission() -> void:
 	permission_requested = true
+
+
+func has_permission() -> bool:
+	return false
 
 
 func schedule(at_unix: int, title: String, body: String) -> void:

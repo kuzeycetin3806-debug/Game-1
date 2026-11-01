@@ -88,7 +88,16 @@ jobs:
           mkdir -p build/linux
           $G --headless --path . --export-release "Linux" build/linux/sehir.x86_64
           GODOT=$G tools/startup_smoke.sh "$PWD/build/linux/sehir.x86_64"
-      - name: Export Android debug APK
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10.2"
+      - name: Build notification plugin (AAR)
+        run: |
+          gradle -p platform/android --no-daemon assembleDebug assembleRelease
+          mkdir -p addons/sehir_notifications/bin
+          cp platform/android/build/outputs/aar/sehir_notifications-debug.aar addons/sehir_notifications/bin/
+          cp platform/android/build/outputs/aar/sehir_notifications-release.aar addons/sehir_notifications/bin/
+      - name: Export Android debug APK (Gradle build with our plugin)
         run: |
           G=~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64
           KS=$RUNNER_TEMP/debug.keystore
@@ -99,11 +108,34 @@ jobs:
             "$ANDROID_SDK_ROOT" "$JAVA_HOME" "$KS" > ~/.config/godot/editor_settings-4.4.tres
           export GODOT_ANDROID_KEYSTORE_DEBUG_PATH="$KS" GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android
           mkdir -p build/android
-          $G --headless --path . --export-debug "Android" build/android/sehir-debug.apk
+          # The template flag only works together with an export flag.
+          $G --headless --path . --install-android-build-template --export-debug "Android" build/android/sehir-debug.apk
           test -s build/android/sehir-debug.apk
-          "$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)/apksigner" verify --print-certs build/android/sehir-debug.apk | head -3
+          BT="$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)"
+          "$BT/apksigner" verify --print-certs build/android/sehir-debug.apk | head -3
+          echo "--- plugin registration in the merged manifest:"
+          "$BT/aapt2" dump xmltree --file AndroidManifest.xml build/android/sehir-debug.apk | grep -A2 "org.godotengine.plugin.v2.SehirNotifications"
+          "$BT/aapt2" dump xmltree --file AndroidManifest.xml build/android/sehir-debug.apk | grep -q "NotificationReceiver"
       - uses: actions/upload-artifact@v4
         with:
           name: sehir-nefes-aliyor-debug-apk
           path: build/android/sehir-debug.apk
+          retention-days: 14
+
+  ios-plugin:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: platform/ios/godot-cpp
+          key: godot-cpp-ios-godot-4.4-stable
+      - name: Build iOS notification extension
+        run: |
+          pip3 install --break-system-packages scons || pip3 install scons
+          platform/ios/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sehir-notifications-ios-xcframeworks
+          path: platform/ios/out
           retention-days: 14

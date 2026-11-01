@@ -48,6 +48,10 @@ window/handheld/orientation=1
 locale/translations=PackedStringArray("res://assets/i18n/strings.tr.translation", "res://assets/i18n/strings.en.translation")
 locale/fallback="tr"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sehir_notifications/plugin.cfg")
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=false
