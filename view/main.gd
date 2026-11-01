@@ -30,6 +30,10 @@ func _ready() -> void:
 	var settings := SettingsView.new()
 	_ui_root.add_child(settings)
 	_hud.settings_requested.connect(settings.open)
+	settings.benchmark_requested.connect(run_benchmark)
+	settings.test_notification_requested.connect(func() -> void:
+		SimRunner.send_test_notification()
+		_hud.show_toast(tr("UI_TEST_NOTIFICATION_SENT")))
 	var perf := PerfWatch.new()
 	add_child(perf)
 	perf.quality_lowered.connect(func() -> void: _hud.show_toast(tr("UI_QUALITY_LOWERED")))
@@ -53,3 +57,11 @@ func _apply_ui_scale() -> void:
 	_ui_root.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	_ui_root.position = Vector2.ZERO
 	_ui_root.size = get_viewport().get_visible_rect().size / s
+
+
+func run_benchmark() -> PerfBenchmark:
+	var b := PerfBenchmark.new()
+	b.city = _city
+	_ui_root.add_child(b)
+	b.run()
+	return b

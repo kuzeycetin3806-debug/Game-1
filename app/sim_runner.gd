@@ -22,6 +22,9 @@ var notifier: LocalNotifier = LocalNotifier.for_platform()
 var notification_rules: Dictionary = {}
 
 var _job: CatchUpJob
+## While a preview city is shown (performance test), the real city waits here
+## untouched: no ticks, no saves, no commands.
+var _real_sim: Simulation = null
 var _task_id: int = -1
 var _ticks_since_save: int = 0
 
@@ -100,8 +103,30 @@ func catch_up_progress() -> float:
 	return float(_job.done) / float(_job.steps)
 
 
+## Shows a temporary city (e.g. the benchmark's dense town). Nothing is saved.
+func begin_preview(preview: Simulation) -> void:
+	if _real_sim == null:
+		_real_sim = sim
+	sim = preview
+	EventBus.city_loaded.emit()
+	EventBus.city_changed.emit()
+
+
+func end_preview() -> void:
+	if _real_sim == null:
+		return
+	sim = _real_sim
+	_real_sim = null
+	EventBus.city_loaded.emit()
+	EventBus.city_changed.emit()
+
+
+func in_preview() -> bool:
+	return _real_sim != null
+
+
 func _process(_delta: float) -> void:
-	if sim == null:
+	if sim == null or in_preview():
 		return
 	if catching_up:
 		_poll_job()
@@ -152,7 +177,7 @@ func _abort_job() -> void:
 
 ## Applies a player command now. Returns the sim result dictionary.
 func submit(cmd: Command) -> Dictionary:
-	if catching_up:
+	if catching_up or in_preview():
 		EventBus.command_rejected.emit("ERR_CITY_BUSY")
 		return {"ok": false, "error": "ERR_CITY_BUSY", "events": [] as Array[SimEvent]}
 	var result: Dictionary = sim.apply_command(cmd)
@@ -174,7 +199,7 @@ func check(cmd: Command) -> String:
 
 
 func save_now() -> void:
-	if sim == null or catching_up:
+	if sim == null or catching_up or in_preview():
 		return
 	_ticks_since_save = 0
 	SaveService.save(sim, meta)
@@ -196,7 +221,7 @@ func _notification(what: int) -> void:
 ## Returns what was scheduled (for tests and the debug panel).
 func schedule_notifications() -> Array[Dictionary]:
 	notifier.cancel_all()
-	if sim == null or catching_up or not Settings.notifications:
+	if sim == null or catching_up or in_preview() or not Settings.notifications:
 		return []
 	if not notifier.permission_requested:
 		notifier.request_permission()
@@ -217,3 +242,10 @@ func notification_text(n: Dictionary) -> String:
 		args.append(s)
 	var tmpl: String = tr(String(n.key))
 	return tmpl % args if not args.is_empty() else tmpl
+
+
+## Debug helper for device testing: one notification 10 seconds from now.
+func send_test_notification() -> void:
+	if not notifier.permission_requested:
+		notifier.request_permission()
+	notifier.schedule(int(Time.get_unix_time_from_system()) + 10, tr("NOTIF_TITLE"), tr("NOTIF_TEST"))

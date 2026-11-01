@@ -151,3 +151,16 @@ AGENDA_TIP_TRAFFIC,Trafik bunaltıyor: ulaşım kararlarına bakın,Traffic is h
 AGENDA_TIP_JOBS,İş arayan çok: yeni ofisler iyi gelir,Many are job hunting: new offices would help
 AGENDA_TIP_GREEN,Şehir yeşile hasret: bir park yapın,The city craves green: build a park
 AGENDA_TIP_GROW,Herkes mutlu: yeni konutlarla büyüyün,Everyone is happy: grow with new homes
+UI_BENCH_START,Performans testi (~40 sn),Performance test (~40 s)
+UI_BENCH_PREPARING,Test şehri hazırlanıyor…,Preparing the test city…
+UI_BENCH_RUNNING,Ölçülüyor: %s · %s,Measuring: %s · %s
+UI_BENCH_VIEW_FAR,uzak,far
+UI_BENCH_VIEW_NEAR,yakın,near
+UI_BENCH_TITLE,Şehir Nefes Alıyor %s performans testi,Şehir Nefes Alıyor %s performance test
+UI_BENCH_RECOMMENDED,Önerilen kalite,Recommended quality
+UI_BENCH_COPY,Sonucu kopyala,Copy result
+UI_BENCH_COPIED,Kopyalandı ✓,Copied ✓
+UI_BENCH_APPLY,Öneriyi uygula: %s,Apply: %s
+UI_TEST_NOTIFICATION,Test bildirimi (10 sn sonra),Test notification (in 10 s)
+UI_TEST_NOTIFICATION_SENT,Bildirim 10 saniye sonra gelecek; uygulamayı arka plana al,Notification in 10 s; put the app in the background
+NOTIF_TEST,Bildirimler çalışıyor! Nefeskent seni bekliyor.,Notifications work! Nefeskent is waiting for you.

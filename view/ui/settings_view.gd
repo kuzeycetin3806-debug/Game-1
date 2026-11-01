@@ -1,6 +1,10 @@
 class_name SettingsView
 extends Control
-## Settings: language, graphics, text size, haptics, notifications.
+## Settings: language, graphics, text size, haptics, notifications, and tools
+## for testing on a device (performance test; test notification in debug builds).
+
+signal benchmark_requested
+signal test_notification_requested
 
 var _panel: GlassPanel
 var _box: VBoxContainer
@@ -56,6 +60,19 @@ func _build() -> void:
 	_choice(tr("UI_NOTIFICATIONS"), [tr("UI_ON"), tr("UI_OFF")], 0 if Settings.notifications else 1, func(i: int) -> void:
 		Settings.set_notifications(i == 0)
 		_build())
+	var bench := Button.new()
+	bench.text = tr("UI_BENCH_START")
+	bench.custom_minimum_size = Vector2(0, 52)
+	bench.pressed.connect(func() -> void:
+		visible = false
+		benchmark_requested.emit())
+	_box.add_child(bench)
+	if OS.is_debug_build():
+		var notif := Button.new()
+		notif.text = tr("UI_TEST_NOTIFICATION")
+		notif.custom_minimum_size = Vector2(0, 52)
+		notif.pressed.connect(func() -> void: test_notification_requested.emit())
+		_box.add_child(notif)
 	var about := Label.new()
 	about.text = tr("UI_ABOUT") % String(ProjectSettings.get_setting("application/config/version", "0.0.0"))
 	about.add_theme_font_size_override("font_size", 14)
