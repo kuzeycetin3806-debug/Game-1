@@ -121,21 +121,3 @@ jobs:
           name: sehir-nefes-aliyor-debug-apk
           path: build/android/sehir-debug.apk
           retention-days: 14
-
-  ios-plugin:
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: platform/ios/godot-cpp
-          key: godot-cpp-ios-godot-4.4-stable
-      - name: Build iOS notification extension
-        run: |
-          pip3 install --break-system-packages scons || pip3 install scons
-          platform/ios/build.sh
-      - uses: actions/upload-artifact@v4
-        with:
-          name: sehir-notifications-ios-xcframeworks
-          path: platform/ios/out
-          retention-days: 14
